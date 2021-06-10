@@ -128,8 +128,9 @@ MonoBehaviour:
   acceleration: 20
   dashMultiplier: 150
   dashDrag: 4.5
+  dashGravityMultiplier: 1.8
   dashCooldown: 1.25
-  jumpStrength: 575
+  jumpStrength: 580
   jumpGravityMultiplier: 1.8
   jumpFirstCooldown: 0.2
   forwardKey: 100
@@ -148,8 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3a23337fa0da046b306f5aaa38e0b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCam: {fileID: 0}
-  smoothMultiplier: 0.6
+  cam: {fileID: 0}
+  smoothMultiplier: 0.45
   minSmooth: 0.4
   maxSmooth: 1.1
 --- !u!54 &7085572790629419229

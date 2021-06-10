@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerCameraFollow : MonoBehaviour
 {
     [SerializeField]
-    Camera mainCam;
+    Camera cam;
     [SerializeField]
     float smoothMultiplier = 0.5f;
     [SerializeField]
@@ -18,12 +18,12 @@ public class PlayerCameraFollow : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        offset = mainCam.transform.position - transform.position;
+        offset = cam.transform.position - transform.position;
     }
 
     private void FixedUpdate()
     {
-        float smooth = Mathf.Clamp(((Mathf.Abs(rb.velocity.z) / 10) * smoothMultiplier) / 1, minSmooth, maxSmooth);
-        mainCam.transform.position = Vector3.SmoothDamp(mainCam.transform.position, transform.position + offset, ref velocity, smooth);
+        float smooth = Mathf.Clamp((Mathf.Abs(rb.velocity.z) / 10) / 1, minSmooth, maxSmooth) * smoothMultiplier;
+        cam.transform.position = Vector3.SmoothDamp(cam.transform.position, transform.position + offset, ref velocity, smooth);
     }
 }

@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float dashDrag = 4;
     [SerializeField]
+    float dashGravityMultiplier = 1.75f;
+    [SerializeField]
     float dashCooldown = 1.4f;
     WaitForSeconds dashWFS;
 
@@ -104,9 +106,20 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = false;
         rb.drag = dashDrag;
+        StartCoroutine(nameof(DashGravity));
         yield return dashWFS;
+        float time = Time.deltaTime;
         rb.drag = originalDrag;
         canDash = true;
+    }
+
+    IEnumerator DashGravity()
+    {
+        while (!isColliding)
+        {
+            rb.AddForce(Vector3.down * dashGravityMultiplier);
+            yield return null;
+        }
     }
 
     IEnumerator JumpEnd()

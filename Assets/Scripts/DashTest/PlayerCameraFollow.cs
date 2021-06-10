@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerCameraTest : MonoBehaviour
+public class PlayerCameraFollow : MonoBehaviour
 {
     [SerializeField]
     Camera mainCam;

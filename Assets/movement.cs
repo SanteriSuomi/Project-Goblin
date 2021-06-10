@@ -10,7 +10,11 @@ public class movement : MonoBehaviour
 	private float fallMultiplier = 2.5f;
 	private float lowJumpMultiplier = 2f;
 
+	RaycastHit hit;
+
 	public BoxCollider boxCollider;
+
+	bool grounded;
 
 	float colliderX;
 	float colliderY;
@@ -22,9 +26,6 @@ public class movement : MonoBehaviour
 
 	float angle;
 	float mx;
-	float flip = 0f;
-	float width = 1f;
-	float height = 1f;
 
 	void Awake() {
 		rb = GetComponent<Rigidbody> ();
@@ -40,13 +41,11 @@ public class movement : MonoBehaviour
 
 	private void FixedUpdate() {
 		Vector2 movement = new Vector2(mx * movementSpeed, rb.velocity.y);
-		turnAround();
-		transform.localRotation = Quaternion.Euler(0, flip, 0);
 		rb.velocity = movement;
 	}
 
 	void Jump() {
-		if(Input.GetButtonDown("Jump")) {
+		if(Input.GetButtonDown("Jump") && grounded) {
 			GetComponent<Rigidbody>().velocity = Vector3.up * jumpVelocity;
 		}
 		if(rb.velocity.y < 0) {
@@ -57,31 +56,26 @@ public class movement : MonoBehaviour
 		}
 	}
 
-	void turnAround() {
-		if ((angle >= 91f || angle <= -91f) || turned.Equals("left")) {
-			if(flip < 180f && flip >= 135f) {
-				flip += 2.5f;
-			}
-			else if(flip < 135f) {
-				turned = "left";
-				flip = 135f;
-			}
+	private void OnCollisionEnter(Collision collision) {
+		if(collision.gameObject.layer == 3)
+		{
+			grounded = true;
 		}
-		if ((angle <= 90f && angle > -90f) || turned.Equals("right")) {
-			if(flip > 0f && flip <= 45f) {
-				flip -= 2.5f;
-			}
-			else if(flip > 45f) {
-				turned = "right";
-				flip = 45f;
-			}
+	}
+	private void OnCollisionExit(Collision collision) {
+		if(collision.gameObject.layer == 3)
+		{
+			grounded = false;
 		}
-
 	}
 
 	public bool IsGrounded() {
-		bool groundCheck = Physics2D.BoxCast(GetComponent<Collider>().bounds.center, GetComponent<Collider>().bounds.size, 0 , Vector2.down, GetComponent<Collider>().bounds.extents.y, groundLayerMask);
+		bool groundCheck = Physics.BoxCast(GetComponent<Collider>().bounds.center, transform.localScale, Vector3.down, out hit, transform.rotation, GetComponent<Collider>().bounds.extents.y + 1f, groundLayerMask);
+		if(groundCheck) {
+			Debug.Log("Hit : " + hit.collider.name);
+		}
 		return groundCheck;
 	}
+
 }
 

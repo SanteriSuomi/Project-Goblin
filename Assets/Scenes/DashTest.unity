@@ -660,6 +660,10 @@ PrefabInstance:
       propertyPath: jumpSecondCooldown
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 7085572790629419170, guid: c9ac1ac23351dba4a9c4d0734eb682bf, type: 3}
+      propertyPath: jumpGravityMultiplier
+      value: 1.75
+      objectReference: {fileID: 0}
     - target: {fileID: 7085572790629419171, guid: c9ac1ac23351dba4a9c4d0734eb682bf, type: 3}
       propertyPath: mainCam
       value: 

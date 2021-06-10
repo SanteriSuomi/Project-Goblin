@@ -36,14 +36,15 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     float originalDrag;
 
-    bool forward;
-    bool backward;
-    bool dash;
+    bool forward = false;
+    bool backward = false;
+    bool dash = false;
+    bool jump = false;
+
     bool canDash = true;
-    bool jump;
     bool canJump = true;
 
-    bool collision;
+    bool isColliding;
 
     private void Awake()
     {
@@ -56,15 +57,19 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         GetInput();
-        Move();
     }
 
     void GetInput()
     {
-        forward = Input.GetKey(forwardKey);
-        backward = Input.GetKey(backwardKey);
-        dash = Input.GetKeyDown(dashKey);
-        jump = Input.GetKeyDown(jumpKey);
+        if (!forward) forward = Input.GetKey(forwardKey);
+        if (!backward) backward = Input.GetKey(backwardKey);
+        if (!dash) dash = Input.GetKeyDown(dashKey);
+        if (!jump) jump = Input.GetKeyDown(jumpKey);
+    }
+
+    void FixedUpdate()
+    {
+        Move();
     }
 
     void Move()
@@ -72,19 +77,23 @@ public class PlayerMovement : MonoBehaviour
         moveVector = Vector3.zero;
         if (forward)
         {
+            forward = false;
             moveVector += transform.forward * acceleration;
         }
         if (backward)
         {
+            backward = false;
             moveVector += -(transform.forward * acceleration);
         }
         if (dash && canDash && Mathf.Abs(moveVector.sqrMagnitude) >= 0)
         {
+            dash = false;
             moveVector *= dashMultiplier;
             StartCoroutine(nameof(DashEnd));
         }
         if (jump && canJump)
         {
+            jump = false;
             moveVector.y += jumpStrength;
             StartCoroutine(nameof(JumpEnd));
         }
@@ -104,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
     {
         canJump = false;
         yield return jumpFirstWFS;
-        while (!collision)
+        while (!isColliding)
         {
             rb.AddForce(Vector3.down * jumpGravityMultiplier);
             yield return null;
@@ -114,11 +123,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        collision = true;
+        isColliding = true;
     }
 
     private void OnCollisionExit(Collision other)
     {
-        collision = false;
+        isColliding = false;
     }
 }

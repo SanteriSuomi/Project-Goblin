@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 moveVector;
     Rigidbody rb;
+    Animator anim;
     float originalDrag;
 
     bool forward = false;
@@ -51,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
         originalDrag = rb.drag;
         dashWFS = new WaitForSeconds(dashCooldown);
         jumpFirstWFS = new WaitForSeconds(jumpFirstCooldown);
@@ -95,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (jump && canJump)
         {
+            anim.SetTrigger("Jump");
             jump = false;
             moveVector.y += jumpStrength;
             StartCoroutine(nameof(JumpEnd));

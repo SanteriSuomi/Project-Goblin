@@ -12403,7 +12403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  smoothMultiplier: 0.25
+  smoothMultiplier: 0.2
   minSmooth: 0.6
   maxSmooth: 1.2
 --- !u!114 &2335792799003705574
@@ -12418,14 +12418,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a24aa649a6042d44945931120aa6227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 20
-  dashMultiplier: 180
-  dashDrag: 4.5
+  acceleration: 18
+  dashMultiplier: 170
+  dashDrag: 4.6
   dashGravityMultiplier: 2
-  dashCooldown: 1.2
-  jumpStrength: 600
+  dashCooldown: 1.25
+  jumpStrength: 625
   jumpGravityMultiplier: 2
-  jumpFirstCooldown: 0.15
+  jumpFirstCooldown: 0.1
+  rotateSpeed: 5.25
   forwardKey: 100
   backwardKey: 97
   dashKey: 304

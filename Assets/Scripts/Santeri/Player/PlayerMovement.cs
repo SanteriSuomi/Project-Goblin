@@ -22,8 +22,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float jumpGravityMultiplier = 1.75f;
     [SerializeField]
-    private float jumpFirstCooldown = 0.2f;
+    float jumpFirstCooldown = 0.2f;
     WaitForSeconds jumpFirstWFS;
+
+    [SerializeField]
+    float rotateSpeed = 5.25f;
 
     [SerializeField]
     KeyCode forwardKey = KeyCode.D;
@@ -82,12 +85,15 @@ public class PlayerMovement : MonoBehaviour
         if (forward)
         {
             forward = false;
-            moveVector += transform.forward * acceleration;
+            moveVector += Vector3.forward * acceleration;
+            Rotate(0);
         }
         if (backward)
         {
+
             backward = false;
-            moveVector += -(transform.forward * acceleration);
+            moveVector += -(Vector3.forward * acceleration);
+            Rotate(180);
         }
         if (dash && canDash && Mathf.Abs(moveVector.sqrMagnitude) >= 0)
         {
@@ -103,6 +109,11 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(nameof(JumpEnd));
         }
         rb.AddForce(moveVector, ForceMode.Force);
+    }
+
+    void Rotate(float dir)
+    {
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, dir, 0), rotateSpeed);
     }
 
     IEnumerator DashEnd()
@@ -135,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
         canJump = true;
+        anim.SetTrigger("StopJump");
     }
 
     private void OnCollisionEnter(Collision other)

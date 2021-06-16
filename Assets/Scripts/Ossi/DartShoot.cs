@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class dartShoot : MonoBehaviour {
-	public Transform firePoint;
-	public GameObject bulletPrefab;
+public class DartShoot : MonoBehaviour
+{
+    public Transform firePoint;
+    public GameObject bulletPrefab;
 
-    void Update() {
-    	if(Input.GetButtonDown("Fire1")) {
-    		shoot();
-    	}
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            shoot();
+        }
     }
 
-    void shoot() {
-    	Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, -90, 0));
+    void shoot()
+    {
+        Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, -90, 0));
     }
 }

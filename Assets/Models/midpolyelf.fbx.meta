@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 53517abc8c97d2b4b8f50451bfa0508e
+guid: 007003c9f530bc146b9fb092c3a9607c
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
+  - first:
+      74: -488512666918179702
+    second: rig|dashAction
   - first:
       74: 8200595285488311604
     second: rig|idleAction

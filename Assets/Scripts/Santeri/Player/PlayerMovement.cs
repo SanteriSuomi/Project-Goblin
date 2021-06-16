@@ -85,15 +85,15 @@ public class PlayerMovement : MonoBehaviour
         if (forward)
         {
             forward = false;
-            moveVector += Vector3.forward * acceleration;
-            Rotate(0);
+            moveVector += Vector3.right * acceleration;
+            Rotate(90);
         }
         if (backward)
         {
 
             backward = false;
-            moveVector += -(Vector3.forward * acceleration);
-            Rotate(180);
+            moveVector += -(Vector3.right * acceleration);
+            Rotate(-90);
         }
         if (dash && canDash && Mathf.Abs(moveVector.sqrMagnitude) >= 0)
         {

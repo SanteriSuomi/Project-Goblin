@@ -8,7 +8,7 @@ public class TrapDamage : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log("Collision event with " + gameObject.name + " and " + other.gameObject.name);
-        Player player = other.transform.GetComponent<Player>();
+        PlayerHealth player = other.transform.GetComponent<PlayerHealth>();
         if (player != null)
         {
             player.ModifyHealth(-damage);

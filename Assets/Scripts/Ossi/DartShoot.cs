@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShoot : MonoBehaviour {
+public class dartShoot : MonoBehaviour {
 	public Transform firePoint;
 	public GameObject bulletPrefab;
 
@@ -13,6 +13,6 @@ public class EnemyShoot : MonoBehaviour {
     }
 
     void shoot() {
-    	Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    	Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, -90, 0));
     }
 }

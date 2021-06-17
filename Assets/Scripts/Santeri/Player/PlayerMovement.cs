@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     bool canJump = true;
 
     bool running = false;
+    bool flipped = false;
 
     private void Awake()
     {
@@ -139,10 +140,15 @@ public class PlayerMovement : MonoBehaviour
     void Rotate(float dir)
     {
         float yRot = transform.rotation.eulerAngles.y;
-        if (yRot > -15 && yRot < 15) // Flip X axis when rotating so animation is rotated too
+        if (yRot >= -15 && yRot <= 15 && !flipped) // Flip X axis when rotating so animation is rotated too
         {
+            flipped = true;
             Vector3 original = transform.localScale;
             transform.localScale = new Vector3(-original.x, original.y, original.z);
+        }
+        else if (yRot < -15 || yRot > 15)
+        {
+            flipped = false;
         }
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, dir, 0), rotateSpeed);
     }

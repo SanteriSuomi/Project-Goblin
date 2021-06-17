@@ -18390,7 +18390,7 @@ MonoBehaviour:
   rotateSpeed: 8.5
   runThreshold: 3
   gravityRayLength: 0.15
-  gravityMultiplier: 25
+  gravityMultiplier: 20
   forwardKey: 100
   backwardKey: 97
   dashKey: 304

@@ -10,23 +10,30 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float dashMultiplier = 100;
     [SerializeField]
-    float dashDrag = 4;
+    float dashCooldown1 = 0.45f;
     [SerializeField]
-    float dashGravityMultiplier = 1.75f;
+    float dashCooldown2 = 0.8f;
     [SerializeField]
-    float dashCooldown = 1.4f;
-    WaitForSeconds dashWFS;
+    float dashAngleMultiplier = 6;
+    WaitForSeconds dashWFS1;
+    WaitForSeconds dashWFS2;
 
     [SerializeField]
     float jumpStrength = 100;
     [SerializeField]
-    float jumpGravityMultiplier = 1.75f;
-    [SerializeField]
-    float jumpFirstCooldown = 0.2f;
-    WaitForSeconds jumpFirstWFS;
+    float jumpCooldown = 0.2f;
+    WaitForSeconds jumpWFS;
 
     [SerializeField]
     float rotateSpeed = 5.25f;
+
+    [SerializeField]
+    float runThreshold = 3;
+
+    [SerializeField]
+    float gravityRayLength = 0.4f;
+    [SerializeField]
+    float gravityMultiplier = 16;
 
     [SerializeField]
     KeyCode forwardKey = KeyCode.D;
@@ -36,9 +43,6 @@ public class PlayerMovement : MonoBehaviour
     KeyCode dashKey = KeyCode.LeftShift;
     [SerializeField]
     KeyCode jumpKey = KeyCode.Space;
-
-    [SerializeField]
-    float runThreshold = 3;
 
     Vector3 moveVector;
     Rigidbody rb;
@@ -55,15 +59,15 @@ public class PlayerMovement : MonoBehaviour
 
     bool running = false;
 
-    bool isColliding;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         originalDrag = rb.drag;
-        dashWFS = new WaitForSeconds(dashCooldown);
-        jumpFirstWFS = new WaitForSeconds(jumpFirstCooldown);
+        dashWFS1 = new WaitForSeconds(dashCooldown1);
+        dashWFS2 = new WaitForSeconds(dashCooldown2);
+        jumpWFS = new WaitForSeconds(jumpCooldown);
+        StartCoroutine(nameof(ApplyGravity));
     }
 
     private void Update()
@@ -103,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetTrigger("Dash");
             dash = false;
-            moveVector *= dashMultiplier;
+            moveVector += (moveVector + (Vector3.up * dashAngleMultiplier)) * dashMultiplier;
             StartCoroutine(nameof(DashEnd));
         }
         if (jump && canJump)
@@ -114,10 +118,10 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(nameof(JumpEnd));
         }
         rb.AddForce(moveVector, ForceMode.Force);
-        RunCheck();
+        RunAnimation();
     }
 
-    void RunCheck()
+    void RunAnimation()
     {
         if (Mathf.Abs(moveVector.x) >= runThreshold && !running)
         {
@@ -135,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
     void Rotate(float dir)
     {
         float yRot = transform.rotation.eulerAngles.y;
-        if (yRot > -1 && yRot < 1) // Flip X axis when rotating so animation is rotated too
+        if (yRot > -15 && yRot < 15) // Flip X axis when rotating so animation is rotated too
         {
             Vector3 original = transform.localScale;
             transform.localScale = new Vector3(-original.x, original.y, original.z);
@@ -146,46 +150,35 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator DashEnd()
     {
         canDash = false;
-        rb.drag = dashDrag;
-        StartCoroutine(nameof(DashGravity));
-        yield return dashWFS;
-        canDash = true;
-        anim.ResetTrigger("StopRun");
+        yield return dashWFS1;
         running = false;
-    }
-
-    IEnumerator DashGravity()
-    {
-        while (!isColliding)
-        {
-            rb.AddForce(Vector3.down * dashGravityMultiplier);
-            yield return null;
-        }
-        rb.drag = originalDrag;
+        yield return dashWFS2;
+        anim.ResetTrigger("StopRun");
+        canDash = true;
     }
 
     IEnumerator JumpEnd()
     {
-        canJump = false;
-        yield return jumpFirstWFS;
-        while (!isColliding)
-        {
-            rb.AddForce(Vector3.down * jumpGravityMultiplier);
-            yield return null;
-        }
-        canJump = true;
+        yield return jumpWFS;
         anim.SetTrigger("StopJump");
         anim.ResetTrigger("StopRun");
         running = false;
     }
 
-    private void OnCollisionEnter(Collision other)
+    IEnumerator ApplyGravity()
     {
-        isColliding = true;
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        isColliding = false;
+        while (true)
+        {
+            if (!Physics.Raycast(transform.position + new Vector3(0, 0.1f, 0), Vector3.down, gravityRayLength))
+            {
+                canJump = false;
+                rb.AddForce(Vector3.down * gravityMultiplier);
+            }
+            else
+            {
+                canJump = true;
+            }
+            yield return null;
+        }
     }
 }

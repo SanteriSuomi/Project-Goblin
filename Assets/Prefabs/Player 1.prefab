@@ -18315,7 +18315,7 @@ Rigidbody:
   m_GameObject: {fileID: 5309619644145061036}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 10
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -18380,15 +18380,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a24aa649a6042d44945931120aa6227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 18
-  dashMultiplier: 170
-  dashDrag: 4.6
-  dashGravityMultiplier: 2
-  dashCooldown: 1.25
-  jumpStrength: 625
-  jumpGravityMultiplier: 2
-  jumpFirstCooldown: 0.1
-  rotateSpeed: 7.5
+  acceleration: 90
+  dashMultiplier: 60
+  dashCooldown1: 0.45
+  dashCooldown2: 0.8
+  dashAngleMultiplier: 14
+  jumpStrength: 2200
+  jumpCooldown: 0.2
+  rotateSpeed: 8.5
+  runThreshold: 3
+  gravityRayLength: 0.15
+  gravityMultiplier: 25
   forwardKey: 100
   backwardKey: 97
   dashKey: 304

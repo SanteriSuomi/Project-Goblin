@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Santeri.unity
     guid: f8a1330130a258440a50645a37a9fbe6
   - enabled: 1
-    path: Assets/Scenes/oss.unity
+    path: Assets/oss.unity
     guid: 1e38750b8d277274db07c4fab14539bc
   m_configObjects: {}

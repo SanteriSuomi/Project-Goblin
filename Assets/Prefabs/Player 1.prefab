@@ -18388,7 +18388,7 @@ MonoBehaviour:
   jumpStrength: 625
   jumpGravityMultiplier: 2
   jumpFirstCooldown: 0.1
-  rotateSpeed: 6
+  rotateSpeed: 7.5
   forwardKey: 100
   backwardKey: 97
   dashKey: 304

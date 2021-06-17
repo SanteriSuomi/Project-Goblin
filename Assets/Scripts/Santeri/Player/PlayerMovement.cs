@@ -37,6 +37,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     KeyCode jumpKey = KeyCode.Space;
 
+    [SerializeField]
+    float runThreshold = 3;
+
     Vector3 moveVector;
     Rigidbody rb;
     Animator anim;
@@ -49,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
 
     bool canDash = true;
     bool canJump = true;
+
+    bool running = false;
 
     bool isColliding;
 
@@ -90,13 +95,13 @@ public class PlayerMovement : MonoBehaviour
         }
         if (backward)
         {
-
             backward = false;
             moveVector += -(Vector3.right * acceleration);
             Rotate(-90);
         }
         if (dash && canDash && Mathf.Abs(moveVector.sqrMagnitude) >= 0)
         {
+            anim.SetTrigger("Dash");
             dash = false;
             moveVector *= dashMultiplier;
             StartCoroutine(nameof(DashEnd));
@@ -109,10 +114,32 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(nameof(JumpEnd));
         }
         rb.AddForce(moveVector, ForceMode.Force);
+        RunCheck();
+    }
+
+    void RunCheck()
+    {
+        if (Mathf.Abs(moveVector.x) >= runThreshold && !running)
+        {
+            anim.ResetTrigger("StopRun");
+            anim.SetTrigger("Run");
+            running = true;
+        }
+        else if (Mathf.Approximately(Mathf.Abs(moveVector.x), 0) && running)
+        {
+            anim.SetTrigger("StopRun");
+            running = false;
+        }
     }
 
     void Rotate(float dir)
     {
+        float yRot = transform.rotation.eulerAngles.y;
+        if (yRot > -1 && yRot < 1) // Flip X axis when rotating so animation is rotated too
+        {
+            Vector3 original = transform.localScale;
+            transform.localScale = new Vector3(-original.x, original.y, original.z);
+        }
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, dir, 0), rotateSpeed);
     }
 
@@ -122,9 +149,9 @@ public class PlayerMovement : MonoBehaviour
         rb.drag = dashDrag;
         StartCoroutine(nameof(DashGravity));
         yield return dashWFS;
-        float time = Time.deltaTime;
-        rb.drag = originalDrag;
         canDash = true;
+        anim.ResetTrigger("StopRun");
+        running = false;
     }
 
     IEnumerator DashGravity()
@@ -134,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector3.down * dashGravityMultiplier);
             yield return null;
         }
+        rb.drag = originalDrag;
     }
 
     IEnumerator JumpEnd()
@@ -147,6 +175,8 @@ public class PlayerMovement : MonoBehaviour
         }
         canJump = true;
         anim.SetTrigger("StopJump");
+        anim.ResetTrigger("StopRun");
+        running = false;
     }
 
     private void OnCollisionEnter(Collision other)

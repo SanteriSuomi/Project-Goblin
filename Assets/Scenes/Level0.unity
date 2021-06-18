@@ -214,7 +214,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &217923326
 PrefabInstance:
@@ -418,7 +418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6009251226417814678, guid: 51e1c97c70ca2974082234b4d7c4a079, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6009251226417814678, guid: 51e1c97c70ca2974082234b4d7c4a079, type: 3}
       propertyPath: m_AnchorMax.x
@@ -493,12 +493,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6009251226428380076, guid: 51e1c97c70ca2974082234b4d7c4a079, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 34.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009251226428380076, guid: 51e1c97c70ca2974082234b4d7c4a079, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 544
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6009251226428380076, guid: 51e1c97c70ca2974082234b4d7c4a079, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 265
+      value: 261.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e1c97c70ca2974082234b4d7c4a079, type: 3}
@@ -515,7 +519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1511614528865562330, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.17
+      value: 32.71
       objectReference: {fileID: 0}
     - target: {fileID: 1511614528865562330, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -625,11 +629,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1511614528865562330, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1511614528865562330, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.99
+      value: 30.53
       objectReference: {fileID: 0}
     - target: {fileID: 1511614528865562330, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -743,7 +747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1511614528865562330, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.07
+      value: 31.61
       objectReference: {fileID: 0}
     - target: {fileID: 1511614528865562330, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -800,7 +804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1511614528865562330, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 34.2
+      value: 33.739998
       objectReference: {fileID: 0}
     - target: {fileID: 1511614528865562330, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -906,10 +910,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5003190492377051632, guid: 407a2ba413a7f034a8d1e7e39d729e5a, type: 3}
-      propertyPath: jumpStrength
-      value: 2500
-      objectReference: {fileID: 0}
     - target: {fileID: 5003190492377051633, guid: 407a2ba413a7f034a8d1e7e39d729e5a, type: 3}
       propertyPath: cam
       value: 
@@ -998,7 +998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1347099967182448971, guid: ccbe6f26f95fcf845bbd19eff7e452fc, type: 3}
       propertyPath: fireRate
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1347099967182448971, guid: ccbe6f26f95fcf845bbd19eff7e452fc, type: 3}
       propertyPath: triggerRange
@@ -1006,7 +1006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1347099967182448983, guid: ccbe6f26f95fcf845bbd19eff7e452fc, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1347099967182448983, guid: ccbe6f26f95fcf845bbd19eff7e452fc, type: 3}
       propertyPath: m_LocalPosition.x

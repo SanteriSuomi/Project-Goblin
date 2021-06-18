@@ -68,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
         dashWFS1 = new WaitForSeconds(dashCooldown1);
         dashWFS2 = new WaitForSeconds(dashCooldown2);
         jumpWFS = new WaitForSeconds(jumpCooldown);
-        StartCoroutine(nameof(ApplyGravity));
     }
 
     private void Update()
@@ -92,26 +91,29 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         moveVector = Vector3.zero;
+        Gravity();
+
         if (forward)
         {
             forward = false;
             moveVector += Vector3.right * acceleration;
             Rotate(90);
         }
-        if (backward)
+        else if (backward)
         {
             backward = false;
             moveVector += -(Vector3.right * acceleration);
             Rotate(-90);
         }
-        if (dash && canDash && Mathf.Abs(moveVector.sqrMagnitude) >= 0)
+
+        if (dash && canDash && Mathf.Abs(moveVector.sqrMagnitude) >= 0 && canJump)
         {
             anim.SetTrigger("Dash");
             dash = false;
             moveVector += (moveVector + (Vector3.up * dashAngleMultiplier)) * dashMultiplier;
             StartCoroutine(nameof(DashEnd));
         }
-        if (jump && canJump)
+        else if (jump && canJump)
         {
             anim.SetTrigger("Jump");
             jump = false;
@@ -122,9 +124,22 @@ public class PlayerMovement : MonoBehaviour
         RunAnimation();
     }
 
+    private void Gravity()
+    {
+        if (!Physics.Raycast(transform.position + new Vector3(0, 0.1f, 0), Vector3.down, gravityRayLength))
+        {
+            canJump = false;
+            moveVector += (Vector3.down * gravityMultiplier);
+        }
+        else
+        {
+            canJump = true;
+        }
+    }
+
     void RunAnimation()
     {
-        if (Mathf.Abs(moveVector.x) >= runThreshold && !running)
+        if (Mathf.Abs(moveVector.x) >= runThreshold && !running && canJump)
         {
             anim.ResetTrigger("StopRun");
             anim.SetTrigger("Run");
@@ -165,26 +180,19 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator JumpEnd()
     {
+        StartCoroutine(nameof(HitGround));
         yield return jumpWFS;
-        anim.SetTrigger("StopJump");
         anim.ResetTrigger("StopRun");
         running = false;
     }
 
-    IEnumerator ApplyGravity()
+    IEnumerator HitGround()
     {
-        while (true)
+        yield return new WaitForSeconds(0.1f);
+        while (!Physics.Raycast(transform.position + new Vector3(0, 0.1f, 0), Vector3.down, gravityRayLength))
         {
-            if (!Physics.Raycast(transform.position + new Vector3(0, 0.1f, 0), Vector3.down, gravityRayLength))
-            {
-                canJump = false;
-                rb.AddForce(Vector3.down * gravityMultiplier);
-            }
-            else
-            {
-                canJump = true;
-            }
             yield return null;
         }
+        anim.SetTrigger("StopJump");
     }
 }

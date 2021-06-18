@@ -18368,6 +18368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
+  healthBar: {fileID: 0}
 --- !u!114 &5003190492377051632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18385,12 +18386,12 @@ MonoBehaviour:
   dashCooldown1: 0.45
   dashCooldown2: 0.8
   dashAngleMultiplier: 14
-  jumpStrength: 2200
+  jumpStrength: 3000
   jumpCooldown: 0.2
   rotateSpeed: 8.5
   runThreshold: 3
-  gravityRayLength: 0.15
-  gravityMultiplier: 20
+  gravityRayLength: 0.11
+  gravityMultiplier: 90
   forwardKey: 100
   backwardKey: 97
   dashKey: 304

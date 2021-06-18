@@ -6,12 +6,19 @@ public class DartShoot : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public float triggerRange;
+    public float fireRate;
 
-    void Update()
+    private float nextFire = 0f;
+
+    void FixedUpdate()
     {
-        if (Input.GetButtonDown("Fire1"))
+    	RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.right*-1, out hit, triggerRange) && Time.time > nextFire)
         {
+        	nextFire = Time.time + fireRate;
             shoot();
+            //Debug.Log(hit.transform.name);
         }
     }
 

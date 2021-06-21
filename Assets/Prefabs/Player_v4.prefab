@@ -1050,7 +1050,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
+  m_Radius: 0.225
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
@@ -1104,8 +1104,8 @@ MonoBehaviour:
   dashCooldown1: 0.45
   dashCooldown2: 0.8
   dashAngleMultiplier: 14
-  jumpStrength: 3000
-  jumpCooldown: 0.2
+  jumpStrength: 2225
+  jumpCooldown: 0.85
   rotateSpeed: 8.5
   runThreshold: 3
   gravityRayLength: 0.11

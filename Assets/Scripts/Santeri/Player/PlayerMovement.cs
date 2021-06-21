@@ -49,16 +49,17 @@ public class PlayerMovement : MonoBehaviour
     Animator anim;
     float originalDrag;
 
-    bool forward = false;
-    bool backward = false;
-    bool dash = false;
-    bool jump = false;
+    bool forwardPressed = false;
+    bool backwardPressed = false;
+    bool dashPressed = false;
+    bool jumpPressed = false;
 
     bool canDash = true;
     bool canJump = true;
 
     bool running = false;
     bool flipped = false;
+    bool onGround;
 
     private void Awake()
     {
@@ -77,15 +78,19 @@ public class PlayerMovement : MonoBehaviour
 
     void GetInput()
     {
-        if (!forward) forward = Input.GetKey(forwardKey);
-        if (!backward) backward = Input.GetKey(backwardKey);
-        if (!dash) dash = Input.GetKeyDown(dashKey);
-        if (!jump) jump = Input.GetKeyDown(jumpKey);
+        if (!forwardPressed) forwardPressed = Input.GetKey(forwardKey);
+        if (!backwardPressed) backwardPressed = Input.GetKey(backwardKey);
+        if (!dashPressed) dashPressed = Input.GetKeyDown(dashKey);
+        if (!jumpPressed) jumpPressed = Input.GetKeyDown(jumpKey);
     }
 
     void FixedUpdate()
     {
         Move();
+        forwardPressed = false;
+        backwardPressed = false;
+        dashPressed = false;
+        jumpPressed = false;
     }
 
     void Move()
@@ -93,30 +98,31 @@ public class PlayerMovement : MonoBehaviour
         moveVector = Vector3.zero;
         Gravity();
 
-        if (forward)
+        if (forwardPressed)
         {
-            forward = false;
+            forwardPressed = false;
             moveVector += Vector3.right * acceleration;
             Rotate(90);
         }
-        else if (backward)
+        else if (backwardPressed)
         {
-            backward = false;
+            backwardPressed = false;
             moveVector += -(Vector3.right * acceleration);
             Rotate(-90);
         }
 
-        if (dash && canDash && Mathf.Abs(moveVector.sqrMagnitude) >= 0 && canJump)
+        if (dashPressed && canDash && Mathf.Abs(moveVector.sqrMagnitude) >= 0 && onGround)
         {
             anim.SetTrigger("Dash");
-            dash = false;
+            dashPressed = false;
             moveVector += (moveVector + (Vector3.up * dashAngleMultiplier)) * dashMultiplier;
             StartCoroutine(nameof(DashEnd));
         }
-        else if (jump && canJump)
+        else if (jumpPressed && canJump)
         {
             anim.SetTrigger("Jump");
-            jump = false;
+            canJump = false;
+            jumpPressed = false;
             moveVector.y += jumpStrength;
             StartCoroutine(nameof(JumpEnd));
         }
@@ -128,12 +134,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!Physics.Raycast(transform.position + new Vector3(0, 0.1f, 0), Vector3.down, gravityRayLength))
         {
-            canJump = false;
+            onGround = false;
             moveVector += (Vector3.down * gravityMultiplier);
         }
         else
         {
-            canJump = true;
+            onGround = true;
         }
     }
 
@@ -184,6 +190,7 @@ public class PlayerMovement : MonoBehaviour
         yield return jumpWFS;
         anim.ResetTrigger("StopRun");
         running = false;
+        canJump = true;
     }
 
     IEnumerator HitGround()

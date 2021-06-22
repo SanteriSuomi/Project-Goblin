@@ -1001,9 +1001,10 @@ GameObject:
   - component: {fileID: 7524647528759443907}
   - component: {fileID: 7060885502809434467}
   - component: {fileID: 7895587135835021954}
+  - component: {fileID: 271974705}
   m_Layer: 0
   m_Name: Player_v4
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1050,7 +1051,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.225
+  m_Radius: 0.3
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
@@ -1130,6 +1131,22 @@ MonoBehaviour:
   smoothMultiplier: 0.2
   minSmooth: 0.6
   maxSmooth: 1.2
+--- !u!208 &271974705
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257374833557345765}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.3, y: 0.8, z: 0.3}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0.8, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &257923805061249305
 GameObject:
   m_ObjectHideFlags: 0

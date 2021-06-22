@@ -1001,6 +1001,7 @@ GameObject:
   - component: {fileID: 7524647528759443907}
   - component: {fileID: 7060885502809434467}
   - component: {fileID: 7895587135835021954}
+  - component: {fileID: 2422039610256301722}
   m_Layer: 0
   m_Name: Player_v4
   m_TagString: Untagged
@@ -1021,6 +1022,7 @@ Transform:
   m_Children:
   - {fileID: 8396169751701066796}
   - {fileID: 2745471488873065870}
+  - {fileID: 7038658536652910660}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -1130,6 +1132,20 @@ MonoBehaviour:
   smoothMultiplier: 0.2
   minSmooth: 0.6
   maxSmooth: 1.2
+--- !u!114 &2422039610256301722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257374833557345765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbbb70c1f7878384db7ebdbe5efa680e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 0}
+  bulletPrefab: {fileID: 0}
 --- !u!1 &257923805061249305
 GameObject:
   m_ObjectHideFlags: 0
@@ -13688,6 +13704,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7046550238058064004}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3408294411760830226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7038658536652910660}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7038658536652910660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3408294411760830226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.074, z: 0.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 637736126005628767}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3427925724445550708
 GameObject:

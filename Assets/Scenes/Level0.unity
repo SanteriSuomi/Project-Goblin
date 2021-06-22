@@ -677,6 +677,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
+--- !u!4 &1163980515 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7038658536652910660, guid: c063de998f005fa448d38818a0f712b9, type: 3}
+  m_PrefabInstance: {fileID: 8333689807397929886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1542702558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1027,6 +1032,26 @@ PrefabInstance:
     - target: {fileID: 637736126005628767, guid: c063de998f005fa448d38818a0f712b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2422039610256301722, guid: c063de998f005fa448d38818a0f712b9, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 1163980515}
+    - target: {fileID: 2422039610256301722, guid: c063de998f005fa448d38818a0f712b9, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 225601468356673896, guid: 825bd0cba75f0cc4f9f305e813225eaf, type: 3}
+    - target: {fileID: 7038658536652910660, guid: c063de998f005fa448d38818a0f712b9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038658536652910660, guid: c063de998f005fa448d38818a0f712b9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.174
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038658536652910660, guid: c063de998f005fa448d38818a0f712b9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.484
       objectReference: {fileID: 0}
     - target: {fileID: 7524647528759443907, guid: c063de998f005fa448d38818a0f712b9, type: 3}
       propertyPath: healthBar

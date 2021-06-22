@@ -1144,8 +1144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbbb70c1f7878384db7ebdbe5efa680e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 0}
-  bulletPrefab: {fileID: 0}
+  firePoint: {fileID: 7038658536652910660}
+  bulletPrefab: {fileID: 225601468356673896, guid: 825bd0cba75f0cc4f9f305e813225eaf, type: 3}
+  chargeTime: 0
+  speed: 6
 --- !u!1 &257923805061249305
 GameObject:
   m_ObjectHideFlags: 0
@@ -13729,7 +13731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3408294411760830226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.074, z: 0.89}
+  m_LocalPosition: {x: 0, y: 1.174, z: 1.484}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 637736126005628767}

@@ -6,21 +6,25 @@ public class Arrow : MonoBehaviour
 {
     [SerializeField]
     float damage = 10f;
-    float speed = 6f;
     public Rigidbody rb;
     public GameObject player;
-    private float chargeTime = 0f;
 
-    public PlayerBow playerBow;
+    public  float speed;
+    public  float chargeTime;
+
+    //private PlayerBow playerBow;
 
 
     void Awake()
     {
-    	playerBow = 
+    	//playerBow = player.GetComponent<PlayerBow>();
+    	//speed = playerBow.speed;
+    	//chargeTime = playerBow.chargeTime;
+
         //if(transform.parent.rotation.y > 0) {
         //transform.localScale = new Vector3(-1f, 1f, 1f);
         //}
-    	rb.velocity = (transform.forward * speed) + transform.up * 3f;
+    	rb.velocity = (transform.forward * speed) + transform.up * 2f;
     }
 
 

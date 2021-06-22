@@ -8,10 +8,14 @@ public class PlayerBow : MonoBehaviour
     public GameObject bulletPrefab;
     private Rigidbody bulletRb;
 
-    private float chargeTime = 0f;
-    private float speed = 6f;
+    public float chargeTime;
+    public float speed;
 
     private float nextFire = 0f;
+
+    bool shot = false;
+
+    private Arrow arrow;
 
     //void FixedUpdate()
     //{
@@ -21,32 +25,40 @@ public class PlayerBow : MonoBehaviour
     //	}
     //}
     void Awake() {
-    	bulletRb = bulletPrefab.GetComponent<Rigidbody>();
+    	speed = 6f;
+    	chargeTime = 0f;
+    	arrow = bulletPrefab.GetComponent<Arrow>();
     }
 
     void Update() {
     	if(Input.GetButton("Fire1")) {
     		chargeTime += Time.deltaTime;
+    		shot = false;
     	}
 
     	if(Input.GetButtonUp("Fire1") && (chargeTime > 1f)) {
-    		if(chargeTime > 4f) {
-    			speed = speed*4f;
+    		if(chargeTime > 2.5f) {
+    			speed = speed*5f;
+    			arrow.speed = speed;
     			shoot();
     		}
     		else{
-    			speed = speed*chargeTime;
+    			speed = speed * (chargeTime * 2);
+    			arrow.speed = speed;
     			shoot();
     		}
-    		chargeTime = 0f;
-    		speed = 6f;
+	 	}
+
+	 	if(shot) {
+	 		chargeTime = 0f;
+    		speed = 5f;
 	 	}
     }
 
     void shoot()
     {
         Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-        bulletRb.velocity = (bulletPrefab.transform.forward * speed) + bulletPrefab.transform.up * 3f;
-        Debug.Log("Arrow shot");
+        Debug.Log(speed);
+        shot = true;
     }
 }

@@ -128,3 +128,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   rb: {fileID: 84671896436221935}
+  player: {fileID: 257374833557345765, guid: c063de998f005fa448d38818a0f712b9, type: 3}
+  playerBow: {fileID: 0}

@@ -483,10 +483,10 @@ NavMeshAgent:
   m_AgentTypeID: -334000983
   m_Radius: 0.5
   m_Speed: 2.25
-  m_Acceleration: 5
+  m_Acceleration: 6.5
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0.05
+  m_AngularSpeed: 160
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -509,8 +509,15 @@ MonoBehaviour:
   health: 100
   wanderRange: 7.5
   angleToPlayerForChase: 15
-  distanceToPlayerForChase: 5
-  distanceToPlayerForAttack: 1
+  distanceToPlayerForChase: 5.5
+  distanceToPlayerForAttack: 1.5
+  damagePerHit: 15
+  attackSpeed: 1.1
+  wanderSpeed: 2.25
+  chaseSpeed: 3.25
+  chasePathUpdateSpeed: 0.1
+  offsetLength: 1.4
+  player: {fileID: 271974707}
 --- !u!54 &168900427
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -527,8 +534,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
---- !u!65 &168900428
-BoxCollider:
+--- !u!135 &168900428
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -538,7 +545,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 30, y: 30, z: 30}
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &174401306
 GameObject:
@@ -570,8 +577,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: -334000983
-  m_StartPoint: {x: 0.000000010939033, y: 0.00000067055225, z: -1.0550001}
-  m_EndPoint: {x: -0.000000010939004, y: -0.00000074505806, z: 1.0549998}
+  m_StartPoint: {x: 0.000000048936272, y: 0.00000052154064, z: -1.0549995}
+  m_EndPoint: {x: -0.00000004893633, y: -0.0000009760261, z: 1.0550003}
   m_Width: 4
   m_CostModifier: -5
   m_Bidirectional: 1
@@ -584,8 +591,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174401306}
-  m_LocalRotation: {x: -0.19397435, y: 0.67998123, z: 0.19397388, w: 0.67998064}
-  m_LocalPosition: {x: 12.071, y: 1.1801914, z: -0.000000085532335}
+  m_LocalRotation: {x: -0.19397438, y: 0.67998123, z: 0.1939739, w: 0.6799806}
+  m_LocalPosition: {x: 12.070999, y: 1.1801913, z: -0.000000085532236}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -768,6 +775,17 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &271974707 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7524647528759443907, guid: c063de998f005fa448d38818a0f712b9, type: 3}
+  m_PrefabInstance: {fileID: 8333689807397929886}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbfba394497e8434c860e4e9a7df1907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &392993303
 PrefabInstance:
   m_ObjectHideFlags: 0

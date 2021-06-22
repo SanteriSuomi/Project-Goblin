@@ -12,19 +12,43 @@ public class Goblin : Enemy
     float angleToPlayerForChase = 15;
     [SerializeField]
     float distanceToPlayerForChase = 7.5f;
-
     [SerializeField]
     float distanceToPlayerForAttack = 1.5f;
 
-    Vector3 playerPosition;
+    [SerializeField]
+    float damagePerHit = 15;
+    [SerializeField]
+    float attackSpeed = 1;
+
+    float attackTimer;
+    float chaseTimer;
+
+    [SerializeField]
+    float wanderSpeed = 2.25f;
+    [SerializeField]
+    float chaseSpeed = 3f;
+
+    [SerializeField]
+    float chasePathUpdateSpeed = 1f;
+
+    [SerializeField]
+    float offsetLength = 1.4f;
+
+    [SerializeField]
+    PlayerHealth player;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        chaseTimer = chasePathUpdateSpeed + 0.01f;
     }
 
     private void Update()
     {
+        if (transform.position.z < 0 || transform.position.z > 0)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        }
         switch (state)
         {
             case State.Wander:
@@ -50,14 +74,24 @@ public class Goblin : Enemy
 
     protected override void Chase()
     {
-        if (!agent.hasPath)
+        chaseTimer += Time.deltaTime;
+        if (chaseTimer >= chasePathUpdateSpeed)
         {
-            agent.SetDestination(playerPosition);
+            agent.SetDestination(GetPlayerPosAndOffset());
+            chaseTimer = 0;
+            Debug.Log("Update path");
         }
     }
 
     protected override void Attack()
     {
+        attackTimer += Time.deltaTime;
+        if (attackTimer >= attackSpeed)
+        {
+            Debug.Log("Dealt " + damagePerHit + " damage to player.");
+            player.ModifyHealth(-damagePerHit);
+            attackTimer = 0;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -74,16 +108,24 @@ public class Goblin : Enemy
         float angle = Vector3.Angle((player.transform.position - transform.position), transform.forward);
         if (distance < distanceToPlayerForAttack) // Attack
         {
-            // state = State.Attack;
+            if (state == State.Attack)
+            {
+                return;
+            }
+            state = State.Attack;
+            chaseTimer = chasePathUpdateSpeed + 0.01f;
             Debug.Log("Attack");
         }
         else if (distance < distanceToPlayerForChase || angle < angleToPlayerForChase) // Chase
         {
-            Vector3 offset = ((transform.position - player.transform.position).normalized * 1.5f);
-            playerPosition = player.transform.position + offset;
-            Debug.DrawLine(transform.position, playerPosition);
+            if (state == State.Chase)
+            {
+                return;
+            }
             agent.ResetPath();
             state = State.Chase;
+            attackTimer = attackSpeed + 0.01f;
+            agent.speed = chaseSpeed;
             Debug.Log("Chase");
         }
     }
@@ -92,9 +134,21 @@ public class Goblin : Enemy
     {
         if (other.CompareTag("Player"))
         {
+            if (state == State.Wander)
+            {
+                return;
+            }
             agent.ResetPath();
             state = State.Wander;
+            attackTimer = attackSpeed + 0.01f;
+            chaseTimer = chasePathUpdateSpeed + 0.01f;
+            agent.speed = wanderSpeed;
             Debug.Log("Wander");
         }
+    }
+
+    Vector3 GetPlayerPosAndOffset()
+    {
+        return player.transform.position + ((transform.position - player.transform.position).normalized * offsetLength);
     }
 }

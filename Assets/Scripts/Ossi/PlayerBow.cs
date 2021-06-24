@@ -5,13 +5,20 @@ using UnityEngine;
 public class PlayerBow : MonoBehaviour
 {
     public Transform firePoint;
+    public Transform aim;
     public GameObject bulletPrefab;
     private Rigidbody bulletRb;
+
+    Vector3 lookPos;
 
     public float chargeTime;
     public float speed;
 
-    private float nextFire = 0f;
+	float angle;
+
+   	float aimSpeed;
+
+    //private float nextFire = 0f;
 
     bool shot = false;
 
@@ -24,6 +31,7 @@ public class PlayerBow : MonoBehaviour
     //	    nextFire = Time.time + 0.2f;
     //	}
     //}
+
     void Awake() {
     	speed = 6f;
     	chargeTime = 0f;
@@ -31,6 +39,15 @@ public class PlayerBow : MonoBehaviour
     }
 
     void Update() {
+    	/*if(aimSpeed <= 0.005f) {
+        	aimSpeed += Time.fixedDeltaTime;
+        }
+        else {
+        	Aim();
+        	aimSpeed = 0f;
+        }*/
+
+
     	if(Input.GetButton("Fire1")) {
     		chargeTime += Time.deltaTime;
     		shot = false;
@@ -60,5 +77,29 @@ public class PlayerBow : MonoBehaviour
         Instantiate(bulletPrefab, firePoint.position, transform.rotation);
         Debug.Log(speed);
         shot = true;
+    }
+
+    void Aim() {
+    	Vector3 mousePosition = GetMouseWorldPosition();
+    	Vector3 aimDirection = (mousePosition - transform.position).normalized;
+        angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+
+
+	    aim.eulerAngles = new Vector3(0f , 90f, angle);
+
+
+        Debug.Log(angle);
+
+    }
+
+    public Vector3 GetMouseWorldPosition() {
+    	Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
+    	vec.z = 0f;
+    	return vec;
+    }
+    public Vector3 GetMouseWorldPositionWithZ(Vector3 screenPosition, Camera worldCamera) {
+    	Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
+    	worldPosition.z = transform.position.z;
+    	return worldPosition; 
     }
 }

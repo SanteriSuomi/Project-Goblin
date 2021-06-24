@@ -1004,7 +1004,7 @@ GameObject:
   - component: {fileID: 2422039610256301722}
   m_Layer: 0
   m_Name: Player_v4
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1145,6 +1145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 7038658536652910660}
+  aim: {fileID: 0}
   bulletPrefab: {fileID: 225601468356673896, guid: 825bd0cba75f0cc4f9f305e813225eaf, type: 3}
   chargeTime: 0
   speed: 6

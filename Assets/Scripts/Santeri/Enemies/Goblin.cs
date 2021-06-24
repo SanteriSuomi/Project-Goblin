@@ -34,21 +34,18 @@ public class Goblin : Enemy
     [SerializeField]
     float offsetLength = 1.4f;
 
-    [SerializeField]
     PlayerHealth player;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         chaseTimer = chasePathUpdateSpeed + 0.01f;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     private void Update()
     {
-        if (transform.position.z < 0 || transform.position.z > 0)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        }
+        ForceZ();
         switch (state)
         {
             case State.Wander:
@@ -60,6 +57,14 @@ public class Goblin : Enemy
             case State.Attack:
                 Attack();
                 break;
+        }
+    }
+
+    void ForceZ()
+    {
+        if (transform.position.z < 0 || transform.position.z > 0)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
     }
 

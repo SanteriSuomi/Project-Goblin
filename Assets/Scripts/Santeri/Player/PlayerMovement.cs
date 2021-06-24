@@ -73,11 +73,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        GetInput();
+    }
+
+    void ForceZ()
+    {
         if (transform.position.z < 0 || transform.position.z > 0)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
-        GetInput();
     }
 
     void GetInput()

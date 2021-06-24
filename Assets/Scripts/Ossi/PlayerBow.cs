@@ -14,9 +14,9 @@ public class PlayerBow : MonoBehaviour
     public float chargeTime;
     public float speed;
 
-	float angle;
+    float angle;
 
-   	float aimSpeed;
+    float aimSpeed;
 
     //private float nextFire = 0f;
 
@@ -32,14 +32,16 @@ public class PlayerBow : MonoBehaviour
     //	}
     //}
 
-    void Awake() {
-    	speed = 6f;
-    	chargeTime = 0f;
-    	arrow = bulletPrefab.GetComponent<Arrow>();
+    void Awake()
+    {
+        speed = 6f;
+        chargeTime = 0f;
+        arrow = bulletPrefab.GetComponent<Arrow>();
     }
 
-    void Update() {
-    	/*if(aimSpeed <= 0.005f) {
+    void Update()
+    {
+        /*if(aimSpeed <= 0.005f) {
         	aimSpeed += Time.fixedDeltaTime;
         }
         else {
@@ -48,28 +50,33 @@ public class PlayerBow : MonoBehaviour
         }*/
 
 
-    	if(Input.GetButton("Fire1")) {
-    		chargeTime += Time.deltaTime;
-    		shot = false;
-    	}
+        if (Input.GetButton("Fire1"))
+        {
+            chargeTime += Time.deltaTime;
+            shot = false;
+        }
 
-    	if(Input.GetButtonUp("Fire1") && (chargeTime > 1f)) {
-    		if(chargeTime > 2.5f) {
-    			speed = speed*5f;
-    			arrow.speed = speed;
-    			shoot();
-    		}
-    		else{
-    			speed = speed * (chargeTime * 2);
-    			arrow.speed = speed;
-    			shoot();
-    		}
-	 	}
+        if (Input.GetButtonUp("Fire1") && (chargeTime > 1f))
+        {
+            if (chargeTime > 2.5f)
+            {
+                speed = speed * 5f;
+                arrow.speed = speed;
+                shoot();
+            }
+            else
+            {
+                speed = speed * (chargeTime * 2);
+                arrow.speed = speed;
+                shoot();
+            }
+        }
 
-	 	if(shot) {
-	 		chargeTime = 0f;
-    		speed = 5f;
-	 	}
+        if (shot)
+        {
+            chargeTime = 0f;
+            speed = 5f;
+        }
     }
 
     void shoot()
@@ -79,27 +86,30 @@ public class PlayerBow : MonoBehaviour
         shot = true;
     }
 
-    void Aim() {
-    	Vector3 mousePosition = GetMouseWorldPosition();
-    	Vector3 aimDirection = (mousePosition - transform.position).normalized;
+    void Aim()
+    {
+        Vector3 mousePosition = GetMouseWorldPosition();
+        Vector3 aimDirection = (mousePosition - transform.position).normalized;
         angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
 
 
-	    aim.eulerAngles = new Vector3(0f , 90f, angle);
+        aim.eulerAngles = new Vector3(0f, 90f, angle);
 
 
         Debug.Log(angle);
 
     }
 
-    public Vector3 GetMouseWorldPosition() {
-    	Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
-    	vec.z = 0f;
-    	return vec;
+    public Vector3 GetMouseWorldPosition()
+    {
+        Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
+        vec.z = 0f;
+        return vec;
     }
-    public Vector3 GetMouseWorldPositionWithZ(Vector3 screenPosition, Camera worldCamera) {
-    	Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
-    	worldPosition.z = transform.position.z;
-    	return worldPosition; 
+    public Vector3 GetMouseWorldPositionWithZ(Vector3 screenPosition, Camera worldCamera)
+    {
+        Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
+        worldPosition.z = transform.position.z;
+        return worldPosition;
     }
 }

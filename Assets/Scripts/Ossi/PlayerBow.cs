@@ -39,13 +39,13 @@ public class PlayerBow : MonoBehaviour
     }
 
     void Update() {
-    	/*if(aimSpeed <= 0.005f) {
+    	if(aimSpeed <= 0.005f) {
         	aimSpeed += Time.fixedDeltaTime;
         }
         else {
         	Aim();
         	aimSpeed = 0f;
-        }*/
+        }
 
 
     	if(Input.GetButton("Fire1")) {
@@ -74,7 +74,7 @@ public class PlayerBow : MonoBehaviour
 
     void shoot()
     {
-        Instantiate(bulletPrefab, firePoint.position, transform.rotation);
+        Instantiate(bulletPrefab, firePoint.position, aim.rotation);
         Debug.Log(speed);
         shot = true;
     }
@@ -85,7 +85,9 @@ public class PlayerBow : MonoBehaviour
         angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
 
 
-	    aim.eulerAngles = new Vector3(0f , 90f, angle);
+	    //aim.eulerAngles = new Vector3(angle, 90f, 0f);
+
+	    aim.LookAt(Input.mousePosition);
 
 
         Debug.Log(angle);

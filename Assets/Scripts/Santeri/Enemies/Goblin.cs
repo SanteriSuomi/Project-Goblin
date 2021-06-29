@@ -34,6 +34,13 @@ public class Goblin : Enemy
     [SerializeField]
     float offsetLength = 1.4f;
 
+
+    [SerializeField]
+    LayerMask enviroMask;
+    [SerializeField]
+    float enviroCollisionCooldown = 1.5f;
+    float enviroCollisionTimer = 0;
+
     PlayerHealth player;
 
     private void Awake()
@@ -45,6 +52,7 @@ public class Goblin : Enemy
 
     private void Update()
     {
+        CheckEnvironmentCollision();
         ForceZ();
         switch (state)
         {
@@ -60,6 +68,28 @@ public class Goblin : Enemy
         }
     }
 
+    void CheckEnvironmentCollision()
+    {
+        enviroCollisionTimer += Time.deltaTime;
+        bool rayLeft = Physics.Raycast(transform.position, Vector3.left, out RaycastHit hitLeft, 1, enviroMask);
+        bool rayRight = Physics.Raycast(transform.position, Vector3.right, out RaycastHit hitRight, 1, enviroMask);
+        if (state == State.Wander && enviroCollisionTimer >= enviroCollisionCooldown && (rayLeft || rayRight))
+        {
+            Debug.Log(gameObject.name + " hit environment. Updating path.");
+            Vector3 hitPos = rayLeft ? hitLeft.transform.position : hitRight.transform.position;
+            Vector3 dist = (hitPos - transform.position).normalized;
+            if (dist.x > 0)
+            {
+                SetRandomPath(0, wanderRange);
+            }
+            else
+            {
+                SetRandomPath(-wanderRange, 0);
+            }
+            enviroCollisionTimer = 0;
+        }
+    }
+
     void ForceZ()
     {
         if (transform.position.z < 0 || transform.position.z > 0)
@@ -72,9 +102,14 @@ public class Goblin : Enemy
     {
         if (!agent.hasPath)
         {
-            float randX = Random.Range(-wanderRange, wanderRange);
-            agent.SetDestination(transform.position + (Vector3.right * randX));
+            SetRandomPath(-wanderRange, wanderRange);
         }
+    }
+
+    void SetRandomPath(float negWanderRange, float posWanderRange)
+    {
+        float randX = Random.Range(negWanderRange, posWanderRange);
+        agent.SetDestination(transform.position + (Vector3.right * randX));
     }
 
     protected override void Chase()

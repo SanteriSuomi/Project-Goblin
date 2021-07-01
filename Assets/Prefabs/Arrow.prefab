@@ -108,7 +108,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225601468356673896}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.0004
   m_Height: 0.0024
@@ -129,4 +129,5 @@ MonoBehaviour:
   damage: 10
   rb: {fileID: 84671896436221935}
   player: {fileID: 257374833557345765, guid: c063de998f005fa448d38818a0f712b9, type: 3}
-  playerBow: {fileID: 0}
+  speed: 12.835759
+  chargeTime: 0

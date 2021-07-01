@@ -28,7 +28,7 @@ public class Arrow : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Hit " + other.gameObject.name);
         //if (other.transform.TryGetComponent<PlayerHealth>(out PlayerHealth comp))

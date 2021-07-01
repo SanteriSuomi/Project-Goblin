@@ -506,6 +506,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e1c97c70ca2974082234b4d7c4a079, type: 3}
+--- !u!95 &453512574 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3071468884741378196, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
+  m_PrefabInstance: {fileID: 3071468884447418183}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &518905531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -620,6 +625,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 783e65f74c59c7f47bbaaaabe2909b52, type: 3}
+--- !u!95 &911632954 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 714927836, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
+  m_PrefabInstance: {fileID: 3071468884447418183}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &952751542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1165,6 +1175,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 919132148911749789, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2765603231607418331, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
       propertyPath: m_Name
       value: Player_v6
@@ -1177,6 +1191,18 @@ PrefabInstance:
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 1490218168}
+    - target: {fileID: 3071468884741378184, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
+      propertyPath: bowAnimator
+      value: 
+      objectReference: {fileID: 911632954}
+    - target: {fileID: 3071468884741378184, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 4179939667229260544, guid: ab342417702e2e54590903daf53f114c, type: 3}
+    - target: {fileID: 3071468884741378184, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 453512574}
     - target: {fileID: 3071468884741378197, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
       propertyPath: healthBar
       value: 
@@ -1241,7 +1267,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.25
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 919132148911749789, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
 --- !u!1001 &7144768761881798671
 PrefabInstance:

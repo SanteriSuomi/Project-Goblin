@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerBow : MonoBehaviour
 {
+	[SerializeField]
+    Animator bowAnimator;
+    [SerializeField]
+    Animator playerAnimator;
+
     public Transform firePoint;
     public Transform aim;
     public GameObject bulletPrefab;
@@ -30,7 +35,7 @@ public class PlayerBow : MonoBehaviour
     //}
 
     void Awake() {
-    	speed = 6f;
+    	speed = 5f;
     	chargeTime = 0f;
     	arrow = bulletPrefab.GetComponent<Arrow>();
     }
@@ -41,17 +46,21 @@ public class PlayerBow : MonoBehaviour
 
     	if(Input.GetButton("Fire1")) {
     		chargeTime += Time.deltaTime;
+    		bowAnimator.SetTrigger("Shoot");
+    		playerAnimator.SetTrigger("Shoot");
+    		bowAnimator.SetFloat("DrawDist", chargeTime);
+    		playerAnimator.SetFloat("DrawDist", chargeTime);
     		shot = false;
     	}
 
-    	if(Input.GetButtonUp("Fire1") && (chargeTime > 1f)) {
-    		if(chargeTime > 2.5f) {
-    			speed = speed*5f;
+    	if(Input.GetButtonUp("Fire1") && (chargeTime > 0.5f)) {
+    		if(chargeTime > 1.5f) {
+    			speed = speed*6f;
     			arrow.speed = speed;
     			shoot();
     		}
     		else{
-    			speed = speed * (chargeTime * 2);
+    			speed = speed * (chargeTime * 4);
     			arrow.speed = speed;
     			shoot();
     		}
@@ -65,6 +74,8 @@ public class PlayerBow : MonoBehaviour
 
     void shoot()
     {
+    	bowAnimator.SetTrigger("Shot");
+    	playerAnimator.SetTrigger("Shot");
         Instantiate(bulletPrefab, firePoint.position, aim.rotation);
         Debug.Log(speed);
         shot = true;

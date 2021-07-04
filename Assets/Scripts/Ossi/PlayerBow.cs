@@ -86,7 +86,7 @@ public class PlayerBow : MonoBehaviour
         bowAnimator.SetTrigger("Shot");
         playerAnimator.SetTrigger("Shot");
         Instantiate(bulletPrefab, firePoint.position, aim.rotation);
-        Debug.Log(speed);
+        //Debug.Log(speed);
         shot = true;
     }
 

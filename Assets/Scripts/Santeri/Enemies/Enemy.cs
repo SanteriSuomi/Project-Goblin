@@ -16,6 +16,10 @@ public abstract class Enemy : MonoBehaviour
     public void ModifyHeath(float by)
     {
         health += by;
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected State state = State.Wander;

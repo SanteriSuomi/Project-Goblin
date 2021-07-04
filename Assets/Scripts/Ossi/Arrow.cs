@@ -9,32 +9,39 @@ public class Arrow : MonoBehaviour
     public Rigidbody rb;
     public GameObject player;
 
-    public  float speed;
-    public  float chargeTime;
+    public float speed;
+    public float chargeTime;
 
     //private PlayerBow playerBow;
 
 
     void Awake()
     {
-    	//playerBow = player.GetComponent<PlayerBow>();
-    	//speed = playerBow.speed;
-    	//chargeTime = playerBow.chargeTime;
+        //playerBow = player.GetComponent<PlayerBow>();
+        //speed = playerBow.speed;
+        //chargeTime = playerBow.chargeTime;
 
         //if(transform.parent.rotation.y > 0) {
         //transform.localScale = new Vector3(-1f, 1f, 1f);
         //}
-    	rb.velocity = (transform.forward * speed) + transform.up * 2f;
+        rb.velocity = (transform.forward * speed) + transform.up * 2f;
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Hit " + other.gameObject.name);
-        //if (other.transform.TryGetComponent<PlayerHealth>(out PlayerHealth comp))
-        //{
-        //    comp.ModifyHealth(-damage);
-        //}
-        Destroy(this.gameObject);
+        if (other.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+        {
+            enemy.ModifyHeath(-damage);
+        }
     }
+
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     Debug.Log("Hit " + other.gameObject.name);
+    //     //if (other.transform.TryGetComponent<PlayerHealth>(out PlayerHealth comp))
+    //     //{
+    //     //    comp.ModifyHealth(-damage);
+    //     //}
+    //     Destroy(this.gameObject);
+    // }
 }

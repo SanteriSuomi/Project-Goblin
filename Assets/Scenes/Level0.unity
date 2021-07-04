@@ -1171,6 +1171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_v6
       objectReference: {fileID: 0}
+    - target: {fileID: 3071468884741378184, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 225601468356673896, guid: 825bd0cba75f0cc4f9f305e813225eaf, type: 3}
     - target: {fileID: 3071468884741378197, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
       propertyPath: healthBar
       value: 

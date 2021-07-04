@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveVector;
     Rigidbody rb;
     Animator anim;
+    PlayerBow bow;
     float originalDrag;
 
     bool forwardPressed = false;
@@ -69,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
         dashWFS1 = new WaitForSeconds(dashCooldown1);
         dashWFS2 = new WaitForSeconds(dashCooldown2);
         jumpWFS = new WaitForSeconds(jumpCooldown);
+        bow = GetComponent<PlayerBow>();
     }
 
     private void Update()
@@ -104,6 +106,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
+        if (bow.IsCharging)
+        {
+            return;
+        }
+
         moveVector = Vector3.zero;
         Gravity();
 

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Goblin : Enemy
 {
     NavMeshAgent agent;
+    Animator anim;
 
     [SerializeField]
     float wanderRange = 7.5f;
@@ -48,6 +49,7 @@ public class Goblin : Enemy
         agent = GetComponent<NavMeshAgent>();
         chaseTimer = chasePathUpdateSpeed + 0.01f;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -154,6 +156,7 @@ public class Goblin : Enemy
             }
             state = State.Attack;
             chaseTimer = chasePathUpdateSpeed + 0.01f;
+            anim.SetTrigger("StartMelee");
             Debug.Log("Attack");
         }
         else if (distance < distanceToPlayerForChase || angle < angleToPlayerForChase) // Chase
@@ -162,10 +165,15 @@ public class Goblin : Enemy
             {
                 return;
             }
+            if (state == State.Attack)
+            {
+                anim.SetTrigger("EndMelee");
+            }
             agent.ResetPath();
             state = State.Chase;
             attackTimer = attackSpeed + 0.01f;
             agent.speed = chaseSpeed;
+
             Debug.Log("Chase");
         }
     }
@@ -178,11 +186,16 @@ public class Goblin : Enemy
             {
                 return;
             }
+            if (state == State.Attack)
+            {
+                anim.SetTrigger("EndMelee");
+            }
             agent.ResetPath();
             state = State.Wander;
             attackTimer = attackSpeed + 0.01f;
             chaseTimer = chasePathUpdateSpeed + 0.01f;
             agent.speed = wanderSpeed;
+
             Debug.Log("Wander");
         }
     }

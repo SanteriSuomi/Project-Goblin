@@ -15,7 +15,7 @@ public class PlayerBow : MonoBehaviour
     private Rigidbody bulletRb;
     public LayerMask mouseAimMask;
 
-    Vector3 mousePoint;
+    public Vector3 mousePoint;
 
     public float chargeTime;
     public float speed;

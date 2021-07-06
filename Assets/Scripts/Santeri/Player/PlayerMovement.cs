@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     WaitForSeconds jumpWFS;
 
     [SerializeField]
-    float rotateSpeed = 5.25f;
+    float rotateSpeed = 12f;
 
     [SerializeField]
     float runThreshold = 3;
@@ -49,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
     Animator anim;
     PlayerBow bow;
     float originalDrag;
+    float moveVelocity;
+
+    string facingDir = "Right";
 
     bool forwardPressed = false;
     bool backwardPressed = false;
@@ -111,20 +114,50 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if(facingDir.Contains("Left")) {
+        	moveVelocity = 0 - rb.velocity.x;
+        	acceleration = 90;
+        }
+        else {
+        	moveVelocity = rb.velocity.x;
+        	acceleration = 90;
+        }
+
+        anim.SetFloat("MovementSpeed", moveVelocity);
         moveVector = Vector3.zero;
         Gravity();
+
+        if(bow.mousePoint.x < transform.position.x) {
+        	Rotate(-90);
+        	facingDir = "Left";
+        	Debug.Log(bow.mousePoint.x);
+        }
+        else {
+        	Rotate(90);
+        	facingDir = "Right";
+        }
 
         if (forwardPressed)
         {
             forwardPressed = false;
+            if(facingDir.Contains("Left")) {
+	        	acceleration = 50;
+	        }
+	        else {
+	        	acceleration = 90;
+	        }
             moveVector += Vector3.right * acceleration;
-            Rotate(90);
         }
         else if (backwardPressed)
         {
             backwardPressed = false;
+            if(facingDir.Contains("Right")) {
+	        	acceleration = 50;
+	        }
+	        else {
+	        	acceleration = 90;
+	        }
             moveVector += -(Vector3.right * acceleration);
-            Rotate(-90);
         }
 
         if (dashPressed && canDash && Mathf.Abs(moveVector.sqrMagnitude) >= 0 && onGround)
@@ -181,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
         {
             flipped = true;
             Vector3 original = transform.localScale;
-            transform.localScale = new Vector3(-original.x, original.y, original.z);
+            transform.localScale = new Vector3(original.x, original.y, original.z);
         }
         else if (yRot < -15 || yRot > 15)
         {

@@ -14,6 +14,7 @@ public class PlayerBow : MonoBehaviour
     public GameObject bulletPrefab;
     private Rigidbody bulletRb;
     public LayerMask mouseAimMask;
+    Animator anim;
 
     public Vector3 mousePoint;
 
@@ -40,6 +41,7 @@ public class PlayerBow : MonoBehaviour
         speed = 5f;
         chargeTime = 0f;
         arrow = bulletPrefab.GetComponent<Arrow>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -123,5 +125,10 @@ public class PlayerBow : MonoBehaviour
         Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
         worldPosition.z = transform.position.z;
         return worldPosition;
+    }
+
+    private void OnAnimatorIK() {
+    	anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+    	anim.SetIKPosition(AvatarIKGoal.RightHand, mousePoint);
     }
 }

@@ -127,8 +127,8 @@ public class PlayerBow : MonoBehaviour
         return worldPosition;
     }
 
-    private void OnAnimatorIK() {
-    	anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-    	anim.SetIKPosition(AvatarIKGoal.RightHand, mousePoint);
-    }
+    /*private void OnAnimatorIK() {
+    	anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+    	anim.SetIKPosition(AvatarIKGoal.LeftHand, mousePoint);
+    }*/
 }

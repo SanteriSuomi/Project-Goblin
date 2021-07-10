@@ -92,6 +92,10 @@ public class PlayerMovement : MonoBehaviour
 
     void GetInput()
     {
+        if (bow.IsCharging)
+        {
+            return;
+        }
         if (!forwardPressed) forwardPressed = Input.GetKey(forwardKey);
         if (!backwardPressed) backwardPressed = Input.GetKey(backwardKey);
         if (!dashPressed) dashPressed = Input.GetKeyDown(dashKey);
@@ -117,12 +121,12 @@ public class PlayerMovement : MonoBehaviour
         if (facingDir.Contains("Left"))
         {
             moveVelocity = 0 - rb.velocity.x;
-            acceleration = 90;
+            acceleration = 85;
         }
         else
         {
             moveVelocity = rb.velocity.x;
-            acceleration = 90;
+            acceleration = 85;
         }
 
         anim.SetFloat("MovementSpeed", moveVelocity);
@@ -133,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Rotate(-90);
             facingDir = "Left";
-            Debug.Log(bow.mousePoint.x);
+            //Debug.Log(bow.mousePoint.x);
         }
         else
         {

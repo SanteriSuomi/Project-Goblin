@@ -1,10 +1,22 @@
 using UnityEngine.AI;
 using UnityEngine;
 
+enum Type
+{
+    Melee,
+    Mage
+}
+
 public class Goblin : Enemy
 {
     NavMeshAgent agent;
     Animator anim;
+
+    [SerializeField]
+    Type type;
+
+    [SerializeField]
+    GameObject mageFireBallPrefab;
 
     [SerializeField]
     float wanderRange = 7.5f;
@@ -56,6 +68,7 @@ public class Goblin : Enemy
     {
         CheckEnvironmentCollision();
         ForceZ();
+        if (type == Type.Mage) return;
         switch (state)
         {
             case State.Wander:
@@ -136,15 +149,23 @@ public class Goblin : Enemy
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider contact)
     {
-        if (other.CompareTag("Player"))
+        if (contact.CompareTag("Player"))
         {
-            PlayerContact(other);
+            switch (type)
+            {
+                case Type.Melee:
+                    PlayerContactMelee(contact);
+                    break;
+                case Type.Mage:
+                    PlayerContactMage(contact);
+                    break;
+            }
         }
     }
 
-    void PlayerContact(Collider player)
+    void PlayerContactMelee(Collider player)
     {
         float distance = Vector3.Distance(player.transform.position, transform.position);
         float angle = Vector3.Angle((player.transform.position - transform.position), transform.forward);
@@ -173,8 +194,18 @@ public class Goblin : Enemy
             state = State.Chase;
             attackTimer = attackSpeed + 0.01f;
             agent.speed = chaseSpeed;
-
             Debug.Log("Chase");
+        }
+    }
+
+    void PlayerContactMage(Collider player)
+    {
+        attackTimer += Time.deltaTime;
+        if (attackTimer >= attackSpeed)
+        {
+            GameObject fireBall = Instantiate(mageFireBallPrefab, transform.position + (Vector3.up * 1.6f), Quaternion.identity);
+            fireBall.GetComponent<GoblinFireBall>().MovePosition = (player.transform.position - transform.position) * 1000;
+            attackTimer = 0;
         }
     }
 

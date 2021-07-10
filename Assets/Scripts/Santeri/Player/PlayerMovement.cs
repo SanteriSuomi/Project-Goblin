@@ -114,49 +114,57 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if(facingDir.Contains("Left")) {
-        	moveVelocity = 0 - rb.velocity.x;
-        	acceleration = 90;
+        if (facingDir.Contains("Left"))
+        {
+            moveVelocity = 0 - rb.velocity.x;
+            acceleration = 90;
         }
-        else {
-        	moveVelocity = rb.velocity.x;
-        	acceleration = 90;
+        else
+        {
+            moveVelocity = rb.velocity.x;
+            acceleration = 90;
         }
 
         anim.SetFloat("MovementSpeed", moveVelocity);
         moveVector = Vector3.zero;
         Gravity();
 
-        if(bow.mousePoint.x < transform.position.x) {
-        	Rotate(-90);
-        	facingDir = "Left";
-        	Debug.Log(bow.mousePoint.x);
+        if (bow.mousePoint.x < transform.position.x)
+        {
+            Rotate(-90);
+            facingDir = "Left";
+            Debug.Log(bow.mousePoint.x);
         }
-        else {
-        	Rotate(90);
-        	facingDir = "Right";
+        else
+        {
+            Rotate(90);
+            facingDir = "Right";
         }
 
         if (forwardPressed)
         {
             forwardPressed = false;
-            if(facingDir.Contains("Left")) {
-	        	acceleration = 50;
-	        }
-	        else {
-	        	acceleration = 90;
-	        }
+            if (facingDir.Contains("Left"))
+            {
+                acceleration = 60;
+            }
+            else
+            {
+                acceleration = 85;
+            }
             moveVector += Vector3.right * acceleration;
         }
         else if (backwardPressed)
         {
             backwardPressed = false;
-            if(facingDir.Contains("Right")) {
-	        	acceleration = 50;
-	        }
-	        else {
-	        	acceleration = 90;
-	        }
+            if (facingDir.Contains("Right"))
+            {
+                acceleration = 60;
+            }
+            else
+            {
+                acceleration = 85;
+            }
             moveVector += -(Vector3.right * acceleration);
         }
 

@@ -11123,12 +11123,13 @@ MonoBehaviour:
   playerAnimator: {fileID: 3071468884741378196}
   firePoint: {fileID: 5466819381528824326}
   aim: {fileID: 7025813766756609483}
-  bulletPrefab: {fileID: 4179939667229260544, guid: ab342417702e2e54590903daf53f114c, type: 3}
+  bulletPrefab: {fileID: 225601468356673896, guid: 825bd0cba75f0cc4f9f305e813225eaf, type: 3}
   mouseAimMask:
     serializedVersion: 2
     m_Bits: 64
+  mousePoint: {x: 0, y: 0, z: 0}
   chargeTime: 0
-  speed: 6
+  speed: 5.5
 --- !u!114 &3071468884741378199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11157,15 +11158,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a24aa649a6042d44945931120aa6227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 90
-  dashMultiplier: 60
-  dashCooldown1: 0.45
-  dashCooldown2: 0.8
+  acceleration: 85
+  dashMultiplier: 50
+  dashCooldown1: 0.5
+  dashCooldown2: 0.85
   dashAngleMultiplier: 14
-  jumpStrength: 2225
-  jumpCooldown: 0.85
+  jumpStrength: 2200
+  jumpCooldown: 0.9
   rotateSpeed: 8.5
-  runThreshold: 3
+  runThreshold: 2.5
   gravityRayLength: 0.11
   gravityMultiplier: 90
   forwardKey: 100

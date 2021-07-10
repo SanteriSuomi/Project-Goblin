@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4179939667229260544}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -18.388, y: 2.086, z: 0}
-  m_LocalScale: {x: 200, y: 200, z: 150}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 250, y: 250, z: 150}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -98,10 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc94963024a3f9418baf9482a6b2f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 25.1
   rb: {fileID: 7226112292511488604}
-  player: {fileID: 0}
-  speed: 16.421213
+  player: {fileID: 2765603231607418331, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
+  cooldownUntilDestroy: 10
+  speed: 23.278505
   chargeTime: 0
 --- !u!54 &7226112292511488604
 Rigidbody:
@@ -129,7 +130,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.0001
-  m_Height: 0.0041
+  m_Radius: 0.00015
+  m_Height: 0.0044
   m_Direction: 2
   m_Center: {x: -0.00002820681, y: -5.4569682e-11, z: 0.0020802096}

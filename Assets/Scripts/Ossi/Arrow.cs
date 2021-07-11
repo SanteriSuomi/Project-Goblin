@@ -7,6 +7,7 @@ public class Arrow : MonoBehaviour
     float damage = 10f;
     public Rigidbody rb;
     //public GameObject player;
+    Collider col;
 
     [SerializeField]
     float cooldownUntilDestroy = 10;
@@ -27,6 +28,7 @@ public class Arrow : MonoBehaviour
         //if(transform.parent.rotation.y > 0) {
         //transform.localScale = new Vector3(-1f, 1f, 1f);
         //}
+        col = GetComponent<Collider>();
         rb.velocity = (transform.forward * speed) + transform.up * 2f;
         cooldownUntilDestroyWFS = new WaitForSeconds(cooldownUntilDestroy);
         StartCoroutine(nameof(DestroyCooldown));
@@ -34,6 +36,12 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.CompareTag("MageProjectile"))
+        {
+            Physics.IgnoreCollision(this.col, other.collider, true);
+            return;
+        }
+
         if (other.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
         {
             rb.isKinematic = true;

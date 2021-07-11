@@ -62,6 +62,10 @@ public class Goblin : Enemy
         chaseTimer = chasePathUpdateSpeed + 0.01f;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         anim = GetComponent<Animator>();
+        if (type == Type.Mage)
+        {
+            attackTimer = attackSpeed + 0.01f;
+        }
     }
 
     private void Update()
@@ -204,7 +208,7 @@ public class Goblin : Enemy
         if (attackTimer >= attackSpeed)
         {
             GameObject fireBall = Instantiate(mageFireBallPrefab, transform.position + (Vector3.up * 1.6f), Quaternion.identity);
-            fireBall.GetComponent<GoblinFireBall>().MovePosition = (player.transform.position - transform.position) * 1000;
+            fireBall.GetComponent<GoblinFireBall>().MovePosition = ((player.transform.position + Vector3.down) - transform.position) * 1000;
             attackTimer = 0;
         }
     }

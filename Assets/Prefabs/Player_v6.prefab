@@ -11163,12 +11163,12 @@ MonoBehaviour:
   dashCooldown1: 0.5
   dashCooldown2: 0.85
   dashAngleMultiplier: 14
-  jumpStrength: 2200
+  jumpStrength: 2250
   jumpCooldown: 0.9
   rotateSpeed: 8.5
   runThreshold: 2.5
-  gravityRayLength: 0.11
-  gravityMultiplier: 90
+  gravityRayLength: 0.1125
+  gravityMultiplier: 81
   forwardKey: 100
   backwardKey: 97
   dashKey: 304

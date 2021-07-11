@@ -18802,7 +18802,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 13
+  m_Radius: 12.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &5106535714010161801
 CapsuleCollider:
@@ -18857,7 +18857,7 @@ MonoBehaviour:
   distanceToPlayerForChase: 0
   distanceToPlayerForAttack: 0
   damagePerHit: 0
-  attackSpeed: 2.5
+  attackSpeed: 2.35
   wanderSpeed: 0
   chaseSpeed: 0
   chasePathUpdateSpeed: 0

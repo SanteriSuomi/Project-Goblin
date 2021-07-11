@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     private float health;
     public HealthBar healthBar;
 
+    public float Health => health;
+
     public void ModifyHealth(float by) // Modify health by negative or positive value
     {
         health += by;

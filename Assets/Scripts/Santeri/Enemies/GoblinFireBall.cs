@@ -10,17 +10,24 @@ public class GoblinFireBall : MonoBehaviour
     [SerializeField]
     float cooldownUntilDestroy = 10;
     WaitForSeconds cooldownUntilDestroyWFS;
-
+    Collider col;
     public Vector3 MovePosition { get; set; }
 
     private void Awake()
     {
+        col = GetComponent<Collider>();
         cooldownUntilDestroyWFS = new WaitForSeconds(cooldownUntilDestroy);
         StartCoroutine(nameof(DestroyCooldown));
     }
 
     private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.CompareTag("PlayerArrow"))
+        {
+            Physics.IgnoreCollision(this.col, other.collider, true);
+            return;
+        }
+
         if (other.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth player))
         {
             player.ModifyHealth(-damage);

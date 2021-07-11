@@ -115,6 +115,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (bow.IsCharging)
         {
+            if (bow.mousePoint.x < transform.position.x)
+            {
+                Rotate(-90);
+                facingDir = "Left";
+                //Debug.Log(bow.mousePoint.x);
+            }
+            else
+            {
+                Rotate(90);
+                facingDir = "Right";
+            }
             return;
         }
 
@@ -132,18 +143,6 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("MovementSpeed", moveVelocity);
         moveVector = Vector3.zero;
         Gravity();
-
-        if (bow.mousePoint.x < transform.position.x)
-        {
-            Rotate(-90);
-            facingDir = "Left";
-            //Debug.Log(bow.mousePoint.x);
-        }
-        else
-        {
-            Rotate(90);
-            facingDir = "Right";
-        }
 
         if (forwardPressed)
         {

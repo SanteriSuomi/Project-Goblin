@@ -17,6 +17,8 @@ public class Goblin : Enemy
 
     [SerializeField]
     GameObject mageFireBallPrefab;
+    [SerializeField]
+    Transform fireBallSpawnPoint;
 
     [SerializeField]
     float wanderRange = 7.5f;
@@ -207,8 +209,9 @@ public class Goblin : Enemy
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackSpeed)
         {
-            GameObject fireBall = Instantiate(mageFireBallPrefab, transform.position + (Vector3.up * 1.6f), Quaternion.identity);
-            fireBall.GetComponent<GoblinFireBall>().MovePosition = ((player.transform.position + Vector3.down) - transform.position) * 1000;
+            anim.SetTrigger("StartCast");
+            GameObject fireBall = Instantiate(mageFireBallPrefab, fireBallSpawnPoint.position, Quaternion.identity);
+            fireBall.GetComponent<GoblinFireBall>().MovePosition = ((player.transform.position + (Vector3.down / 2)) - transform.position) * 1000;
             attackTimer = 0;
         }
     }

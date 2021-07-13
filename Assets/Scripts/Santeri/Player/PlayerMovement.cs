@@ -92,10 +92,6 @@ public class PlayerMovement : MonoBehaviour
 
     void GetInput()
     {
-        if (bow.IsCharging)
-        {
-            return;
-        }
         if (!forwardPressed) forwardPressed = Input.GetKey(forwardKey);
         if (!backwardPressed) backwardPressed = Input.GetKey(backwardKey);
         if (!dashPressed) dashPressed = Input.GetKeyDown(dashKey);
@@ -113,19 +109,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        if (bow.IsCharging)
+        if (bow.mousePoint.x < transform.position.x)
         {
-            if (bow.mousePoint.x < transform.position.x)
-            {
-                Rotate(-90);
-                facingDir = "Left";
-            }
-            else
-            {
-                Rotate(90);
-                facingDir = "Right";
-            }
-            return;
+            Rotate(-90);
+            facingDir = "Left";
+        }
+        else
+        {
+            Rotate(90);
+            facingDir = "Right";
         }
 
         if (facingDir.Contains("Left"))
@@ -184,6 +176,11 @@ public class PlayerMovement : MonoBehaviour
             jumpPressed = false;
             moveVector.y += jumpStrength;
             StartCoroutine(nameof(JumpEnd));
+        }
+
+        if (bow.IsCharging)
+        {
+            moveVector = new Vector3(0, moveVector.y, 0);
         }
         rb.AddForce(moveVector, ForceMode.Force);
         RunAnimation();

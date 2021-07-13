@@ -46,7 +46,6 @@ public class PlayerBow : MonoBehaviour
     void Update()
     {
         Aim();
-
         if (Input.GetButton("Fire1"))
         {
             chargeTime += Time.deltaTime;
@@ -72,7 +71,8 @@ public class PlayerBow : MonoBehaviour
                 arrow.speed = speed;
                 shoot();
             }
-            IsCharging = false;
+            StartCoroutine(nameof(ShotCountdown));
+            //IsCharging = false;
         }
 
         if (shot)
@@ -82,6 +82,12 @@ public class PlayerBow : MonoBehaviour
         }
     }
 
+    IEnumerator ShotCountdown()
+    {
+        yield return new WaitForSeconds(0.20f);
+        IsCharging = false;
+    }
+
     void shoot()
     {
         bowAnimator.SetTrigger("Shot");
@@ -89,15 +95,6 @@ public class PlayerBow : MonoBehaviour
         Instantiate(bulletPrefab, firePoint.position, aim.rotation);
         //Debug.Log(speed);
         shot = true;
-    }
-
-    IEnumerator ShotCountdown()
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            yield return null;
-        }
-        shot = false;
     }
 
     void Aim()

@@ -119,7 +119,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 Rotate(-90);
                 facingDir = "Left";
-                //Debug.Log(bow.mousePoint.x);
             }
             else
             {
@@ -131,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (facingDir.Contains("Left"))
         {
-            moveVelocity = 0 - rb.velocity.x;
+            moveVelocity = -rb.velocity.x;
             acceleration = 85;
         }
         else

@@ -718,7 +718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2283753593731920992, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
       propertyPath: m_Name
-      value: spiketrap
+      value: SpikeTrap
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 044f7cb5c35472344be3571c3a853e9c, type: 3}
@@ -775,18 +775,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1973997433492209442, guid: 9153fa4c702951f47866b71f84e94555, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1973997433492209443, guid: 9153fa4c702951f47866b71f84e94555, type: 3}
-      propertyPath: m_VoxelSize
-      value: 0.13333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 1973997433492209443, guid: 9153fa4c702951f47866b71f84e94555, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: 72de613f483e041429e207cd1e437f4e, type: 2}
-    - target: {fileID: 1973997433492209443, guid: 9153fa4c702951f47866b71f84e94555, type: 3}
-      propertyPath: m_OverrideVoxelSize
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1358,10 +1346,6 @@ PrefabInstance:
     - target: {fileID: 3040576223620927565, guid: 975dee1d92c5c004e9fafb201b52f4af, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3294649803145869227, guid: 975dee1d92c5c004e9fafb201b52f4af, type: 3}
-      propertyPath: m_Radius
-      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 975dee1d92c5c004e9fafb201b52f4af, type: 3}

@@ -6955,8 +6955,8 @@ MonoBehaviour:
   fireBallSpawnPoint: {fileID: 0}
   wanderRange: 8
   angleToPlayerForChase: 17.5
-  distanceToPlayerForChase: 4.8
-  distanceToPlayerForAttack: 1.4
+  distanceToPlayerForChase: 6.5
+  distanceToPlayerForAttack: 1.325
   damagePerHit: 10
   attackSpeed: 1.39
   wanderSpeed: 2
@@ -6988,7 +6988,7 @@ NavMeshAgent:
   m_Height: 1.15
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!1 &1834690063817515968
 GameObject:
   m_ObjectHideFlags: 0

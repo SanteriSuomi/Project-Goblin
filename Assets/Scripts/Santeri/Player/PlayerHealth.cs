@@ -6,9 +6,16 @@ public class PlayerHealth : MonoBehaviour
     float startingHealth = 100;
 
     private float health;
-    public HealthBar healthBar;
+    HealthBar healthBar;
 
     public float Health => health;
+
+    private void Awake()
+    {
+        health = startingHealth;
+        healthBar = FindObjectOfType<HealthBar>();
+        healthBar.SetHealth(health);
+    }
 
     public void ModifyHealth(float by) // Modify health by negative or positive value
     {
@@ -18,11 +25,5 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("Player death event (health below 0)");
         }
-    }
-
-    void Awake()
-    {
-        health = startingHealth;
-        healthBar.SetHealth(health);
     }
 }

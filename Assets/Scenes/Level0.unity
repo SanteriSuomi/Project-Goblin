@@ -1081,6 +1081,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1555787121479163515, guid: 8d9d08dc122c9f94ca81d0dd609d9aec, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1825697229334749990, guid: 8d9d08dc122c9f94ca81d0dd609d9aec, type: 3}
       propertyPath: m_Name
       value: Goblin_Melee

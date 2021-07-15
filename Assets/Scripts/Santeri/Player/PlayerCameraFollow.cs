@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerCameraFollow : MonoBehaviour
 {
-    [SerializeField]
     Camera cam;
     [SerializeField]
     float smoothMultiplier = 0.5f;
@@ -17,6 +16,7 @@ public class PlayerCameraFollow : MonoBehaviour
 
     private void Awake()
     {
+        cam = Camera.main;
         rb = GetComponent<Rigidbody>();
         offset = cam.transform.position - transform.position;
     }

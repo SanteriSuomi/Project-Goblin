@@ -157,12 +157,14 @@ public class Goblin : Enemy
 
     private void OnTriggerStay(Collider contact)
     {
+        float distance = Vector3.Distance(contact.transform.position, transform.position);
         if (contact.CompareTag("Player"))
         {
             switch (type)
             {
                 case Type.Melee:
-                    PlayerContactMelee(contact);
+                    if (distance > distanceToPlayerForChase) return;
+                    PlayerContactMelee(contact, distance);
                     break;
                 case Type.Mage:
                     PlayerContactMage(contact);
@@ -171,9 +173,8 @@ public class Goblin : Enemy
         }
     }
 
-    void PlayerContactMelee(Collider player)
+    void PlayerContactMelee(Collider player, float distance)
     {
-        float distance = Vector3.Distance(player.transform.position, transform.position);
         float angle = Vector3.Angle((player.transform.position - transform.position), transform.forward);
         if (distance < distanceToPlayerForAttack) // Attack
         {

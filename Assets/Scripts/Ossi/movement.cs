@@ -12,9 +12,20 @@ public class movement : MonoBehaviour
 
 	RaycastHit hit;
 
-	public BoxCollider boxCollider;
+	public CapsuleCollider capCollider;
+	public Animator anim;
+	PlayerBow bow;
 
+	public float moveVelocity;
+	float rotateSpeed = 2f;
+	string facingDir = "Right";
+
+	bool collision;
 	bool grounded;
+	bool running = false;
+	bool jumping = false;
+	bool falling = false;
+	bool flipped = false;
 
 	float colliderX;
 	float colliderY;
@@ -29,14 +40,29 @@ public class movement : MonoBehaviour
 
 	void Awake() {
 		rb = GetComponent<Rigidbody> ();
-		boxCollider = GetComponent<BoxCollider>();
-		colliderY = boxCollider.bounds.size.y;
-		colliderX = boxCollider.bounds.size.x;
+		capCollider = GetComponent<CapsuleCollider>();
+		colliderY = capCollider.bounds.size.y;
+		colliderX = capCollider.bounds.size.x;
+		bow = GetComponent<PlayerBow>();
 	}
 
 	private void Update() {
 		mx = Input.GetAxisRaw("Horizontal");
+		anim.SetBool("Grounded", IsGrounded());
+		anim.SetFloat("velocityY", rb.velocity.y);
 		Jump();
+		Turn();
+
+
+		if (Mathf.Abs(mx) > 0.05f && !running) {
+            anim.ResetTrigger("StopRun");
+            anim.SetTrigger("Run");
+			running = true;
+		}
+		else if(Mathf.Abs(mx) == 0f && running) {
+            anim.SetTrigger("StopRun");
+            running = false;
+		}
 	}
 
 	private void FixedUpdate() {
@@ -45,7 +71,9 @@ public class movement : MonoBehaviour
 	}
 
 	void Jump() {
-		if(Input.GetButtonDown("Jump") && grounded) {
+		if(Input.GetButtonDown("Jump") && IsGrounded()) {
+			anim.SetTrigger("Jump");
+			jumping = true;
 			GetComponent<Rigidbody>().velocity = Vector3.up * jumpVelocity;
 		}
 		if(rb.velocity.y < 0) {
@@ -54,28 +82,83 @@ public class movement : MonoBehaviour
 		else if (rb.velocity.y > 0 && !Input.GetButton("Jump")) {
 			rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
 		}
+		RaycastHit rayHit;
+		if(Physics.Raycast(transform.position, transform.up*-1, out rayHit, 0.1f)) {
+			anim.SetTrigger("StopJump");
+		}
 	}
 
-	private void OnCollisionEnter(Collision collision) {
-		if(collision.gameObject.layer == 3)
-		{
-			grounded = true;
+	public bool IsFalling() {
+		if(rb.velocity.y < -1f) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
-	private void OnCollisionExit(Collision collision) {
-		if(collision.gameObject.layer == 3)
-		{
-			grounded = false;
-		}
-	}
+
+	private void OnCollisionEnter(Collision other)
+    {
+        collision = true;
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+       collision = false;
+    }
+
+    void Rotate(float dir)
+    {
+        float yRot = transform.rotation.eulerAngles.y;
+        if (yRot >= -15 && yRot <= 15 && !flipped) // Flip X axis when rotating so animation is rotated too
+        {
+            flipped = true;
+            Vector3 original = transform.localScale;
+            transform.localScale = new Vector3(original.x, original.y, original.z);
+        }
+        else if (yRot < -15 || yRot > 15)
+        {
+            flipped = false;
+        }
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, dir, 0), rotateSpeed);
+    }
 
 	public bool IsGrounded() {
-		bool groundCheck = Physics.BoxCast(GetComponent<Collider>().bounds.center, transform.localScale, Vector3.down, out hit, transform.rotation, GetComponent<Collider>().bounds.extents.y + 1f, groundLayerMask);
+		RaycastHit rayHit;
+		bool groundCheck = Physics.Raycast(transform.position, transform.up*-1, out rayHit, 0.04f);
 		if(groundCheck) {
-			Debug.Log("Hit : " + hit.collider.name);
+			Debug.Log("Hit : " + rayHit.collider.name);
+		}
+		else {
+			if(collision) {
+				return true;
+			}
 		}
 		return groundCheck;
 	}
+
+	public void Turn() {
+		anim.SetFloat("MovementSpeed", moveVelocity);
+		if (bow.mousePoint.x < transform.position.x)
+	        {
+	            Rotate(-90);
+	            facingDir = "Left";
+	        }
+	        else
+	        {
+	            Rotate(90);
+	            facingDir = "Right";
+	        }
+
+	        if (facingDir == "Left")
+	        {
+	            moveVelocity = -rb.velocity.x;
+	        }
+	        else
+	        {
+	            moveVelocity = rb.velocity.x;
+	        }
+		}
 
 }
 

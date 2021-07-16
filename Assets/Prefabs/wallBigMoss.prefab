@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9189102740021363435}
   - component: {fileID: 6368854069747529249}
   - component: {fileID: 5738468462668524708}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wallBigMoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}

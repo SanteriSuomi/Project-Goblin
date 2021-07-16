@@ -6952,10 +6952,11 @@ MonoBehaviour:
   health: 50
   type: 0
   mageFireBallPrefab: {fileID: 0}
+  fireBallSpawnPoint: {fileID: 0}
   wanderRange: 8
   angleToPlayerForChase: 17.5
-  distanceToPlayerForChase: 4.8
-  distanceToPlayerForAttack: 1.4
+  distanceToPlayerForChase: 6.5
+  distanceToPlayerForAttack: 1.325
   damagePerHit: 10
   attackSpeed: 1.39
   wanderSpeed: 2
@@ -6987,7 +6988,7 @@ NavMeshAgent:
   m_Height: 1.15
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!1 &1834690063817515968
 GameObject:
   m_ObjectHideFlags: 0
@@ -20826,9 +20827,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1151844921754575795, guid: 34f26fe1963f0a94c8058ec4ec2ef23d, type: 3}
-  - {fileID: 6728736049189609223, guid: 34f26fe1963f0a94c8058ec4ec2ef23d, type: 3}
-  - {fileID: -4163170327692077165, guid: 34f26fe1963f0a94c8058ec4ec2ef23d, type: 3}
+  - {fileID: 2100000, guid: 7318950e54f58744fbceb1c247f2cf28, type: 2}
+  - {fileID: 2100000, guid: 7318950e54f58744fbceb1c247f2cf28, type: 2}
+  - {fileID: 2100000, guid: 7318950e54f58744fbceb1c247f2cf28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

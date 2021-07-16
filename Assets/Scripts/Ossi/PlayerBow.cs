@@ -4,6 +4,9 @@ using UnityEngine;
 public class PlayerBow : MonoBehaviour
 {
     [SerializeField]
+    KeyCode fireButton = KeyCode.Mouse0;
+
+    [SerializeField]
     Animator bowAnimator;
     [SerializeField]
     Animator playerAnimator;
@@ -27,14 +30,6 @@ public class PlayerBow : MonoBehaviour
 
     private Arrow arrow;
 
-    //void FixedUpdate()
-    //{
-    //	if(Input.GetButton("Fire1") && Time.time > nextFire) {
-    //	    shoot();
-    //	    nextFire = Time.time + 0.2f;
-    //	}
-    //}
-
     void Awake()
     {
         speed = 5f;
@@ -46,7 +41,7 @@ public class PlayerBow : MonoBehaviour
     void Update()
     {
         Aim();
-        if (Input.GetButton("Fire1"))
+        if (Input.GetKey(fireButton))
         {
             chargeTime += Time.deltaTime;
             bowAnimator.SetTrigger("Shoot");
@@ -56,8 +51,12 @@ public class PlayerBow : MonoBehaviour
             IsCharging = true;
             shot = false;
         }
+        else
+        {
+            IsCharging = false;
+        }
 
-        if (Input.GetButtonUp("Fire1") && (chargeTime > 0.5f))
+        if (Input.GetKeyUp(fireButton) && (chargeTime > 0.6f))
         {
             if (chargeTime > 1.5f)
             {
@@ -72,7 +71,6 @@ public class PlayerBow : MonoBehaviour
                 shoot();
             }
             StartCoroutine(nameof(ShotCountdown));
-            //IsCharging = false;
         }
 
         if (shot)
@@ -93,7 +91,6 @@ public class PlayerBow : MonoBehaviour
         bowAnimator.SetTrigger("Shot");
         playerAnimator.SetTrigger("Shot");
         Instantiate(bulletPrefab, firePoint.position, aim.rotation);
-        //Debug.Log(speed);
         shot = true;
     }
 

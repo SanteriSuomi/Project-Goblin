@@ -10,10 +10,18 @@ public class movement : MonoBehaviour
 	private float fallMultiplier = 2.5f;
 	private float lowJumpMultiplier = 2f;
 
+    float dashMultiplier = 15f;
+    float dashCooldown1 = 0.45f;
+    float dashCooldown2 = 0.8f;
+    float dashAngleMultiplier = 2;
+    WaitForSeconds dashWFS1;
+    WaitForSeconds dashWFS2;
+
 	RaycastHit hit;
 
 	public CapsuleCollider capCollider;
 	public Animator anim;
+	Vector2 moveVector;
 	PlayerBow bow;
 
 	public float moveVelocity;
@@ -26,6 +34,8 @@ public class movement : MonoBehaviour
 	bool jumping = false;
 	bool falling = false;
 	bool flipped = false;
+	bool dashPressed = false;
+	bool canDash = true;
 
 	float colliderX;
 	float colliderY;
@@ -52,7 +62,12 @@ public class movement : MonoBehaviour
 		anim.SetFloat("velocityY", rb.velocity.y);
 		Jump();
 		Turn();
+		//Dash();
 
+		if(!bow.IsCharging) {
+			Vector2 movement = new Vector2(mx * movementSpeed, rb.velocity.y);
+			rb.velocity = movement;
+		}
 
 		if (Mathf.Abs(mx) > 0.05f && !running) {
             anim.ResetTrigger("StopRun");
@@ -66,12 +81,10 @@ public class movement : MonoBehaviour
 	}
 
 	private void FixedUpdate() {
-		Vector2 movement = new Vector2(mx * movementSpeed, rb.velocity.y);
-		rb.velocity = movement;
 	}
 
 	void Jump() {
-		if(Input.GetButtonDown("Jump") && IsGrounded()) {
+		if(Input.GetButtonDown("Jump") && IsGrounded() && !bow.IsCharging) {
 			anim.SetTrigger("Jump");
 			jumping = true;
 			GetComponent<Rigidbody>().velocity = Vector3.up * jumpVelocity;
@@ -157,8 +170,30 @@ public class movement : MonoBehaviour
 	        else
 	        {
 	            moveVelocity = rb.velocity.x;
-	        }
+	    }
+	}
+
+	/*public void Dash() {
+		if(Input.GetKeyDown(KeyCode.LeftShift)) {
+			dashPressed = true;
 		}
+		if (dashPressed && canDash && IsGrounded()) {
+            anim.SetTrigger("Dash");
+            moveVector = new Vector2(mx * dashMultiplier, rb.velocity.y);
+            rb.velocity = moveVector;
+            dashPressed = false;
+            StartCoroutine(nameof(DashEnd));
+        }
+	}
+
+	IEnumerator DashEnd() {
+        canDash = false;
+        yield return dashWFS1;
+        running = false;
+        yield return dashWFS2;
+        anim.ResetTrigger("StopRun");
+        canDash = true;
+    }*/
 
 }
 

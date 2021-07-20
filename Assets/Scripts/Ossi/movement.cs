@@ -23,7 +23,7 @@ public class movement : MonoBehaviour
     PlayerBow bow;
 
     public float moveVelocity;
-    float rotateSpeed = 2f;
+    public float rotateSpeed = 2f;
     string facingDir = "Right";
 
     bool collision;
@@ -41,7 +41,6 @@ public class movement : MonoBehaviour
     public string turned = "right";
 
     public Rigidbody rb;
-    public LayerMask groundLayers;
 
     float angle;
     float mx;
@@ -70,27 +69,24 @@ public class movement : MonoBehaviour
             rb.velocity = movement;
         }
 
-        if (Mathf.Abs(mx) > 0.05f && !running)
+        if (Mathf.Abs(mx) > 0.1f && !running)
         {
             anim.ResetTrigger("StopRun");
             anim.SetTrigger("Run");
             running = true;
         }
-        else if (Mathf.Abs(mx) == 0f && running)
+        else if (Mathf.Approximately(Mathf.Abs(mx), 0) && running)
         {
             anim.SetTrigger("StopRun");
             running = false;
         }
     }
 
-    private void FixedUpdate()
-    {
-    }
-
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && IsGrounded() && !bow.IsCharging)
+        if (Input.GetButton("Jump") && IsGrounded() && !bow.IsCharging)
         {
+            running = false;
             anim.SetTrigger("Jump");
             jumping = true;
             GetComponent<Rigidbody>().velocity = Vector3.up * jumpVelocity;
@@ -103,8 +99,7 @@ public class movement : MonoBehaviour
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        RaycastHit rayHit;
-        if (Physics.Raycast(transform.position, transform.up * -1, out rayHit, 0.1f))
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit rayHit, 0.11f))
         {
             anim.SetTrigger("StopJump");
         }
@@ -150,20 +145,20 @@ public class movement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        RaycastHit rayHit;
-        bool groundCheck = Physics.Raycast(transform.position, -transform.up, out rayHit, 0.1f);
-        if (groundCheck)
-        {
-            Debug.Log("Hit : " + rayHit.collider.name);
-        }
-        else
-        {
-            if (collision)
-            {
-                return true;
-            }
-        }
-        return groundCheck;
+        bool groundCheck = Physics.Raycast(transform.position, Vector3.down, out RaycastHit rayHit, 0.11f, groundLayerMask);
+        return groundCheck || collision;
+        // if (groundCheck)
+        // {
+        //     //Debug.Log("Hit : " + rayHit.collider.name);
+        // }
+        // else
+        // {
+        //     if (collision)
+        //     {
+        //         return true;
+        //     }
+        // }
+        // return groundCheck;
     }
 
     public void Turn()
@@ -211,6 +206,4 @@ public class movement : MonoBehaviour
         anim.ResetTrigger("StopRun");
         canDash = true;
     }*/
-
 }
-

@@ -6902,7 +6902,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1555787121479163517
 CapsuleCollider:
@@ -6962,7 +6962,7 @@ MonoBehaviour:
   wanderSpeed: 2
   chaseSpeed: 3
   chasePathUpdateSpeed: 0.275
-  offsetLength: 1.25
+  offsetLength: 1.2
   enviroMask:
     serializedVersion: 2
     m_Bits: 136
@@ -6977,10 +6977,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -334000983
   m_Radius: 0.2
-  m_Speed: 2.25
-  m_Acceleration: 6
+  m_Speed: 1.85
+  m_Acceleration: 5
   avoidancePriority: 50
-  m_AngularSpeed: 225
+  m_AngularSpeed: 220
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

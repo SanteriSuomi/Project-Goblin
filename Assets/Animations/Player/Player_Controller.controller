@@ -33,7 +33,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: rig_runningAction 0
-  m_Speed: -2
+  m_Speed: -2.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4609954516283158891}
@@ -935,7 +935,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: rig_runningAction
-  m_Speed: 2
+  m_Speed: 2.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5978505890236310643}

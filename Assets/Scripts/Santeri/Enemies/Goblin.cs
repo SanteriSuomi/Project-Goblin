@@ -57,9 +57,11 @@ public class Goblin : Enemy
     float enviroCollisionTimer = 0;
 
     PlayerHealth player;
+    Collider col;
 
     private void Awake()
     {
+        col = GetComponent<Collider>();
         agent = GetComponent<NavMeshAgent>();
         chaseTimer = chasePathUpdateSpeed + 0.01f;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
@@ -157,6 +159,12 @@ public class Goblin : Enemy
 
     private void OnTriggerStay(Collider contact)
     {
+        Physics.Linecast(transform.position + (Vector3.up / 2), player.transform.position + Vector3.up, out RaycastHit hit);
+        if (!hit.transform.CompareTag("Player"))
+        {
+            state = State.Wander;
+            return;
+        }
         float distance = Vector3.Distance(contact.transform.position, transform.position);
         if (contact.CompareTag("Player"))
         {
@@ -187,7 +195,7 @@ public class Goblin : Enemy
             anim.SetTrigger("StartMelee");
             Debug.Log("Attack");
         }
-        else if (distance < distanceToPlayerForChase || angle < angleToPlayerForChase) // Chase
+        else if ((distance < distanceToPlayerForChase || angle < angleToPlayerForChase)) // Chase
         {
             if (state == State.Chase)
             {
@@ -212,7 +220,9 @@ public class Goblin : Enemy
         {
             anim.SetTrigger("StartCast");
             GameObject fireBall = Instantiate(mageFireBallPrefab, fireBallSpawnPoint.position, Quaternion.identity);
-            fireBall.GetComponent<GoblinFireBall>().MovePosition = ((player.transform.position + (Vector3.down / 2)) - transform.position) * 1000;
+            GoblinFireBall fireBallComp = fireBall.GetComponent<GoblinFireBall>();
+            fireBallComp.PlayerTransform = player.transform;
+            fireBallComp.GoblinCollider = col;
             attackTimer = 0;
         }
     }
@@ -234,7 +244,6 @@ public class Goblin : Enemy
             attackTimer = attackSpeed + 0.01f;
             chaseTimer = chasePathUpdateSpeed + 0.01f;
             agent.speed = wanderSpeed;
-
             Debug.Log("Wander");
         }
     }

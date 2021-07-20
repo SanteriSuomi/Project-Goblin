@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class movement : MonoBehaviour
 {
-	public LayerMask groundLayerMask;
-	public float movementSpeed;
-	public float jumpVelocity;
-	private float fallMultiplier = 2.5f;
-	private float lowJumpMultiplier = 2f;
+    public LayerMask groundLayerMask;
+    public float movementSpeed;
+    public float jumpVelocity;
+    private float fallMultiplier = 2.5f;
+    private float lowJumpMultiplier = 2f;
 
     float dashMultiplier = 15f;
     float dashCooldown1 = 0.45f;
@@ -17,107 +15,121 @@ public class movement : MonoBehaviour
     WaitForSeconds dashWFS1;
     WaitForSeconds dashWFS2;
 
-	RaycastHit hit;
+    RaycastHit hit;
 
-	public CapsuleCollider capCollider;
-	public Animator anim;
-	Vector2 moveVector;
-	PlayerBow bow;
+    public CapsuleCollider capCollider;
+    public Animator anim;
+    Vector2 moveVector;
+    PlayerBow bow;
 
-	public float moveVelocity;
-	float rotateSpeed = 2f;
-	string facingDir = "Right";
+    public float moveVelocity;
+    float rotateSpeed = 2f;
+    string facingDir = "Right";
 
-	bool collision;
-	bool grounded;
-	bool running = false;
-	bool jumping = false;
-	bool falling = false;
-	bool flipped = false;
-	bool dashPressed = false;
-	bool canDash = true;
+    bool collision;
+    bool grounded;
+    bool running = false;
+    bool jumping = false;
+    bool falling = false;
+    bool flipped = false;
+    bool dashPressed = false;
+    bool canDash = true;
 
-	float colliderX;
-	float colliderY;
+    float colliderX;
+    float colliderY;
 
-	public string turned = "right";
+    public string turned = "right";
 
-	public Rigidbody rb;
-	public LayerMask groundLayers;
+    public Rigidbody rb;
+    public LayerMask groundLayers;
 
-	float angle;
-	float mx;
+    float angle;
+    float mx;
 
-	void Awake() {
-		rb = GetComponent<Rigidbody> ();
-		capCollider = GetComponent<CapsuleCollider>();
-		colliderY = capCollider.bounds.size.y;
-		colliderX = capCollider.bounds.size.x;
-		bow = GetComponent<PlayerBow>();
-	}
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        capCollider = GetComponent<CapsuleCollider>();
+        colliderY = capCollider.bounds.size.y;
+        colliderX = capCollider.bounds.size.x;
+        bow = GetComponent<PlayerBow>();
+    }
 
-	private void Update() {
-		mx = Input.GetAxisRaw("Horizontal");
-		anim.SetBool("Grounded", IsGrounded());
-		anim.SetFloat("velocityY", rb.velocity.y);
-		Jump();
-		Turn();
-		//Dash();
+    private void Update()
+    {
+        mx = Input.GetAxisRaw("Horizontal");
+        anim.SetBool("Grounded", IsGrounded());
+        anim.SetFloat("velocityY", rb.velocity.y);
+        Jump();
+        Turn();
+        //Dash();
 
-		if(!bow.IsCharging) {
-			Vector2 movement = new Vector2(mx * movementSpeed, rb.velocity.y);
-			rb.velocity = movement;
-		}
+        if (!bow.IsCharging)
+        {
+            Vector2 movement = new Vector2(mx * movementSpeed, rb.velocity.y);
+            rb.velocity = movement;
+        }
 
-		if (Mathf.Abs(mx) > 0.05f && !running) {
+        if (Mathf.Abs(mx) > 0.05f && !running)
+        {
             anim.ResetTrigger("StopRun");
             anim.SetTrigger("Run");
-			running = true;
-		}
-		else if(Mathf.Abs(mx) == 0f && running) {
+            running = true;
+        }
+        else if (Mathf.Abs(mx) == 0f && running)
+        {
             anim.SetTrigger("StopRun");
             running = false;
-		}
-	}
+        }
+    }
 
-	private void FixedUpdate() {
-	}
+    private void FixedUpdate()
+    {
+    }
 
-	void Jump() {
-		if(Input.GetButtonDown("Jump") && IsGrounded() && !bow.IsCharging) {
-			anim.SetTrigger("Jump");
-			jumping = true;
-			GetComponent<Rigidbody>().velocity = Vector3.up * jumpVelocity;
-		}
-		if(rb.velocity.y < 0) {
-			rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-		}
-		else if (rb.velocity.y > 0 && !Input.GetButton("Jump")) {
-			rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-		}
-		RaycastHit rayHit;
-		if(Physics.Raycast(transform.position, transform.up*-1, out rayHit, 0.1f)) {
-			anim.SetTrigger("StopJump");
-		}
-	}
+    void Jump()
+    {
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !bow.IsCharging)
+        {
+            anim.SetTrigger("Jump");
+            jumping = true;
+            GetComponent<Rigidbody>().velocity = Vector3.up * jumpVelocity;
+        }
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+        RaycastHit rayHit;
+        if (Physics.Raycast(transform.position, transform.up * -1, out rayHit, 0.1f))
+        {
+            anim.SetTrigger("StopJump");
+        }
+    }
 
-	public bool IsFalling() {
-		if(rb.velocity.y < -1f) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+    public bool IsFalling()
+    {
+        if (rb.velocity.y < -1f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
-	private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
         collision = true;
     }
 
     private void OnCollisionExit(Collision other)
     {
-       collision = false;
+        collision = false;
     }
 
     void Rotate(float dir)
@@ -136,44 +148,49 @@ public class movement : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, dir, 0), rotateSpeed);
     }
 
-	public bool IsGrounded() {
-		RaycastHit rayHit;
-		bool groundCheck = Physics.Raycast(transform.position, transform.up*-1, out rayHit, 0.04f);
-		if(groundCheck) {
-			Debug.Log("Hit : " + rayHit.collider.name);
-		}
-		else {
-			if(collision) {
-				return true;
-			}
-		}
-		return groundCheck;
-	}
+    public bool IsGrounded()
+    {
+        RaycastHit rayHit;
+        bool groundCheck = Physics.Raycast(transform.position, -transform.up, out rayHit, 0.1f);
+        if (groundCheck)
+        {
+            Debug.Log("Hit : " + rayHit.collider.name);
+        }
+        else
+        {
+            if (collision)
+            {
+                return true;
+            }
+        }
+        return groundCheck;
+    }
 
-	public void Turn() {
-		anim.SetFloat("MovementSpeed", moveVelocity);
-		if (bow.mousePoint.x < transform.position.x)
-	        {
-	            Rotate(-90);
-	            facingDir = "Left";
-	        }
-	        else
-	        {
-	            Rotate(90);
-	            facingDir = "Right";
-	        }
+    public void Turn()
+    {
+        anim.SetFloat("MovementSpeed", moveVelocity);
+        if (bow.mousePoint.x < transform.position.x)
+        {
+            Rotate(-90);
+            facingDir = "Left";
+        }
+        else
+        {
+            Rotate(90);
+            facingDir = "Right";
+        }
 
-	        if (facingDir == "Left")
-	        {
-	            moveVelocity = -rb.velocity.x;
-	        }
-	        else
-	        {
-	            moveVelocity = rb.velocity.x;
-	    }
-	}
+        if (facingDir == "Left")
+        {
+            moveVelocity = -rb.velocity.x;
+        }
+        else
+        {
+            moveVelocity = rb.velocity.x;
+        }
+    }
 
-	/*public void Dash() {
+    /*public void Dash() {
 		if(Input.GetKeyDown(KeyCode.LeftShift)) {
 			dashPressed = true;
 		}

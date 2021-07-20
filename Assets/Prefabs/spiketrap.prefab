@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 338185291536143797}
   - component: {fileID: 2283753593731920995}
   - component: {fileID: 2283753593731920994}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: spiketrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,4 +108,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba37901222ba8a84488d7600ab43ce2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 100

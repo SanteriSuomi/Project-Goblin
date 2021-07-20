@@ -8,15 +8,17 @@ public class DartShoot : MonoBehaviour
     public GameObject bulletPrefab;
     public float triggerRange;
     public float fireRate;
+    [SerializeField]
+    Vector3 rayDirection = Vector3.left;
 
     private float nextFire = 0f;
 
     void FixedUpdate()
     {
-    	RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.right*-1, out hit, triggerRange) && Time.time > nextFire)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, rayDirection, out hit, triggerRange) && Time.time > nextFire)
         {
-        	nextFire = Time.time + fireRate;
+            nextFire = Time.time + fireRate;
             shoot();
             //Debug.Log(hit.transform.name);
         }

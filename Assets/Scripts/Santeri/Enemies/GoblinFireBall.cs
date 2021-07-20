@@ -10,14 +10,24 @@ public class GoblinFireBall : MonoBehaviour
     [SerializeField]
     float cooldownUntilDestroy = 10;
     WaitForSeconds cooldownUntilDestroyWFS;
+    Rigidbody rb;
     Collider col;
-    public Vector3 MovePosition { get; set; }
+    public Transform PlayerTransform { get; set; }
+    private Vector3 velocity;
+    public Collider GoblinCollider { get; set; }
 
     private void Awake()
     {
         col = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
         cooldownUntilDestroyWFS = new WaitForSeconds(cooldownUntilDestroy);
         StartCoroutine(nameof(DestroyCooldown));
+    }
+
+    private void Start()
+    {
+        velocity = ((PlayerTransform.position + Vector3.up) - transform.position).normalized;
+        Physics.IgnoreCollision(GoblinCollider, col, true);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -35,10 +45,15 @@ public class GoblinFireBall : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, MovePosition, Time.deltaTime * speed);
+        rb.MovePosition(transform.position + (velocity * speed * Time.deltaTime));
     }
+
+    // private void Update()
+    // {
+    //     transform.position = Vector3.MoveTowards(transform.position, MovePosition, Time.deltaTime * speed);
+    // }
 
     IEnumerator DestroyCooldown()
     {

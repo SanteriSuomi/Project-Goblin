@@ -1,11 +1,8 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
-public class PlayerMove: MonoBehaviour
+public class movement : MonoBehaviour
 {
     public LayerMask groundLayerMask;
-    public Transform Aim;
     public float movementSpeed;
     public float jumpVelocity;
     private float fallMultiplier = 2.5f;
@@ -26,9 +23,8 @@ public class PlayerMove: MonoBehaviour
     PlayerBow bow;
 
     public float moveVelocity;
-    float rotateSpeed = 20f;
-
-    public string facingDir = "Right";
+    public float rotateSpeed = 2f;
+    string facingDir = "Right";
 
     bool collision;
     bool grounded;
@@ -42,8 +38,9 @@ public class PlayerMove: MonoBehaviour
     float colliderX;
     float colliderY;
 
+    public string turned = "right";
+
     public Rigidbody rb;
-    public LayerMask groundLayers;
 
     float angle;
     float mx;
@@ -59,38 +56,37 @@ public class PlayerMove: MonoBehaviour
 
     private void Update()
     {
+        mx = Input.GetAxisRaw("Horizontal");
         anim.SetBool("Grounded", IsGrounded());
         anim.SetFloat("velocityY", rb.velocity.y);
         Jump();
         Turn();
         //Dash();
 
-    }
-
-    private void FixedUpdate()
-    {
-    	if (!bow.IsCharging)
+        if (!bow.IsCharging)
         {
-        	mx = Input.GetAxisRaw("Horizontal") * movementSpeed;
-            Vector2 movement = new Vector2(mx, rb.velocity.y);
+            Vector2 movement = new Vector2(mx * movementSpeed, rb.velocity.y);
             rb.velocity = movement;
         }
-        if (Mathf.Abs(mx) > 0.05f)
+
+        if (Mathf.Abs(mx) > 0.1f && !running)
         {
-            anim.SetBool("Running", true);
+            anim.ResetTrigger("StopRun");
+            anim.SetTrigger("Run");
             running = true;
         }
-        else if (Mathf.Abs(mx) == 0f)
+        else if (Mathf.Approximately(Mathf.Abs(mx), 0) && running)
         {
-            anim.SetBool("Running", false);
+            anim.SetTrigger("StopRun");
             running = false;
         }
     }
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && IsGrounded() && !bow.IsCharging)
+        if (Input.GetButton("Jump") && IsGrounded() && !bow.IsCharging)
         {
+            running = false;
             anim.SetTrigger("Jump");
             jumping = true;
             GetComponent<Rigidbody>().velocity = Vector3.up * jumpVelocity;
@@ -103,8 +99,7 @@ public class PlayerMove: MonoBehaviour
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        RaycastHit rayHit;
-        if (Physics.Raycast(transform.position, -transform.up, out rayHit, 2f))
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit rayHit, 0.11f))
         {
             anim.SetTrigger("StopJump");
         }
@@ -112,7 +107,7 @@ public class PlayerMove: MonoBehaviour
 
     public bool IsFalling()
     {
-        if (rb.velocity.y < -0.5f)
+        if (rb.velocity.y < -1f)
         {
             return true;
         }
@@ -150,43 +145,34 @@ public class PlayerMove: MonoBehaviour
 
     public bool IsGrounded()
     {
-        RaycastHit rayHit;
-        bool groundCheck = Physics.Raycast(transform.position, -transform.up, out rayHit, 0.2f);
-        if (groundCheck)
-        {
-            Debug.Log("Hit : " + rayHit.collider.name);
-        }
-        else
-        {
-            if (collision)
-            {
-                return true;
-            }
-        }
-        return groundCheck;
+        bool groundCheck = Physics.Raycast(transform.position, Vector3.down, out RaycastHit rayHit, 0.11f, groundLayerMask);
+        return groundCheck || collision;
+        // if (groundCheck)
+        // {
+        //     //Debug.Log("Hit : " + rayHit.collider.name);
+        // }
+        // else
+        // {
+        //     if (collision)
+        //     {
+        //         return true;
+        //     }
+        // }
+        // return groundCheck;
     }
 
     public void Turn()
     {
         anim.SetFloat("MovementSpeed", moveVelocity);
-        if (bow.IsCharging) {
-            if(bow.mousePoint.x < transform.position.x && facingDir != "Left") {
-                Flip();
-                facingDir = "Left";
-            }
-            else if(bow.mousePoint.x > transform.position.x && facingDir != "Right") {
-                Flip();
-                facingDir = "Right";
-            }
-        }
-
-        if(mx > 0 && facingDir != "Right" && !bow.IsCharging) {
-        	Flip();
-            facingDir = "Right";
-        }
-        else if(mx < 0 && facingDir != "Left" && !bow.IsCharging) {
-        	Flip();
+        if (bow.mousePoint.x < transform.position.x)
+        {
+            Rotate(-90);
             facingDir = "Left";
+        }
+        else
+        {
+            Rotate(90);
+            facingDir = "Right";
         }
 
         if (facingDir == "Left")
@@ -198,15 +184,6 @@ public class PlayerMove: MonoBehaviour
             moveVelocity = rb.velocity.x;
         }
     }
-
-    private void Flip()
-	{
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.z *= -1;
-        Aim.transform.localScale = theScale;
-		transform.localScale = theScale;
-	}
 
     /*public void Dash() {
 		if(Input.GetKeyDown(KeyCode.LeftShift)) {
@@ -229,6 +206,4 @@ public class PlayerMove: MonoBehaviour
         anim.ResetTrigger("StopRun");
         canDash = true;
     }*/
-
 }
-

@@ -1,8 +1,56 @@
 fileFormatVersion: 2
-guid: 7584994b600357e4f9c3aae472176c00
+guid: 2c0e1ca12f2151c449d1e35161c44e89
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 3687371023976008321
+    second: shamanRig|castChannelShaman
+  - first:
+      74: -5689500300222635937
+    second: shamanRig|castEndShaman
+  - first:
+      74: 6844146680045908425
+    second: shamanRig|idleActionGoblin
+  - first:
+      74: 6447102845075886307
+    second: shamanRig|idleActionShaman
+  - first:
+      74: -9089229100040935363
+    second: shamanRig|meleeAction
+  - first:
+      74: -137336437440819681
+    second: shamanRig|ogreJumpAttack
+  - first:
+      74: -6745066950118239880
+    second: shamanRig|ogreKick
+  - first:
+      74: -8631362988618733798
+    second: shamanRig|ogreLeftPunch
+  - first:
+      74: 3675981128916539194
+    second: shamanRig|ogreOverhead
+  - first:
+      74: -6046003002086299730
+    second: shamanRig|ogreWalkcycle
+  - first:
+      74: -2062023971572789374
+    second: shamanRig|PoseLibGoblin
+  - first:
+      74: -3961006198129814403
+    second: shamanRig|PoseLibGoblin.002
+  - first:
+      74: 1280611549823018303
+    second: shamanRig|poseLibOgre
+  - first:
+      74: 3638525411269843417
+    second: shamanRig|PoseLibShaman
+  - first:
+      74: 4213045791232981190
+    second: shamanRig|walkAction
+  - first:
+      74: -8512734886491682212
+    second: shamanRig|walkActionShaman
   externalObjects: {}
   materials:
     materialImportMode: 2

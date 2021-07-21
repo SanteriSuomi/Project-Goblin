@@ -25,7 +25,7 @@ public class Dart : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hit " + other.gameObject.name);
+        // Debug.Log("Hit " + other.gameObject.name);
         if (other.transform.TryGetComponent<PlayerHealth>(out PlayerHealth comp))
         {
             comp.ModifyHealth(-damage);

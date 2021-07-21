@@ -33,7 +33,7 @@ public class PlayerMelee : MonoBehaviour
             {
                 if (hit.transform != null && hit.transform.TryGetComponent<Enemy>(out Enemy enemy) && !set.Contains(enemy))
                 {
-                    Debug.Log("melee hit");
+                    // Debug.Log("melee hit");
                     set.Add(enemy);
                     enemy.ModifyHealth(-damage);
                 }

@@ -6958,13 +6958,13 @@ MonoBehaviour:
   wanderRange: 8
   angleToPlayerForChase: 17.5
   distanceToPlayerForChase: 6.5
-  distanceToPlayerForAttack: 1.325
-  damagePerHit: 10
+  distanceToPlayerForAttack: 1.35
+  damagePerHit: 15
   attackSpeed: 1.39
-  wanderSpeed: 2
-  chaseSpeed: 3
-  chasePathUpdateSpeed: 0.275
-  offsetLength: 1.2
+  wanderSpeed: 1.5
+  chaseSpeed: 2.5
+  chasePathUpdateSpeed: 0.3
+  offsetLength: 1.15
   enviroMask:
     serializedVersion: 2
     m_Bits: 136

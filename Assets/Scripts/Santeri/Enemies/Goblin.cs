@@ -75,6 +75,11 @@ public class Goblin : Enemy
 
     private void Update()
     {
+        // Physics.Linecast(transform.position + (Vector3.up / 2), player.transform.position + Vector3.up, out RaycastHit hit);
+        // if (hit.transform != null && !hit.transform.CompareTag("Player"))
+        // {
+        //     state = State.Wander;
+        // }
         CheckEnvironmentCollision();
         ForceZ();
         if (type == Type.Mage) return;
@@ -97,9 +102,10 @@ public class Goblin : Enemy
         enviroCollisionTimer += Time.deltaTime;
         bool rayLeft = Physics.Raycast(transform.position, Vector3.left, out RaycastHit hitLeft, 1, enviroMask);
         bool rayRight = Physics.Raycast(transform.position, Vector3.right, out RaycastHit hitRight, 1, enviroMask);
-        if (state == State.Wander && enviroCollisionTimer >= enviroCollisionCooldown && (rayLeft || rayRight))
+        if (state == State.Wander && enviroCollisionTimer >= enviroCollisionCooldown && (rayLeft || rayRight)
+            && hitLeft.transform != null && hitRight.transform != null && !hitLeft.transform.CompareTag("Player") && !hitRight.transform.CompareTag("Player"))
         {
-            Debug.Log(gameObject.name + " hit environment. Updating path.");
+            // Debug.Log(gameObject.name + " hit environment. Updating path.");
             Vector3 hitPos = rayLeft ? hitLeft.transform.position : hitRight.transform.position;
             Vector3 dist = (hitPos - transform.position).normalized;
             if (dist.x > 0)
@@ -143,7 +149,7 @@ public class Goblin : Enemy
         {
             agent.SetDestination(GetPlayerPosAndOffset());
             chaseTimer = 0;
-            Debug.Log("Update path");
+            // Debug.Log("Update path");
         }
     }
 
@@ -152,7 +158,7 @@ public class Goblin : Enemy
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackSpeed)
         {
-            Debug.Log("Dealt " + damagePerHit + " damage to player.");
+            // Debug.Log("Dealt " + damagePerHit + " damage to player.");
             player.ModifyHealth(-damagePerHit);
             attackTimer = 0;
         }
@@ -160,25 +166,26 @@ public class Goblin : Enemy
 
     private void OnTriggerStay(Collider contact)
     {
+        if (!contact.CompareTag("Player"))
+        {
+            return;
+        }
         Physics.Linecast(transform.position + (Vector3.up / 2), player.transform.position + Vector3.up, out RaycastHit hit);
-        if (!hit.transform.CompareTag("Player"))
+        if (hit.transform != null && !hit.transform.CompareTag("Player"))
         {
             state = State.Wander;
             return;
         }
         float distance = Vector3.Distance(contact.transform.position, transform.position);
-        if (contact.CompareTag("Player"))
+        switch (type)
         {
-            switch (type)
-            {
-                case Type.Melee:
-                    if (distance > distanceToPlayerForChase) return;
-                    PlayerContactMelee(contact, distance);
-                    break;
-                case Type.Mage:
-                    PlayerContactMage(contact);
-                    break;
-            }
+            case Type.Melee:
+                if (distance > distanceToPlayerForChase) return;
+                PlayerContactMelee(contact, distance);
+                break;
+            case Type.Mage:
+                PlayerContactMage(contact);
+                break;
         }
     }
 
@@ -194,7 +201,7 @@ public class Goblin : Enemy
             state = State.Attack;
             chaseTimer = chasePathUpdateSpeed + 0.01f;
             anim.SetTrigger("StartMelee");
-            Debug.Log("Attack");
+            // Debug.Log("Attack");
         }
         else if ((distance < distanceToPlayerForChase || angle < angleToPlayerForChase)) // Chase
         {
@@ -210,7 +217,7 @@ public class Goblin : Enemy
             state = State.Chase;
             attackTimer = attackSpeed + 0.01f;
             agent.speed = chaseSpeed;
-            Debug.Log("Chase");
+            // Debug.Log("Chase");
         }
     }
 

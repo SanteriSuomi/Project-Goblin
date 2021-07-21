@@ -37,7 +37,7 @@ public class Arrow : MonoBehaviour
             rb.freezeRotation = true;
             transform.SetParent(other.transform, true);
             enemy.ModifyHealth(-damage);
-            Debug.Log("Arrow hit player");
+            // Debug.Log("Arrow hit player");
         }
         else
         {

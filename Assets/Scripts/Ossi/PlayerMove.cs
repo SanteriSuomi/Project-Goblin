@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerMove: MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     public LayerMask groundLayerMask;
     public Transform Aim;
@@ -69,9 +69,9 @@ public class PlayerMove: MonoBehaviour
 
     private void FixedUpdate()
     {
-    	if (!bow.IsCharging)
+        if (!bow.IsCharging)
         {
-        	mx = Input.GetAxisRaw("Horizontal") * movementSpeed;
+            mx = Input.GetAxisRaw("Horizontal") * movementSpeed;
             Vector2 movement = new Vector2(mx, rb.velocity.y);
             rb.velocity = movement;
         }
@@ -89,7 +89,7 @@ public class PlayerMove: MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && IsGrounded() && !bow.IsCharging)
+        if (Input.GetButton("Jump") && IsGrounded() && !bow.IsCharging)
         {
             anim.SetTrigger("Jump");
             jumping = true;
@@ -154,7 +154,7 @@ public class PlayerMove: MonoBehaviour
         bool groundCheck = Physics.Raycast(transform.position, -transform.up, out rayHit, 0.2f);
         if (groundCheck)
         {
-            Debug.Log("Hit : " + rayHit.collider.name);
+            // Debug.Log("Hit : " + rayHit.collider.name);
         }
         else
         {
@@ -169,23 +169,28 @@ public class PlayerMove: MonoBehaviour
     public void Turn()
     {
         anim.SetFloat("MovementSpeed", moveVelocity);
-        if (bow.IsCharging) {
-            if(bow.mousePoint.x < transform.position.x && facingDir != "Left") {
+        if (bow.IsCharging)
+        {
+            if (bow.mousePoint.x < transform.position.x && facingDir != "Left")
+            {
                 Flip();
                 facingDir = "Left";
             }
-            else if(bow.mousePoint.x > transform.position.x && facingDir != "Right") {
+            else if (bow.mousePoint.x > transform.position.x && facingDir != "Right")
+            {
                 Flip();
                 facingDir = "Right";
             }
         }
 
-        if(mx > 0 && facingDir != "Right" && !bow.IsCharging) {
-        	Flip();
+        if (mx > 0 && facingDir != "Right" && !bow.IsCharging)
+        {
+            Flip();
             facingDir = "Right";
         }
-        else if(mx < 0 && facingDir != "Left" && !bow.IsCharging) {
-        	Flip();
+        else if (mx < 0 && facingDir != "Left" && !bow.IsCharging)
+        {
+            Flip();
             facingDir = "Left";
         }
 
@@ -200,13 +205,13 @@ public class PlayerMove: MonoBehaviour
     }
 
     private void Flip()
-	{
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.z *= -1;
+    {
+        // Multiply the player's x local scale by -1.
+        Vector3 theScale = transform.localScale;
+        theScale.z *= -1;
         Aim.transform.localScale = theScale;
-		transform.localScale = theScale;
-	}
+        transform.localScale = theScale;
+    }
 
     /*public void Dash() {
 		if(Input.GetKeyDown(KeyCode.LeftShift)) {

@@ -12,10 +12,16 @@ public abstract class Enemy : MonoBehaviour
 {
     [SerializeField]
     protected float health = 100;
+    public HealthBar healthBar;
 
-    public void ModifyHeath(float by)
+    private void Awake() {
+        healthBar.SetHealth(health);
+    }
+
+    public void ModifyHealth(float by)
     {
         health += by;
+        healthBar.SetHealth(health);
         if (health < 0)
         {
             Destroy(gameObject);

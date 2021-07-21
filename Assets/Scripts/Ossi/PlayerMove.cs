@@ -180,11 +180,11 @@ public class PlayerMove: MonoBehaviour
             }
         }
 
-        if(mx > 0 && facingDir != "Right") {
+        if(mx > 0 && facingDir != "Right" && !bow.IsCharging) {
         	Flip();
             facingDir = "Right";
         }
-        else if(mx < 0 && facingDir != "Left") {
+        else if(mx < 0 && facingDir != "Left" && !bow.IsCharging) {
         	Flip();
             facingDir = "Left";
         }

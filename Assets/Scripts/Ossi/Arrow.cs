@@ -36,7 +36,7 @@ public class Arrow : MonoBehaviour
             rb.isKinematic = true;
             rb.freezeRotation = true;
             transform.SetParent(other.transform, true);
-            enemy.ModifyHeath(-damage);
+            enemy.ModifyHealth(-damage);
             Debug.Log("Arrow hit player");
         }
         else

@@ -6,14 +6,13 @@ public class PlayerHealth : MonoBehaviour
     float startingHealth = 100;
 
     private float health;
-    HealthBar healthBar;
+    public HealthBar healthBar;
 
     public float Health => health;
 
     private void Awake()
     {
         health = startingHealth;
-        healthBar = FindObjectOfType<HealthBar>();
         healthBar.SetHealth(health);
     }
 

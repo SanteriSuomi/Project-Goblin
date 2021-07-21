@@ -59,6 +59,7 @@ public class Goblin : Enemy
     PlayerHealth player;
     Collider col;
 
+
     private void Awake()
     {
         col = GetComponent<Collider>();

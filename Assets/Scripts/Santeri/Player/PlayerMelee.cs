@@ -35,7 +35,7 @@ public class PlayerMelee : MonoBehaviour
                 {
                     Debug.Log("melee hit");
                     set.Add(enemy);
-                    enemy.ModifyHeath(-damage);
+                    enemy.ModifyHealth(-damage);
                 }
             }
         }

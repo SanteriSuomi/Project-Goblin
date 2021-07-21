@@ -107,19 +107,6 @@ public class PlayerBow : MonoBehaviour
         }
     }
 
-    public Vector3 GetMouseWorldPosition()
-    {
-        Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
-        vec.z = 0f;
-        return vec;
-    }
-    public Vector3 GetMouseWorldPositionWithZ(Vector3 screenPosition, Camera worldCamera)
-    {
-        Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
-        worldPosition.z = transform.position.z;
-        return worldPosition;
-    }
-
     /*private void OnAnimatorIK() {
     	anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
     	anim.SetIKPosition(AvatarIKGoal.LeftHand, mousePoint);

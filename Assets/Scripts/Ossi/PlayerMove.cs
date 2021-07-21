@@ -1,8 +1,11 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
-public class movement : MonoBehaviour
+public class PlayerMove: MonoBehaviour
 {
     public LayerMask groundLayerMask;
+    public Transform Aim;
     public float movementSpeed;
     public float jumpVelocity;
     private float fallMultiplier = 2.5f;
@@ -23,8 +26,9 @@ public class movement : MonoBehaviour
     PlayerBow bow;
 
     public float moveVelocity;
-    float rotateSpeed = 2f;
-    string facingDir = "Right";
+    float rotateSpeed = 20f;
+
+    public string facingDir = "Right";
 
     bool collision;
     bool grounded;
@@ -37,8 +41,6 @@ public class movement : MonoBehaviour
 
     float colliderX;
     float colliderY;
-
-    public string turned = "right";
 
     public Rigidbody rb;
     public LayerMask groundLayers;
@@ -57,34 +59,32 @@ public class movement : MonoBehaviour
 
     private void Update()
     {
-        mx = Input.GetAxisRaw("Horizontal");
         anim.SetBool("Grounded", IsGrounded());
         anim.SetFloat("velocityY", rb.velocity.y);
         Jump();
         Turn();
         //Dash();
 
-        if (!bow.IsCharging)
-        {
-            Vector2 movement = new Vector2(mx * movementSpeed, rb.velocity.y);
-            rb.velocity = movement;
-        }
-
-        if (Mathf.Abs(mx) > 0.05f && !running)
-        {
-            anim.ResetTrigger("StopRun");
-            anim.SetTrigger("Run");
-            running = true;
-        }
-        else if (Mathf.Abs(mx) == 0f && running)
-        {
-            anim.SetTrigger("StopRun");
-            running = false;
-        }
     }
 
     private void FixedUpdate()
     {
+    	if (!bow.IsCharging)
+        {
+        	mx = Input.GetAxisRaw("Horizontal") * movementSpeed;
+            Vector2 movement = new Vector2(mx, rb.velocity.y);
+            rb.velocity = movement;
+        }
+        if (Mathf.Abs(mx) > 0.05f)
+        {
+            anim.SetBool("Running", true);
+            running = true;
+        }
+        else if (Mathf.Abs(mx) == 0f)
+        {
+            anim.SetBool("Running", false);
+            running = false;
+        }
     }
 
     void Jump()
@@ -104,7 +104,7 @@ public class movement : MonoBehaviour
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
         RaycastHit rayHit;
-        if (Physics.Raycast(transform.position, transform.up * -1, out rayHit, 0.1f))
+        if (Physics.Raycast(transform.position, -transform.up, out rayHit, 2f))
         {
             anim.SetTrigger("StopJump");
         }
@@ -112,7 +112,7 @@ public class movement : MonoBehaviour
 
     public bool IsFalling()
     {
-        if (rb.velocity.y < -1f)
+        if (rb.velocity.y < -0.5f)
         {
             return true;
         }
@@ -151,7 +151,7 @@ public class movement : MonoBehaviour
     public bool IsGrounded()
     {
         RaycastHit rayHit;
-        bool groundCheck = Physics.Raycast(transform.position, -transform.up, out rayHit, 0.1f);
+        bool groundCheck = Physics.Raycast(transform.position, -transform.up, out rayHit, 0.2f);
         if (groundCheck)
         {
             Debug.Log("Hit : " + rayHit.collider.name);
@@ -169,15 +169,24 @@ public class movement : MonoBehaviour
     public void Turn()
     {
         anim.SetFloat("MovementSpeed", moveVelocity);
-        if (bow.mousePoint.x < transform.position.x)
-        {
-            Rotate(-90);
-            facingDir = "Left";
+        if (bow.IsCharging) {
+            if(bow.mousePoint.x < transform.position.x && facingDir != "Left") {
+                Flip();
+                facingDir = "Left";
+            }
+            else if(bow.mousePoint.x > transform.position.x && facingDir != "Right") {
+                Flip();
+                facingDir = "Right";
+            }
         }
-        else
-        {
-            Rotate(90);
+
+        if(mx > 0 && facingDir != "Right") {
+        	Flip();
             facingDir = "Right";
+        }
+        else if(mx < 0 && facingDir != "Left") {
+        	Flip();
+            facingDir = "Left";
         }
 
         if (facingDir == "Left")
@@ -189,6 +198,15 @@ public class movement : MonoBehaviour
             moveVelocity = rb.velocity.x;
         }
     }
+
+    private void Flip()
+	{
+		// Multiply the player's x local scale by -1.
+		Vector3 theScale = transform.localScale;
+		theScale.z *= -1;
+        Aim.transform.localScale = theScale;
+		transform.localScale = theScale;
+	}
 
     /*public void Dash() {
 		if(Input.GetKeyDown(KeyCode.LeftShift)) {

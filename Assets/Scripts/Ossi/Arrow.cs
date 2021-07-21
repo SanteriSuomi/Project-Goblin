@@ -41,7 +41,8 @@ public class Arrow : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            rb.isKinematic = true;
+            rb.freezeRotation = true;
         }
     }
 

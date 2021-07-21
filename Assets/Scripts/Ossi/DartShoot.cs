@@ -15,7 +15,8 @@ public class DartShoot : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Physics.Raycast(transform.position, rayDirection, out RaycastHit hit, triggerRange) && Time.time > nextFire)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, rayDirection, out hit, triggerRange) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             shoot();

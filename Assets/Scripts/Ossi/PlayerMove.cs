@@ -122,16 +122,6 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        collision = true;
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        collision = false;
-    }
-
     void Rotate(float dir)
     {
         float yRot = transform.rotation.eulerAngles.y;
@@ -155,13 +145,6 @@ public class PlayerMove : MonoBehaviour
         if (groundCheck)
         {
             // Debug.Log("Hit : " + rayHit.collider.name);
-        }
-        else
-        {
-            if (collision)
-            {
-                return true;
-            }
         }
         return groundCheck;
     }

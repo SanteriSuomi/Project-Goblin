@@ -11,6 +11,7 @@ TagManager:
   - JumpHeight
   - EdgeL
   - EdgeR
+  - BossUI
   layers:
   - Default
   - TransparentFX

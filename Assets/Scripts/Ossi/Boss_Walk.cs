@@ -8,7 +8,6 @@ public class Boss_Walk : StateMachineBehaviour
     public float speed = 2f;
     public float attackRange = 1.0f;
     private float rageTimer;
-
     private bool rage = false;
 
     private int phase = 1;
@@ -127,6 +126,7 @@ public class Boss_Walk : StateMachineBehaviour
     	else {
     		if(player.position.x >= edgeL.position.x) {
     			activated = true;
+    			ogre.ShowHP();
     		}
     	}
     }

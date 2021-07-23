@@ -6,11 +6,13 @@ public class Ogre : MonoBehaviour
 	public Transform player;
 	public HealthBar healthBar;
 	private float health = 1000;
+	public GameObject canvas;
 
 	public bool facingLeft = true;
 
 	private void Awake() {
         healthBar.SetHealth(health);
+        canvas.SetActive(false);
     }
 
 	public void LookAtPlayer() {
@@ -45,4 +47,9 @@ public class Ogre : MonoBehaviour
         theScale.z *= -1;
         transform.localScale = theScale;
     }
+
+    public void ShowHP() {
+    	canvas.SetActive(true);
+    }
+
 }

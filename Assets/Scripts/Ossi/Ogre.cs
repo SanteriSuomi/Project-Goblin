@@ -3,28 +3,33 @@ using UnityEngine;
 
 public class Ogre : MonoBehaviour
 {
-	public Transform player;
-	public HealthBar healthBar;
-	private float health = 1000;
+    private Transform player;
+    public HealthBar healthBar;
+    private float health = 1000;
 
-	public bool facingLeft = true;
+    public bool facingLeft = true;
 
-	private void Awake() {
+    private void Awake()
+    {
         healthBar.SetHealth(health);
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-	public void LookAtPlayer() {
-       if(player.position.x > transform.position.x && facingLeft) {
+    public void LookAtPlayer()
+    {
+        if (player.position.x > transform.position.x && facingLeft)
+        {
             Flip();
             facingLeft = false;
-       }
-       else if (player.position.x < transform.position.x && !facingLeft) {
-        Flip();
-        facingLeft = true;
-       }
-	}
+        }
+        else if (player.position.x < transform.position.x && !facingLeft)
+        {
+            Flip();
+            facingLeft = true;
+        }
+    }
 
-	public void ModifyHealth(float by)
+    public void ModifyHealth(float by)
     {
         health += by;
         healthBar.SetHealth(health);
@@ -34,11 +39,12 @@ public class Ogre : MonoBehaviour
         }
     }
 
-    public float GetHealth() {
-    	return health;
+    public float GetHealth()
+    {
+        return health;
     }
 
-	private void Flip()
+    private void Flip()
     {
         // Multiply the player's x local scale by -1.
         Vector3 theScale = transform.localScale;

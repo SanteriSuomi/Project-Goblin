@@ -21,7 +21,6 @@ public class HealthBar : MonoBehaviour
         if (Mathf.Abs(rectTransform.root.eulerAngles.sqrMagnitude) > 0)
         {
             rectTransform.rotation = Quaternion.Euler(0, 0, 0);
-
         }
     }
 }

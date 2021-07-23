@@ -196,27 +196,29 @@ public class PlayerMove : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    /*public void Dash() {
-		if(Input.GetKeyDown(KeyCode.LeftShift)) {
-			dashPressed = true;
-		}
-		if (dashPressed && canDash && IsGrounded()) {
+    public void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            dashPressed = true;
+        }
+        if (dashPressed && canDash && IsGrounded())
+        {
             anim.SetTrigger("Dash");
             moveVector = new Vector2(mx * dashMultiplier, rb.velocity.y);
             rb.velocity = moveVector;
             dashPressed = false;
             StartCoroutine(nameof(DashEnd));
         }
-	}
+    }
 
-	IEnumerator DashEnd() {
+    IEnumerator DashEnd()
+    {
         canDash = false;
         yield return dashWFS1;
         running = false;
         yield return dashWFS2;
         anim.ResetTrigger("StopRun");
         canDash = true;
-    }*/
-
+    }
 }
-

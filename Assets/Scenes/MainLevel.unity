@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2765603231607418331, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
       propertyPath: m_Name
-      value: Player_v6
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3071468884741378197, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
       propertyPath: healthBar
@@ -243,6 +243,10 @@ PrefabInstance:
       propertyPath: m_NavMeshData
       value: 
       objectReference: {fileID: 23800000, guid: c7984218ae4d164489955817ae4cf63c, type: 2}
+    - target: {fileID: 1973997433492209443, guid: 9153fa4c702951f47866b71f84e94555, type: 3}
+      propertyPath: m_UseGeometry
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9153fa4c702951f47866b71f84e94555, type: 3}
 --- !u!1 &259168677
@@ -273,8 +277,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.80546904, g: 0.9411765, b: 0.74509805, a: 0.9019608}
-  m_Intensity: 0.6
+  m_Color: {r: 0.8249199, g: 0.9056604, b: 0.7903168, a: 0.9019608}
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -590,14 +594,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5325679518256844837, guid: 3d5bd6d638962dc4ebaa49bb93d9d737, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5325679518256844837, guid: 3d5bd6d638962dc4ebaa49bb93d9d737, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5325679518536369721, guid: 3d5bd6d638962dc4ebaa49bb93d9d737, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -605,14 +601,6 @@ PrefabInstance:
     - target: {fileID: 5325679518536369721, guid: 3d5bd6d638962dc4ebaa49bb93d9d737, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5325679519535895111, guid: 3d5bd6d638962dc4ebaa49bb93d9d737, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5325679519798412379, guid: 3d5bd6d638962dc4ebaa49bb93d9d737, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8685119746987762234, guid: 3d5bd6d638962dc4ebaa49bb93d9d737, type: 3}
       propertyPath: m_Name

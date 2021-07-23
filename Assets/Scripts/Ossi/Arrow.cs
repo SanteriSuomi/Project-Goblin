@@ -32,28 +32,29 @@ public class Arrow : MonoBehaviour
         }
 
         if (other.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
-        {
-            Freeze();
+        {	
+        	col.isTrigger = true;
+            rb.isKinematic = true;
+            rb.freezeRotation = true;
             transform.SetParent(other.transform, true);
             enemy.ModifyHealth(-damage);
+            // Debug.Log("Arrow hit player");
         }
         if (other.gameObject.TryGetComponent<Ogre>(out Ogre ogre))
         {
-            Freeze();
+        	col.isTrigger = true;
+            rb.isKinematic = true;
+            rb.freezeRotation = true;
             transform.SetParent(other.transform, true);
             ogre.ModifyHealth(-damage);
+            // Debug.Log("Arrow hit player");
         }
         else
         {
-            Freeze();
+        	col.isTrigger = true;
+            rb.isKinematic = true;
+            rb.freezeRotation = true;
         }
-    }
-
-    void Freeze()
-    {
-        col.isTrigger = true;
-        rb.isKinematic = true;
-        rb.freezeRotation = true;
     }
 
     IEnumerator DestroyCooldown()

@@ -11225,8 +11225,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   Aim: {fileID: 7025813766756609483}
-  movementSpeed: 4.5
-  jumpVelocity: 8.5
+  movementSpeed: 4.65
+  jumpVelocity: 8.45
   capCollider: {fileID: 3071468884741378195}
   anim: {fileID: 3071468884741378196}
   moveVelocity: 0

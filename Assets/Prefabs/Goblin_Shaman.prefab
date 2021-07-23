@@ -8607,7 +8607,7 @@ MonoBehaviour:
   distanceToPlayerForChase: 0
   distanceToPlayerForAttack: 0
   damagePerHit: 0
-  attackSpeed: 4.5
+  attackSpeed: 5
   wanderSpeed: 0
   chaseSpeed: 0
   chasePathUpdateSpeed: 0

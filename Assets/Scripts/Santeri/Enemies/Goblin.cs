@@ -168,6 +168,7 @@ public class Goblin : Enemy
     {
         if (!contact.CompareTag("Player"))
         {
+            attackTimer = 0;
             return;
         }
         Physics.Linecast(transform.position + (Vector3.up / 2), player.transform.position + Vector3.up, out RaycastHit hit);
@@ -203,7 +204,7 @@ public class Goblin : Enemy
             anim.SetTrigger("StartMelee");
             // Debug.Log("Attack");
         }
-        else if ((distance < distanceToPlayerForChase || angle < angleToPlayerForChase)) // Chase
+        else if (distance < distanceToPlayerForChase || angle < angleToPlayerForChase) // Chase
         {
             if (state == State.Chase)
             {
@@ -223,7 +224,7 @@ public class Goblin : Enemy
 
     void PlayerContactMage(Collider player)
     {
-        attackTimer += Time.deltaTime;
+        attackTimer += Time.fixedDeltaTime;
         if (attackTimer >= attackSpeed)
         {
             anim.SetTrigger("StartCast");

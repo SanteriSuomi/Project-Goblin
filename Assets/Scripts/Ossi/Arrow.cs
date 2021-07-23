@@ -39,6 +39,14 @@ public class Arrow : MonoBehaviour
             enemy.ModifyHealth(-damage);
             // Debug.Log("Arrow hit player");
         }
+        if (other.gameObject.TryGetComponent<Ogre>(out Ogre ogre))
+        {
+            rb.isKinematic = true;
+            rb.freezeRotation = true;
+            transform.SetParent(other.transform, true);
+            ogre.ModifyHealth(-damage);
+            // Debug.Log("Arrow hit player");
+        }
         else
         {
             rb.isKinematic = true;

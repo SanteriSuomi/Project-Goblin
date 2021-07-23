@@ -93,7 +93,7 @@ public class PlayerMove : MonoBehaviour
         {
             anim.SetTrigger("Jump");
             jumping = true;
-            GetComponent<Rigidbody>().velocity = Vector3.up * jumpVelocity;
+            rb.velocity = Vector3.up * jumpVelocity;
         }
         if (rb.velocity.y < 0)
         {

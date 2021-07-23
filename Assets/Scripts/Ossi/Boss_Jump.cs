@@ -11,7 +11,12 @@ public class Boss_Jump : StateMachineBehaviour
     public Vector2 target;
     public Vector2 jumpTarget;
 
+    float distant = 2;
+
     float bounce;
+
+    Transform edgeR;
+    Transform edgeL;
 
     bool canJump = false;
     Vector2 leap;
@@ -27,13 +32,21 @@ public class Boss_Jump : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        edgeL = GameObject.FindGameObjectWithTag("EdgeL").transform;
+        edgeR = GameObject.FindGameObjectWithTag("EdgeR").transform;
         jumpHeight = GameObject.FindGameObjectWithTag("JumpHeight").transform;
         groundY = GameObject.FindGameObjectWithTag("GroundY").transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody>();
         ogre = animator.GetComponent<Ogre>();
         leap.x = rb.position.x;
-        bounce = Time.time + 0.7f;
+        bounce = Time.time + 0.6f;
+        if(rb.position.x < player.position.x - 5 || rb.position.x > player.position.x + 5) {
+            distant = 4;
+        }
+        else {
+            distant = 2;
+        }
         
     }
 
@@ -44,12 +57,21 @@ public class Boss_Jump : StateMachineBehaviour
             canJump = true;
         }
         if(ogre.facingLeft) {
-            jumpTarget = new Vector2(leap.x-2, jumpHeight.position.y);
-            target = new Vector2(leap.x-4, groundY.position.y);
+            jumpTarget = new Vector2(leap.x-distant, jumpHeight.position.y);
+            target = new Vector2(leap.x-distant*2, groundY.position.y);
         }
         else {
-            jumpTarget = new Vector2(leap.x+2, jumpHeight.position.y);
-            target = new Vector2(leap.x+4, groundY.position.y);
+            jumpTarget = new Vector2(leap.x+distant, jumpHeight.position.y);
+            target = new Vector2(leap.x+distant*2, groundY.position.y);
+        }
+
+        if(rb.position.x <= edgeL.position.x) {
+            jumpTarget = new Vector2(edgeL.position.x, jumpHeight.position.y);
+            target = new Vector2(edgeL.position.x, groundY.position.y);
+        }
+        else if(rb.position.x >= edgeR.position.x) {
+            jumpTarget = new Vector2(edgeR.position.x, jumpHeight.position.y);
+            target = new Vector2(edgeR.position.x, groundY.position.y);
         }
 
         if(jumpHeight.position.y > rb.position.y && !falling && canJump) {

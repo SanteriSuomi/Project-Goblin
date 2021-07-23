@@ -15,6 +15,10 @@ public class Boss_Walk : StateMachineBehaviour
 
     Ogre ogre;
 
+    Transform edgeR;
+    Transform edgeL;
+    Vector2 target;
+
     Transform groundY;
     Transform player;
     Rigidbody rb;
@@ -22,6 +26,8 @@ public class Boss_Walk : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+    	edgeL = GameObject.FindGameObjectWithTag("EdgeL").transform;
+    	edgeR = GameObject.FindGameObjectWithTag("EdgeR").transform;
     	groundY = GameObject.FindGameObjectWithTag("GroundY").transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody>();
@@ -35,8 +41,15 @@ public class Boss_Walk : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
     	ogre.LookAtPlayer();
-
-    	Vector2 target = new Vector2(player.position.x, rb.position.y);
+    	if(player.position.x <= edgeL.position.x) {
+    		target = new Vector2(edgeL.position.x, rb.position.y);
+    	}
+    	else if(player.position.x >= edgeR.position.x) {
+    		target = new Vector2(edgeR.position.x, rb.position.y);
+    	}
+    	else {
+    		target = new Vector2(player.position.x, rb.position.y);
+    	}
 
     	if(Time.time >= rageTimer) {
     		rage = true;

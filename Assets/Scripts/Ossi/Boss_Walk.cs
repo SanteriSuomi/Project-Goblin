@@ -28,7 +28,7 @@ public class Boss_Walk : StateMachineBehaviour
         ogre = animator.GetComponent<Ogre>();
         animator.SetBool("Chase", true);
 
-        rageTimer = Time.time + Random.Range(0f, 8f);
+        rageTimer = Time.time + Random.Range(0f, 5f);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

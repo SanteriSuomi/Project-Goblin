@@ -8,8 +8,8 @@ public class PlayerMove : MonoBehaviour
     public Transform Aim;
     public float movementSpeed;
     public float jumpVelocity;
-    private float fallMultiplier = 2.5f;
-    private float lowJumpMultiplier = 2f;
+    private float fallMultiplier = 4.0f;
+    private float lowJumpMultiplier = 3.0f;
 
     float dashMultiplier = 15f;
     float dashCooldown1 = 0.45f;

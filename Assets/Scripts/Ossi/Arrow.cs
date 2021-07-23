@@ -32,7 +32,8 @@ public class Arrow : MonoBehaviour
         }
 
         if (other.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
-        {
+        {	
+        	col.isTrigger = true;
             rb.isKinematic = true;
             rb.freezeRotation = true;
             transform.SetParent(other.transform, true);
@@ -41,6 +42,7 @@ public class Arrow : MonoBehaviour
         }
         if (other.gameObject.TryGetComponent<Ogre>(out Ogre ogre))
         {
+        	col.isTrigger = true;
             rb.isKinematic = true;
             rb.freezeRotation = true;
             transform.SetParent(other.transform, true);
@@ -49,6 +51,7 @@ public class Arrow : MonoBehaviour
         }
         else
         {
+        	col.isTrigger = true;
             rb.isKinematic = true;
             rb.freezeRotation = true;
         }

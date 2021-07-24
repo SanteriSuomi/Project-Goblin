@@ -64,7 +64,6 @@ public class PlayerMove : MonoBehaviour
         Jump();
         Turn();
         //Dash();
-
     }
 
     private void FixedUpdate()
@@ -89,7 +88,7 @@ public class PlayerMove : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButton("Jump") && IsGrounded() && !bow.IsCharging)
+        if (Input.GetButton("Jump") && IsGrounded() && !bow.IsCharging && !jumping)
         {
             anim.SetTrigger("Jump");
             jumping = true;
@@ -107,6 +106,7 @@ public class PlayerMove : MonoBehaviour
         if (Physics.Raycast(transform.position, -transform.up, out rayHit, 2f))
         {
             anim.SetTrigger("StopJump");
+            jumping = false;
         }
     }
 
@@ -141,11 +141,7 @@ public class PlayerMove : MonoBehaviour
     public bool IsGrounded()
     {
         RaycastHit rayHit;
-        bool groundCheck = Physics.Raycast(transform.position, -transform.up, out rayHit, 0.2f);
-        if (groundCheck)
-        {
-            // Debug.Log("Hit : " + rayHit.collider.name);
-        }
+        bool groundCheck = Physics.Raycast(transform.position, -transform.up, out rayHit, 0.15f);
         return groundCheck;
     }
 
@@ -196,27 +192,29 @@ public class PlayerMove : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    /*public void Dash() {
-		if(Input.GetKeyDown(KeyCode.LeftShift)) {
-			dashPressed = true;
-		}
-		if (dashPressed && canDash && IsGrounded()) {
+    public void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            dashPressed = true;
+        }
+        if (dashPressed && canDash && IsGrounded())
+        {
             anim.SetTrigger("Dash");
             moveVector = new Vector2(mx * dashMultiplier, rb.velocity.y);
             rb.velocity = moveVector;
             dashPressed = false;
             StartCoroutine(nameof(DashEnd));
         }
-	}
+    }
 
-	IEnumerator DashEnd() {
+    IEnumerator DashEnd()
+    {
         canDash = false;
         yield return dashWFS1;
         running = false;
         yield return dashWFS2;
         anim.ResetTrigger("StopRun");
         canDash = true;
-    }*/
-
+    }
 }
-

@@ -11078,7 +11078,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 3
+  m_CollisionDetection: 0
 --- !u!136 &3071468884741378195
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11225,8 +11225,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   Aim: {fileID: 7025813766756609483}
-  movementSpeed: 4.5
-  jumpVelocity: 8.5
+  movementSpeed: 4.625
+  jumpVelocity: 8.35
   capCollider: {fileID: 3071468884741378195}
   anim: {fileID: 3071468884741378196}
   moveVelocity: 0

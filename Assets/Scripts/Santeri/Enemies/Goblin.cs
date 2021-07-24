@@ -168,10 +168,11 @@ public class Goblin : Enemy
     {
         if (!contact.CompareTag("Player"))
         {
-            attackTimer = 0;
             return;
         }
-        Physics.Linecast(transform.position + (Vector3.up / 2), player.transform.position + Vector3.up, out RaycastHit hit);
+        Vector3 offset = Vector3.up * 1.325f;
+        // Debug.DrawLine(transform.position + offset, player.transform.position + offset, Color.red, 0.05f);
+        Physics.Linecast(transform.position + offset, player.transform.position + offset, out RaycastHit hit);
         if (hit.transform != null && !hit.transform.CompareTag("Player"))
         {
             state = State.Wander;
@@ -253,7 +254,6 @@ public class Goblin : Enemy
             attackTimer = attackSpeed + 0.01f;
             chaseTimer = chasePathUpdateSpeed + 0.01f;
             agent.speed = wanderSpeed;
-            Debug.Log("Wander");
         }
     }
 

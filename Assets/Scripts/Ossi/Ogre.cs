@@ -57,6 +57,7 @@ public class Ogre : MonoBehaviour
     public void ShowHP()
     {
         canvas.SetActive(true);
+        Debug.Log("hp should show");
     }
 
 }

@@ -9,7 +9,6 @@ public class BossUI : MonoBehaviour
     void Awake()
     {
         canvas = gameObject;
-        Hide();
     }
 
     public void Hide()

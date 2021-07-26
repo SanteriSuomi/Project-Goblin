@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossUI : MonoBehaviour
 {
-	GameObject canvas;
+    GameObject canvas;
 
     void Awake()
     {
@@ -12,13 +12,15 @@ public class BossUI : MonoBehaviour
         //Hide();
     }
 
-    public void Hide() {
-    	canvas.SetActive(false);
-    	Debug.Log("fuck");
+    public void Hide()
+    {
+        canvas.SetActive(false);
+        Debug.Log("fuck");
     }
 
-    public void Show() {
-    	canvas.SetActive(true);
+    public void Show()
+    {
+        canvas.SetActive(true);
     }
 
 }

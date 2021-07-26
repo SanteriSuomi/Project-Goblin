@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
         healthBar.SetHealth(health);
         if (health <= 0)
         {
-            // Debug.Log("Player death event (health below 0)");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         }
     }
 }

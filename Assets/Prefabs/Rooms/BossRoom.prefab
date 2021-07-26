@@ -37194,9 +37194,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasOgre
       objectReference: {fileID: 0}
+    - target: {fileID: 5160159401626106869, guid: 2a19b839c3157f04bbf90b0249b20d48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5160159401650041907, guid: 2a19b839c3157f04bbf90b0249b20d48, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -739
+      value: -960
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a19b839c3157f04bbf90b0249b20d48, type: 3}

@@ -33603,21 +33603,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1305478028374702492}
     m_Modifications:
-    - target: {fileID: 2783697077307558726, guid: 05694dec8697405479f5fed7c89bfed5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2783697077307558726, guid: 05694dec8697405479f5fed7c89bfed5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2783697078192343332, guid: 05694dec8697405479f5fed7c89bfed5, type: 3}
       propertyPath: m_Name
       value: CanvasGoblin
-      objectReference: {fileID: 0}
-    - target: {fileID: 2783697078192343334, guid: 05694dec8697405479f5fed7c89bfed5, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2783697078192343512, guid: 05694dec8697405479f5fed7c89bfed5, type: 3}
       propertyPath: m_Pivot.x

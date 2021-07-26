@@ -8,7 +8,7 @@ public class BossUI : MonoBehaviour
 
     void Awake()
     {
-        canvas = GameObject.FindGameObjectWithTag("BossUI");
+        canvas = gameObject;
         Hide();
     }
 

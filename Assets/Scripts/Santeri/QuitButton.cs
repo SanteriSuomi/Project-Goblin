@@ -16,7 +16,6 @@ public class QuitButton : MonoBehaviour
 
     void OnClick()
     {
-        Debug.Log("Clicked");
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 }

@@ -11,16 +11,8 @@ public class PlayerMove : MonoBehaviour
     private float fallMultiplier = 4.0f;
     private float lowJumpMultiplier = 3.0f;
 
-    float dashMultiplier = 15f;
-    float dashCooldown1 = 0.45f;
-    float dashCooldown2 = 0.8f;
-    float dashAngleMultiplier = 2;
-    WaitForSeconds dashWFS1;
-    WaitForSeconds dashWFS2;
-
     RaycastHit hit;
 
-    public CapsuleCollider capCollider;
     public Animator anim;
     Vector2 moveVector;
     PlayerBow bow;
@@ -32,12 +24,8 @@ public class PlayerMove : MonoBehaviour
 
     bool collision;
     bool grounded;
-    bool running = false;
     bool jumping = false;
-    bool falling = false;
     bool flipped = false;
-    bool dashPressed = false;
-    bool canDash = true;
 
     float colliderX;
     float colliderY;
@@ -51,9 +39,6 @@ public class PlayerMove : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        capCollider = GetComponent<CapsuleCollider>();
-        colliderY = capCollider.bounds.size.y;
-        colliderX = capCollider.bounds.size.x;
         bow = GetComponent<PlayerBow>();
     }
 
@@ -77,12 +62,10 @@ public class PlayerMove : MonoBehaviour
         if (Mathf.Abs(mx) > 0.05f)
         {
             anim.SetBool("Running", true);
-            running = true;
         }
         else if (Mathf.Abs(mx) == 0f)
         {
             anim.SetBool("Running", false);
-            running = false;
         }
     }
 
@@ -107,18 +90,6 @@ public class PlayerMove : MonoBehaviour
         {
             anim.SetTrigger("StopJump");
             jumping = false;
-        }
-    }
-
-    public bool IsFalling()
-    {
-        if (rb.velocity.y < -0.5f)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 
@@ -190,31 +161,5 @@ public class PlayerMove : MonoBehaviour
         theScale.z *= -1;
         Aim.transform.localScale = theScale;
         transform.localScale = theScale;
-    }
-
-    public void Dash()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            dashPressed = true;
-        }
-        if (dashPressed && canDash && IsGrounded())
-        {
-            anim.SetTrigger("Dash");
-            moveVector = new Vector2(mx * dashMultiplier, rb.velocity.y);
-            rb.velocity = moveVector;
-            dashPressed = false;
-            StartCoroutine(nameof(DashEnd));
-        }
-    }
-
-    IEnumerator DashEnd()
-    {
-        canDash = false;
-        yield return dashWFS1;
-        running = false;
-        yield return dashWFS2;
-        anim.ResetTrigger("StopRun");
-        canDash = true;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Ogre : MonoBehaviour
 {
-    public Transform player;
+    Transform player;
     public HealthBar healthBar;
     private float health = 1000;
     public GameObject canvas;

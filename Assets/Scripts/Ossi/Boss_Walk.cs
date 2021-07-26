@@ -125,8 +125,8 @@ public class Boss_Walk : StateMachineBehaviour
     	}
     	else {
     		if(player.position.x >= edgeL.position.x) {
-    			activated = true;
     			ogre.ShowHP();
+    			activated = true;
     		}
     	}
     }

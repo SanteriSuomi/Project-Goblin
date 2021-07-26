@@ -9,18 +9,11 @@ public class BossUI : MonoBehaviour
     void Awake()
     {
         canvas = GameObject.FindGameObjectWithTag("BossUI");
-        //Hide();
+        Hide();
     }
 
     public void Hide()
     {
         canvas.SetActive(false);
-        Debug.Log("fuck");
     }
-
-    public void Show()
-    {
-        canvas.SetActive(true);
-    }
-
 }

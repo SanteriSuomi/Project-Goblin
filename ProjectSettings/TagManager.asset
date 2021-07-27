@@ -12,6 +12,7 @@ TagManager:
   - EdgeL
   - EdgeR
   - BossUI
+  - Intro
   layers:
   - Default
   - TransparentFX

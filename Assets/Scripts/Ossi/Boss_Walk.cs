@@ -12,12 +12,14 @@ public class Boss_Walk : StateMachineBehaviour
 
     private int phase = 1;
 
+    bool introPlayed = false;
     bool activated = false;
 
     Ogre ogre;
 
     Transform edgeR;
     Transform edgeL;
+    Transform introPoint;
     Vector2 target;
 
     Transform groundY;
@@ -29,6 +31,7 @@ public class Boss_Walk : StateMachineBehaviour
     {
         edgeL = GameObject.FindGameObjectWithTag("EdgeL").transform;
         edgeR = GameObject.FindGameObjectWithTag("EdgeR").transform;
+        introPoint = GameObject.FindGameObjectWithTag("Intro").transform;
         groundY = GameObject.FindGameObjectWithTag("GroundY").transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody>();
@@ -41,7 +44,7 @@ public class Boss_Walk : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (activated)
+        if (introPlayed)
         {
             ogre.LookAtPlayer();
             if (player.position.x <= edgeL.position.x)
@@ -84,7 +87,6 @@ public class Boss_Walk : StateMachineBehaviour
                 rage = false;
                 animator.SetTrigger("Attack");
                 animator.SetTrigger("JumpAttack");
-                animator.SetBool("JumpAttacks", true);
                 animator.SetBool("Chase", false);
             }
 
@@ -143,10 +145,14 @@ public class Boss_Walk : StateMachineBehaviour
         }
         else
         {
-            if (player.position.x >= edgeL.position.x)
+            if(player.position.x >= introPoint.position.x && !activated)
             {
                 ogre.ShowHP();
                 activated = true;
+            }
+            if(activated) {
+            	rage = true;
+            	introPlayed = true;
             }
         }
     }

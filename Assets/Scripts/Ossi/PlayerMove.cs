@@ -59,6 +59,9 @@ public class PlayerMove : MonoBehaviour
             Vector2 movement = new Vector2(mx, rb.velocity.y);
             rb.velocity = movement;
         }
+        else {
+            mx = 0;
+        }
         if (Mathf.Abs(mx) > 0.05f)
         {
             anim.SetBool("Running", true);

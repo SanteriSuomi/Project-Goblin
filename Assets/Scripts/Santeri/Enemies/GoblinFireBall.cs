@@ -29,7 +29,8 @@ public class GoblinFireBall : MonoBehaviour
     private void Start()
     {
         velocity = ((PlayerTransform.position + Vector3.up) - transform.position).normalized;
-        if (velocity.z > 0)
+        Debug.Log(velocity);
+        if (velocity.x > 0)
         {
             spr.flipX = false;
         }

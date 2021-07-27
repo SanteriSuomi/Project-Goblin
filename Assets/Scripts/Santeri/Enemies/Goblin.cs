@@ -171,8 +171,8 @@ public class Goblin : Enemy
             return;
         }
         Vector3 offset = Vector3.up * 1.3f;
-        Debug.DrawLine(transform.position + (offset), player.transform.position + offset, Color.red, 0.05f);
-        Physics.Linecast(transform.position + (offset), player.transform.position + offset, out RaycastHit hit);
+        Debug.DrawLine(transform.position + offset, player.transform.position + offset, Color.red, 0.05f);
+        Physics.Linecast(transform.position + offset, player.transform.position + offset, out RaycastHit hit);
         if (hit.transform == null || (hit.transform != null && !hit.transform.CompareTag("Player")))
         {
             if (type == Type.Melee)

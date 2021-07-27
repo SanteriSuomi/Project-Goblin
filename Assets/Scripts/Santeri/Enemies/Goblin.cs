@@ -75,11 +75,6 @@ public class Goblin : Enemy
 
     private void Update()
     {
-        // Physics.Linecast(transform.position + (Vector3.up / 2), player.transform.position + Vector3.up, out RaycastHit hit);
-        // if (hit.transform != null && !hit.transform.CompareTag("Player"))
-        // {
-        //     state = State.Wander;
-        // }
         CheckEnvironmentCollision();
         ForceZ();
         if (type == Type.Mage) return;
@@ -105,7 +100,6 @@ public class Goblin : Enemy
         if (state == State.Wander && enviroCollisionTimer >= enviroCollisionCooldown && (rayLeft || rayRight)
             && hitLeft.transform != null && hitRight.transform != null && !hitLeft.transform.CompareTag("Player") && !hitRight.transform.CompareTag("Player"))
         {
-            // Debug.Log(gameObject.name + " hit environment. Updating path.");
             Vector3 hitPos = rayLeft ? hitLeft.transform.position : hitRight.transform.position;
             Vector3 dist = (hitPos - transform.position).normalized;
             if (dist.x > 0)
@@ -171,7 +165,6 @@ public class Goblin : Enemy
             return;
         }
         Vector3 offset = Vector3.up * 1.3f;
-        Debug.DrawLine(transform.position + offset, player.transform.position + offset, Color.red, 0.05f);
         Physics.Linecast(transform.position + offset, player.transform.position + offset, out RaycastHit hit);
         if (hit.transform == null || (hit.transform != null && !hit.transform.CompareTag("Player")))
         {

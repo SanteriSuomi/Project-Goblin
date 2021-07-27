@@ -7,6 +7,7 @@ public class Ogre : MonoBehaviour
     public HealthBar healthBar;
     private float health = 1000;
     public GameObject canvas;
+    public bool intro;
 
     public bool facingLeft = true;
 
@@ -15,6 +16,7 @@ public class Ogre : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         healthBar.SetHealth(health);
         canvas.SetActive(false);
+        intro = false;
     }
 
     public void LookAtPlayer()

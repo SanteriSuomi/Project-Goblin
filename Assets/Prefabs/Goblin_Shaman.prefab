@@ -8564,7 +8564,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 9
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &3294649803145869220
 Animator:
@@ -8600,14 +8600,14 @@ MonoBehaviour:
   health: 50
   healthBar: {fileID: 6377138481281936313}
   type: 1
-  mageFireBallPrefab: {fileID: 7545864457534946686, guid: 2b196b61ed887ca4d8f23379792094aa, type: 3}
+  mageFireBallPrefab: {fileID: 195614570827323938, guid: 1b718ae56d79a9f4ab2963a8233209f7, type: 3}
   fireBallSpawnPoint: {fileID: 3294649803437053149}
   wanderRange: 0
   angleToPlayerForChase: 0
   distanceToPlayerForChase: 0
   distanceToPlayerForAttack: 0
   damagePerHit: 0
-  attackSpeed: 8
+  attackSpeed: 6
   wanderSpeed: 0
   chaseSpeed: 0
   chasePathUpdateSpeed: 0
@@ -11945,7 +11945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3294649803437053148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00023, y: -0.00004, z: 0.00439}
+  m_LocalPosition: {x: 0.00114, y: -0.00004, z: 0.00589}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7033811277449557035}

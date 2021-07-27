@@ -128,10 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc94963024a3f9418baf9482a6b2f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25.1
+  damage: 25.01
   rb: {fileID: 84671896436221935}
   cooldownUntilDestroy: 10
-  speed: 30
+  speed: 22.005898
   chargeTime: 0
 --- !u!1 &5327624933953858156
 GameObject:

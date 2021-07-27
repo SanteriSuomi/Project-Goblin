@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
         player = GameObject.FindGameObjectWithTag("Player").transform;
         AdvanceRoom();
     }
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     GameObject PickRandomRoom()
     {
-        return rooms[Random.Range(0, rooms.Count)];
+        return rooms[UnityEngine.Random.Range(0, rooms.Count)];
     }
 
     void SetDoorCollider(GameObject room, bool val)

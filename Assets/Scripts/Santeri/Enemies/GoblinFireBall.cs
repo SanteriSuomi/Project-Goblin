@@ -12,6 +12,7 @@ public class GoblinFireBall : MonoBehaviour
     WaitForSeconds cooldownUntilDestroyWFS;
     Rigidbody rb;
     Collider col;
+    SpriteRenderer spr;
     public Transform PlayerTransform { get; set; }
     private Vector3 velocity;
     public Collider GoblinCollider { get; set; }
@@ -20,6 +21,7 @@ public class GoblinFireBall : MonoBehaviour
     {
         col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
+        spr = GetComponent<SpriteRenderer>();
         cooldownUntilDestroyWFS = new WaitForSeconds(cooldownUntilDestroy);
         StartCoroutine(nameof(DestroyCooldown));
     }
@@ -27,6 +29,10 @@ public class GoblinFireBall : MonoBehaviour
     private void Start()
     {
         velocity = ((PlayerTransform.position + Vector3.up) - transform.position).normalized;
+        if (velocity.z > 0)
+        {
+            spr.flipX = false;
+        }
         Physics.IgnoreCollision(GoblinCollider, col, true);
     }
 

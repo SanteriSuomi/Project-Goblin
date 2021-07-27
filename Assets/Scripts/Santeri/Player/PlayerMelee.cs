@@ -41,12 +41,12 @@ public class PlayerMelee : MonoBehaviour
             IsMelee = false;
             meleeAttackTimer = 0;
         }
-        if (Input.GetKey(meleeButton) && !IsMelee)
+        if (Input.GetKeyDown(meleeButton) && !IsMelee)
         {
-            dagger.SetActive(true);
             IsMelee = true;
+            dagger.SetActive(true);
             anim.SetTrigger("Melee");
-            var hits = Physics.SphereCastAll(meleeDetectionPoint.position, meleeAttackRadius, transform.forward, 1);
+            var hits = Physics.OverlapSphere(meleeDetectionPoint.position, meleeAttackRadius);
             var set = new HashSet<Enemy>();
             foreach (var hit in hits)
             {

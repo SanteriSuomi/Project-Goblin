@@ -213,7 +213,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.70905524, g: 0.8113208, b: 0.66206837, a: 0.9019608}
-  m_Intensity: 0.5
+  m_Intensity: 0.55
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -752,18 +752,6 @@ PrefabInstance:
     - target: {fileID: 7563838119027585400, guid: 915068c081b708d43b9cbff8ab5e9a85, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7563838119027585401, guid: 915068c081b708d43b9cbff8ab5e9a85, type: 3}
-      propertyPath: rooms.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7563838119027585401, guid: 915068c081b708d43b9cbff8ab5e9a85, type: 3}
-      propertyPath: rooms.Array.data[1]
-      value: 
-      objectReference: {fileID: 4244589766045792163, guid: f90424ac0decc5547ad032698b84b7a5, type: 3}
-    - target: {fileID: 7563838119027585401, guid: 915068c081b708d43b9cbff8ab5e9a85, type: 3}
-      propertyPath: amountOfRoomsUntilBoss
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 915068c081b708d43b9cbff8ab5e9a85, type: 3}

@@ -6957,12 +6957,12 @@ MonoBehaviour:
   fireBallSpawnPoint: {fileID: 0}
   wanderRange: 8
   angleToPlayerForChase: 20
-  distanceToPlayerForChase: 6.5
+  distanceToPlayerForChase: 6.25
   distanceToPlayerForAttack: 1.25
-  damagePerHit: 12.5
+  damagePerHit: 15
   attackSpeed: 1.38
-  wanderSpeed: 1.15
-  chaseSpeed: 2.15
+  wanderSpeed: 1.2
+  chaseSpeed: 2.2
   chasePathUpdateSpeed: 0.3
   offsetLength: 1.1
   enviroMask:

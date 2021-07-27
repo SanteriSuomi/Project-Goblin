@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -16,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     public Animator anim;
     Vector2 moveVector;
     PlayerBow bow;
+    PlayerMelee melee;
 
     public float moveVelocity;
     float rotateSpeed = 20f;
@@ -40,6 +39,7 @@ public class PlayerMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         bow = GetComponent<PlayerBow>();
+        melee = GetComponent<PlayerMelee>();
     }
 
     private void Update()
@@ -53,7 +53,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!bow.IsCharging)
+        if (!bow.IsCharging && !melee.IsMelee)
         {
             mx = Input.GetAxisRaw("Horizontal") * movementSpeed;
             Vector2 movement = new Vector2(mx, rb.velocity.y);
@@ -71,7 +71,7 @@ public class PlayerMove : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButton("Jump") && IsGrounded() && !bow.IsCharging && !jumping)
+        if (Input.GetButton("Jump") && IsGrounded() && !bow.IsCharging && !jumping && !melee.IsMelee)
         {
             anim.SetTrigger("Jump");
             jumping = true;
@@ -119,7 +119,7 @@ public class PlayerMove : MonoBehaviour
     public void Turn()
     {
         anim.SetFloat("MovementSpeed", moveVelocity);
-        if (bow.IsCharging)
+        if (bow.IsCharging || melee.IsMelee)
         {
             if (bow.mousePoint.x < transform.position.x && facingDir != "Left")
             {
@@ -133,12 +133,12 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if (mx > 0 && facingDir != "Right" && !bow.IsCharging)
+        if (mx > 0 && facingDir != "Right" && (!bow.IsCharging || !melee.IsMelee))
         {
             Flip();
             facingDir = "Right";
         }
-        else if (mx < 0 && facingDir != "Left" && !bow.IsCharging)
+        else if (mx < 0 && facingDir != "Left" && (!bow.IsCharging || !melee.IsMelee))
         {
             Flip();
             facingDir = "Left";

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6742548902895766062}
   m_Layer: 0
   m_Name: flameball_sprite
-  m_TagString: Untagged
+  m_TagString: MageProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

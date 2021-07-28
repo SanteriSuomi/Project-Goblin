@@ -12,12 +12,15 @@ public class Arrow : MonoBehaviour
     float cooldownUntilDestroy = 10;
     WaitForSeconds cooldownUntilDestroyWFS;
 
+    TrailRenderer trail;
+
     public float speed;
     public float chargeTime;
 
     void Awake()
     {
         col = GetComponent<Collider>();
+        trail = GetComponent<TrailRenderer>();
         rb.velocity = (transform.forward * speed) + transform.up * 2f;
         cooldownUntilDestroyWFS = new WaitForSeconds(cooldownUntilDestroy);
         StartCoroutine(nameof(DestroyCooldown));
@@ -54,6 +57,7 @@ public class Arrow : MonoBehaviour
         col.isTrigger = true;
         rb.isKinematic = true;
         rb.freezeRotation = true;
+        trail.emitting = false;
     }
 
     IEnumerator DestroyCooldown()

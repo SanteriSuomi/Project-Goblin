@@ -34,6 +34,7 @@ public class PlayerMove : MonoBehaviour
 
     float angle;
     float mx;
+    float mx2;
 
     void Awake()
     {
@@ -53,23 +54,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!bow.IsCharging && !melee.IsMelee)
-        {
-            mx = Input.GetAxisRaw("Horizontal") * movementSpeed;
-            Vector2 movement = new Vector2(mx, rb.velocity.y);
-            rb.velocity = movement;
-        }
-        else {
-            mx = 0;
-        }
-        if (Mathf.Abs(mx) > 0.05f)
-        {
-            anim.SetBool("Running", true);
-        }
-        else if (Mathf.Abs(mx) == 0f)
-        {
-            anim.SetBool("Running", false);
-        }
+        Move();
     }
 
     void Jump()
@@ -110,6 +95,42 @@ public class PlayerMove : MonoBehaviour
             flipped = false;
         }
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, dir, 0), rotateSpeed);
+    }
+
+    public void Move() {
+        if (!bow.IsCharging && !melee.IsMelee)
+        {
+            mx2 = 0;
+            mx = Input.GetAxisRaw("Horizontal") * movementSpeed;
+            Vector2 movement = new Vector2(mx, rb.velocity.y);
+            rb.velocity = movement;
+        }
+        else if(bow.IsCharging) {
+            mx = 0;
+            //mx2 = Input.GetAxisRaw("Horizontal") * (movementSpeed / 3);
+            //Vector2 movement = new Vector2(mx2, rb.velocity.y);
+            //rb.velocity = movement;
+        }
+
+        if (Mathf.Abs(mx) > 0.05f)
+        {
+            anim.SetBool("Running", true);
+        }
+        else if (Mathf.Abs(mx) == 0f)
+        {
+            anim.SetBool("Running", false);
+        }
+        /*
+        if (Mathf.Abs(mx2) > 0.05f)
+        {
+            anim.SetBool("Walking", true);
+            anim.SetLayerWeight(1, 1);
+        }
+        else if (Mathf.Abs(mx2) == 0f)
+        {
+            anim.SetBool("Walking", false);
+            anim.SetLayerWeight(1, 0);
+        }*/
     }
 
     public bool IsGrounded()

@@ -10548,10 +10548,10 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1151844921754575795, guid: a95af0d834d896545a617f73994ecff1, type: 3}
-  - {fileID: 6728736049189609223, guid: a95af0d834d896545a617f73994ecff1, type: 3}
-  - {fileID: -4163170327692077165, guid: a95af0d834d896545a617f73994ecff1, type: 3}
-  - {fileID: 8558219793739017484, guid: a95af0d834d896545a617f73994ecff1, type: 3}
+  - {fileID: 2100000, guid: 1eede67c17fd3e2478e14e2a7c94b2ac, type: 2}
+  - {fileID: 2100000, guid: 1eede67c17fd3e2478e14e2a7c94b2ac, type: 2}
+  - {fileID: 2100000, guid: 1eede67c17fd3e2478e14e2a7c94b2ac, type: 2}
+  - {fileID: 2100000, guid: 1eede67c17fd3e2478e14e2a7c94b2ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -31780,8 +31780,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6728736049189609223, guid: 50de2e1508e4a724daa577c597cb130a, type: 3}
-  - {fileID: 8558219793739017484, guid: 50de2e1508e4a724daa577c597cb130a, type: 3}
+  - {fileID: 2100000, guid: b18266e13a23c5c4399fb2c052dcf2b6, type: 2}
+  - {fileID: 2100000, guid: b18266e13a23c5c4399fb2c052dcf2b6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -37203,6 +37203,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5160159400624109992, guid: 2a19b839c3157f04bbf90b0249b20d48, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5160159400624109992, guid: 2a19b839c3157f04bbf90b0249b20d48, type: 3}
+      propertyPath: m_Color.g
+      value: 0.121335916
+      objectReference: {fileID: 0}
+    - target: {fileID: 5160159400624109992, guid: 2a19b839c3157f04bbf90b0249b20d48, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6320754
+      objectReference: {fileID: 0}
     - target: {fileID: 5160159401626106633, guid: 2a19b839c3157f04bbf90b0249b20d48, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -37321,7 +37333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5160159401650041907, guid: 2a19b839c3157f04bbf90b0249b20d48, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 85
+      value: 66
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a19b839c3157f04bbf90b0249b20d48, type: 3}

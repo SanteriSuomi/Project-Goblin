@@ -72,6 +72,10 @@ public class PlayerBow : MonoBehaviour
             }
             StartCoroutine(nameof(ShotCountdown));
         }
+        else if(Input.GetKeyUp(fireButton)) {
+        	playerAnimator.SetTrigger("Interrupt");
+        	shot = true;
+        }
 
         if (shot)
         {

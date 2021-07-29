@@ -749,7 +749,7 @@ PrefabInstance:
     - target: {fileID: 1973997433492209443, guid: 9153fa4c702951f47866b71f84e94555, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: df27007e00705114a9cc39e8a28eaec0, type: 2}
+      objectReference: {fileID: 23800000, guid: 55f53cd80380daa4eab0cd3e78c2c748, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9153fa4c702951f47866b71f84e94555, type: 3}
 --- !u!4 &642154074726070989 stripped

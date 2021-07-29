@@ -19,6 +19,9 @@ public class PlayerMelee : MonoBehaviour
     [SerializeField]
     GameObject dagger;
 
+    [SerializeField]
+    LayerMask meleeLayerMask;
+
     public bool IsMelee { get; set; } = false;
 
     private void Awake()
@@ -41,12 +44,12 @@ public class PlayerMelee : MonoBehaviour
             IsMelee = false;
             meleeAttackTimer = 0;
         }
-        if (Input.GetKeyDown(meleeButton) && !IsMelee)
+        else if (Input.GetKeyDown(meleeButton) && !IsMelee)
         {
             IsMelee = true;
             dagger.SetActive(true);
             anim.SetTrigger("Melee");
-            var hits = Physics.OverlapSphere(meleeDetectionPoint.position, meleeAttackRadius);
+            var hits = Physics.OverlapSphere(meleeDetectionPoint.position, meleeAttackRadius, meleeLayerMask, QueryTriggerInteraction.Ignore);
             var set = new HashSet<Enemy>();
             foreach (var hit in hits)
             {
@@ -59,8 +62,8 @@ public class PlayerMelee : MonoBehaviour
         }
     }
 
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.DrawWireSphere(meleeDetectionPoint.position, meleeAttackRadius);
-    // }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(meleeDetectionPoint.position, meleeAttackRadius);
+    }
 }

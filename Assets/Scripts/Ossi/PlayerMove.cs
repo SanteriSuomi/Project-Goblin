@@ -34,7 +34,7 @@ public class PlayerMove : MonoBehaviour
 
     float angle;
     float mx;
-    float mx2;
+    // float mx2;
 
     void Awake()
     {
@@ -97,15 +97,17 @@ public class PlayerMove : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, dir, 0), rotateSpeed);
     }
 
-    public void Move() {
+    public void Move()
+    {
         if (!bow.IsCharging && !melee.IsMelee)
         {
-            mx2 = 0;
+            // mx2 = 0;
             mx = Input.GetAxisRaw("Horizontal") * movementSpeed;
             Vector2 movement = new Vector2(mx, rb.velocity.y);
             rb.velocity = movement;
         }
-        else if(bow.IsCharging) {
+        else if (bow.IsCharging)
+        {
             mx = 0;
             //mx2 = Input.GetAxisRaw("Horizontal") * (movementSpeed / 3);
             //Vector2 movement = new Vector2(mx2, rb.velocity.y);
@@ -135,9 +137,7 @@ public class PlayerMove : MonoBehaviour
 
     public bool IsGrounded()
     {
-        RaycastHit rayHit;
-        bool groundCheck = Physics.Raycast(transform.position, -transform.up, out rayHit, 0.15f);
-        return groundCheck;
+        return Physics.Raycast(transform.position, -transform.up, out RaycastHit rayHit, 0.15f, groundLayers, QueryTriggerInteraction.Ignore);
     }
 
     public void Turn()

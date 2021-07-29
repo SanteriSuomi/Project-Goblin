@@ -11033,7 +11033,6 @@ GameObject:
   - component: {fileID: 3071468884741378184}
   - component: {fileID: 3201094429722033401}
   - component: {fileID: 3071468884741378199}
-  - component: {fileID: 3071468884741378198}
   - component: {fileID: 3071468884741378197}
   - component: {fileID: 1011213573}
   - component: {fileID: 1138750313}
@@ -11149,10 +11148,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeButton: 324
   meleeDetectionPoint: {fileID: 1056577156135294389}
-  damage: 17
-  meleeAttackCooldown: 1.15
-  meleeAttackRadius: 0.8
+  damage: 20
+  meleeAttackCooldown: 1.2
+  meleeAttackRadius: 1
   dagger: {fileID: 1589864137694951014}
+  meleeLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &3071468884741378199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11165,36 +11167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3a23337fa0da046b306f5aaa38e0b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothMultiplier: 0.2
+  smoothMultiplier: 0.3
   minSmooth: 0.6
   maxSmooth: 1.2
---- !u!114 &3071468884741378198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2765603231607418331}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a24aa649a6042d44945931120aa6227, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acceleration: 85
-  dashMultiplier: 50
-  dashCooldown1: 0.5
-  dashCooldown2: 0.85
-  dashAngleMultiplier: 14
-  jumpStrength: 2250
-  jumpCooldown: 0.9
-  rotateSpeed: 8.5
-  runThreshold: 2.5
-  gravityRayLength: 0.1125
-  gravityMultiplier: 81
-  forwardKey: 100
-  backwardKey: 97
-  dashKey: 304
-  jumpKey: 32
 --- !u!114 &3071468884741378197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11233,7 +11208,7 @@ MonoBehaviour:
   rb: {fileID: 3071468884741378194}
   groundLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 136
 --- !u!135 &1138750313
 SphereCollider:
   m_ObjectHideFlags: 0

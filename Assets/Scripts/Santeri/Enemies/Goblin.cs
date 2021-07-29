@@ -59,6 +59,8 @@ public class Goblin : Enemy
     PlayerHealth player;
     Collider col;
 
+    [SerializeField]
+    LayerMask linecastMask;
 
     private void Awake()
     {
@@ -75,9 +77,9 @@ public class Goblin : Enemy
 
     private void Update()
     {
-        CheckEnvironmentCollision();
         ForceZ();
         if (type == Type.Mage) return;
+        CheckEnvironmentCollision();
         switch (state)
         {
             case State.Wander:
@@ -95,22 +97,38 @@ public class Goblin : Enemy
     void CheckEnvironmentCollision()
     {
         enviroCollisionTimer += Time.deltaTime;
-        bool rayLeft = Physics.Raycast(transform.position, Vector3.left, out RaycastHit hitLeft, 1, enviroMask);
-        bool rayRight = Physics.Raycast(transform.position, Vector3.right, out RaycastHit hitRight, 1, enviroMask);
-        if (state == State.Wander && enviroCollisionTimer >= enviroCollisionCooldown && (rayLeft || rayRight)
-            && hitLeft.transform != null && hitRight.transform != null && !hitLeft.transform.CompareTag("Player") && !hitRight.transform.CompareTag("Player"))
+        bool rayLeft = Physics.Raycast(transform.position + (Vector3.down * 0.5f), Vector3.left, out RaycastHit hitLeft, 1, enviroMask);
+        bool rayRight = Physics.Raycast(transform.position + (Vector3.down * 0.5f), Vector3.right, out RaycastHit hitRight, 1, enviroMask);
+        bool rayBottomLeft = Physics.Raycast(transform.position + (Vector3.down * 0.5f), new Vector3(-0.5f, -0.5f, 0), out RaycastHit hitBottomLeft, 1, enviroMask);
+        bool rayBottomRight = Physics.Raycast(transform.position + (Vector3.down * 0.5f), new Vector3(0.5f, 0.5f, 0), out RaycastHit hitBottomRight, 1, enviroMask);
+        if (state == State.Wander && enviroCollisionTimer >= enviroCollisionCooldown)
         {
-            Vector3 hitPos = rayLeft ? hitLeft.transform.position : hitRight.transform.position;
-            Vector3 dist = (hitPos - transform.position).normalized;
-            if (dist.x > 0)
+            if ((rayLeft || rayRight) && hitLeft.transform != null && hitRight.transform != null && !hitLeft.transform.CompareTag("Player") && !hitRight.transform.CompareTag("Player"))
             {
-                SetRandomPath(0, wanderRange);
+                Vector3 hitPos = rayLeft ? hitLeft.transform.position : hitRight.transform.position;
+                Vector3 dist = (hitPos - transform.position).normalized;
+                if (dist.x > 0)
+                {
+                    SetRandomPath(0, wanderRange);
+                }
+                else
+                {
+                    SetRandomPath(-wanderRange, 0);
+                }
+                enviroCollisionTimer = 0;
             }
-            else
+            else if (!rayBottomLeft || !rayBottomRight)
             {
-                SetRandomPath(-wanderRange, 0);
+                if (rayBottomLeft)
+                {
+                    SetRandomPath(0, wanderRange);
+                }
+                else
+                {
+                    SetRandomPath(-wanderRange, 0);
+                }
+                enviroCollisionTimer = 0;
             }
-            enviroCollisionTimer = 0;
         }
     }
 
@@ -143,7 +161,6 @@ public class Goblin : Enemy
         {
             agent.SetDestination(GetPlayerPosAndOffset());
             chaseTimer = 0;
-            // Debug.Log("Update path");
         }
     }
 
@@ -152,7 +169,6 @@ public class Goblin : Enemy
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackSpeed)
         {
-            // Debug.Log("Dealt " + damagePerHit + " damage to player.");
             player.ModifyHealth(-damagePerHit);
             attackTimer = 0;
         }
@@ -164,8 +180,15 @@ public class Goblin : Enemy
         {
             return;
         }
-        Vector3 offset = Vector3.up * 1.3f;
-        Physics.Linecast(transform.position + offset, player.transform.position + offset, out RaycastHit hit);
+        if (type == Type.Mage)
+        {
+            RotateTowardsPlayer();
+        }
+        Vector3 yOffsetSelf = Vector3.up * 1.3f;
+        Vector3 yOffsetPlayer = Vector3.up * 1.15f;
+        Vector3 playerOffset = ((transform.position + yOffsetSelf) - (player.transform.position + yOffsetPlayer)).normalized * 0.125f;
+        Physics.Linecast(transform.position + (transform.forward * 0.4f) + yOffsetSelf, player.transform.position + yOffsetPlayer + playerOffset,
+                    out RaycastHit hit, linecastMask, QueryTriggerInteraction.Ignore);
         if (hit.transform == null || (hit.transform != null && !hit.transform.CompareTag("Player")))
         {
             if (type == Type.Melee)
@@ -187,6 +210,14 @@ public class Goblin : Enemy
         }
     }
 
+    void RotateTowardsPlayer()
+    {
+        Quaternion lookRotation = Quaternion.LookRotation((player.transform.position - transform.position).normalized);
+        lookRotation.x = 0;
+        lookRotation.z = 0;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 3);
+    }
+
     void PlayerContactMelee(Collider player, float distance)
     {
         float angle = Vector3.Angle((player.transform.position - transform.position), transform.forward);
@@ -199,7 +230,6 @@ public class Goblin : Enemy
             state = State.Attack;
             chaseTimer = chasePathUpdateSpeed + 0.01f;
             anim.SetTrigger("StartMelee");
-            // Debug.Log("Attack");
         }
         else if (distance < distanceToPlayerForChase || angle < angleToPlayerForChase) // Chase
         {
@@ -215,7 +245,6 @@ public class Goblin : Enemy
             state = State.Chase;
             attackTimer = attackSpeed + 0.01f;
             agent.speed = chaseSpeed;
-            // Debug.Log("Chase");
         }
     }
 

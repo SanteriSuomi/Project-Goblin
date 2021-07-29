@@ -138,18 +138,6 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 738914533}
-    - target: {fileID: 3071468884741378199, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
-      propertyPath: smoothMultiplier
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3201094429722033401, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
-      propertyPath: damage
-      value: 17.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3201094429722033401, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
-      propertyPath: meleeAttackCooldown
-      value: 1.25
-      objectReference: {fileID: 0}
     - target: {fileID: 3254613586140575585, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -194,8 +182,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3071468884741378198, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4d2ab23ddf8a2c47bbdcc53608dee55, type: 3}
 --- !u!1 &259168677
 GameObject:
@@ -775,7 +762,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7563838119027585401, guid: 915068c081b708d43b9cbff8ab5e9a85, type: 3}
+      propertyPath: rooms.Array.data[0]
+      value: 
+      objectReference: {fileID: 5042316585261122842, guid: 09d943054228c4e499bfcec8bd6404a3, type: 3}
+    - target: {fileID: 7563838119027585401, guid: 915068c081b708d43b9cbff8ab5e9a85, type: 3}
       propertyPath: rooms.Array.data[1]
+      value: 
+      objectReference: {fileID: 4244589766045792163, guid: f90424ac0decc5547ad032698b84b7a5, type: 3}
+    - target: {fileID: 7563838119027585401, guid: 915068c081b708d43b9cbff8ab5e9a85, type: 3}
+      propertyPath: rooms.Array.data[2]
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []

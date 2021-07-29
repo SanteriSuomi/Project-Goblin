@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Dart : MonoBehaviour
@@ -13,19 +12,26 @@ public class Dart : MonoBehaviour
     float cooldownUntilDestroy = 10;
     WaitForSeconds cooldownUntilDestroyWFS;
 
+    [SerializeField]
+    LayerMask shootLayerMask;
+
+    public void SetVelocity(Vector3 vel)
+    {
+        rb.velocity = vel * speed;
+    }
+
     void Awake()
     {
-        //if(transform.parent.rotation.y > 0) {
-        //transform.localScale = new Vector3(-1f, 1f, 1f);
-        //}
         cooldownUntilDestroyWFS = new WaitForSeconds(cooldownUntilDestroy);
-        rb.velocity = transform.forward * speed;
         StartCoroutine(nameof(DestroyCooldown));
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Debug.Log("Hit " + other.gameObject.name);
+        if (shootLayerMask != (shootLayerMask | (1 << other.gameObject.layer)))
+        {
+            return;
+        }
         if (other.transform.TryGetComponent<PlayerHealth>(out PlayerHealth comp))
         {
             comp.ModifyHealth(-damage);

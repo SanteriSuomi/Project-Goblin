@@ -11148,8 +11148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeButton: 324
   meleeDetectionPoint: {fileID: 1056577156135294389}
-  damage: 20
-  meleeAttackCooldown: 1.2
+  damage: 17.5
+  meleeAttackCooldown: 1.25
   meleeAttackRadius: 1
   dagger: {fileID: 1589864137694951014}
   meleeLayerMask:
@@ -11200,8 +11200,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   Aim: {fileID: 7025813766756609483}
-  movementSpeed: 4.625
-  jumpVelocity: 8.35
+  movementSpeed: 4.6
+  jumpVelocity: 8.3
   anim: {fileID: 3071468884741378196}
   moveVelocity: 0
   facingDir: Right
@@ -20473,7 +20473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1056577156135294389}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MeleeDetectionPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

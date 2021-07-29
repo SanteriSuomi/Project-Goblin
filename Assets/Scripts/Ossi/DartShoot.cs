@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DartShoot : MonoBehaviour
@@ -10,22 +8,29 @@ public class DartShoot : MonoBehaviour
     public float fireRate;
     [SerializeField]
     Vector3 rayDirection = Vector3.left;
+    [SerializeField]
+    LayerMask shootLayerMask;
 
     private float nextFire = 0f;
 
     void FixedUpdate()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, rayDirection, out hit, triggerRange) && Time.time > nextFire)
+        if (Physics.Raycast(transform.position, rayDirection, out RaycastHit hit, triggerRange, shootLayerMask, QueryTriggerInteraction.Ignore) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             shoot();
-            //Debug.Log(hit.transform.name);
         }
     }
 
     void shoot()
     {
-        Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, -90, 0));
+        Quaternion rotation = Quaternion.Euler(0, -90, 0);
+        if (rayDirection.x > 0)
+        {
+            rotation = Quaternion.Euler(0, 90, 0);
+        }
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, rotation) as GameObject;
+        Dart dartObj = bullet.GetComponent<Dart>();
+        dartObj.SetVelocity(rayDirection);
     }
 }

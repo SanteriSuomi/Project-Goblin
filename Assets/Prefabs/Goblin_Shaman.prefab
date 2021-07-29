@@ -8564,7 +8564,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 9
+  m_Radius: 9.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &3294649803145869220
 Animator:
@@ -8599,6 +8599,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   healthBar: {fileID: 6377138481281936313}
+  healthDropChance: 0.25
+  healthDrop: {fileID: 4280477154092672073, guid: f873381142d2e0c4fb572b27c319ed09, type: 3}
   type: 1
   mageFireBallPrefab: {fileID: 195614570827323938, guid: 1b718ae56d79a9f4ab2963a8233209f7, type: 3}
   fireBallSpawnPoint: {fileID: 3294649803437053149}

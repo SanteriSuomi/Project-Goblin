@@ -20,6 +20,10 @@ public class PlayerHealth : MonoBehaviour
     public void ModifyHealth(float by) // Modify health by negative or positive value
     {
         health += by;
+        if (health > startingHealth)
+        {
+            health = startingHealth;
+        }
         healthBar.SetHealth(health);
         if (health <= 0)
         {

@@ -37,7 +37,7 @@ public class Ogre : MonoBehaviour
     {
         health += by;
         healthBar.SetHealth(health);
-        if (health < 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
         }

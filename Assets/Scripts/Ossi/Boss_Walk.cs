@@ -13,7 +13,6 @@ public class Boss_Walk : StateMachineBehaviour
     private int phase = 1;
 
     bool introPlayed = false;
-    bool activated = false;
 
     Ogre ogre;
 
@@ -121,7 +120,7 @@ public class Boss_Walk : StateMachineBehaviour
                     if (Vector2.Distance(player.position, rb.position) <= attackRange + 0.3f)
                     {
                         animator.SetTrigger("Attack");
-                        animator.SetTrigger("Overhead");
+                        animator.SetTrigger("Kick");
                         animator.SetBool("Chase", false);
                     }
                     break;
@@ -129,7 +128,7 @@ public class Boss_Walk : StateMachineBehaviour
                     if (Vector2.Distance(player.position, rb.position) <= attackRange)
                     {
                         animator.SetTrigger("Attack");
-                        animator.SetTrigger("Kick");
+                        animator.SetTrigger("Overhead");
                         animator.SetBool("Chase", false);
                     }
                     break;
@@ -145,13 +144,10 @@ public class Boss_Walk : StateMachineBehaviour
         }
         else
         {
-            if(player.position.x >= introPoint.position.x && !activated)
+            if(player.position.x >= introPoint.position.x - 1)
             {
                 ogre.ShowHP();
-                activated = true;
-            }
-            if(activated) {
-            	rage = true;
+                rage = true;
             	introPlayed = true;
             }
         }

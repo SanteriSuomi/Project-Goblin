@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7101552778980878543}
   - component: {fileID: 5001599133594098693}
   m_Layer: 0
-  m_Name: ruinedPost 1
+  m_Name: ruinedPost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a7025c779f02ded40a21e418c6b0e5d6, type: 2}
+  - {fileID: 2100000, guid: ccf2ebb27365747498833e53dbd6e89d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

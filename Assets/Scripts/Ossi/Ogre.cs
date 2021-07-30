@@ -7,6 +7,7 @@ public class Ogre : MonoBehaviour
     public HealthBar healthBar;
     private float health = 1000;
     public GameObject canvas;
+    public GameObject finish;
     public bool intro;
     AudioManager audioManager;
 
@@ -17,6 +18,7 @@ public class Ogre : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         healthBar.SetHealth(health);
         canvas.SetActive(false);
+        finish.SetActive(false);
         intro = false;
         audioManager = FindObjectOfType<AudioManager>();
     }
@@ -42,6 +44,7 @@ public class Ogre : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            finish.SetActive(true);
         }
     }
 

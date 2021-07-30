@@ -16,6 +16,7 @@ public class Boss_Walk : StateMachineBehaviour
 
     Ogre ogre;
 
+	AudioManager audioManager;
     Transform edgeR;
     Transform edgeL;
     Transform introPoint;
@@ -35,6 +36,7 @@ public class Boss_Walk : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody>();
         ogre = animator.GetComponent<Ogre>();
+        audioManager = FindObjectOfType<AudioManager>();
         animator.SetBool("Chase", true);
 
         rageTimer = Time.time + Random.Range(0f, 5f);
@@ -84,6 +86,9 @@ public class Boss_Walk : StateMachineBehaviour
             else if (phase == 5)
             {
                 rage = false;
+                if(ogre.intro) {
+                	audioManager.Play("BossRoar2");
+                }
                 animator.SetTrigger("Attack");
                 animator.SetTrigger("JumpAttack");
                 animator.SetBool("Chase", false);
@@ -148,6 +153,7 @@ public class Boss_Walk : StateMachineBehaviour
             {
                 ogre.ShowHP();
                 rage = true;
+                audioManager.Play("BossRoar");
             	introPlayed = true;
             }
         }
@@ -158,6 +164,9 @@ public class Boss_Walk : StateMachineBehaviour
     {
         animator.ResetTrigger("Attack");
         animator.ResetTrigger("Punch");
+        animator.ResetTrigger("Kick");
+        animator.ResetTrigger("Overhead");
+        animator.ResetTrigger("JumpAttack");
         rage = false;
     }
 }

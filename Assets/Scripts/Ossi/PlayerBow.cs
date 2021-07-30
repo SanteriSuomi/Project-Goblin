@@ -11,6 +11,8 @@ public class PlayerBow : MonoBehaviour
     [SerializeField]
     Animator playerAnimator;
 
+    AudioManager audioManager;
+
     public Transform firePoint;
     public Transform aim;
     public GameObject bulletPrefab;
@@ -36,13 +38,17 @@ public class PlayerBow : MonoBehaviour
         chargeTime = 0f;
         arrow = bulletPrefab.GetComponent<Arrow>();
         anim = GetComponent<Animator>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
     {
         Aim();
         if (Input.GetKey(fireButton))
-        {
+        {	
+        	if(Input.GetKeyDown(fireButton)) {
+        		audioManager.Play("BowLoad");
+        	}
             chargeTime += Time.deltaTime;
             bowAnimator.SetTrigger("Shoot");
             playerAnimator.SetTrigger("Shoot");
@@ -94,6 +100,7 @@ public class PlayerBow : MonoBehaviour
     {
         bowAnimator.SetTrigger("Shot");
         playerAnimator.SetTrigger("Shot");
+        audioManager.Play("BowFire");
         Instantiate(bulletPrefab, firePoint.position, aim.rotation);
         shot = true;
     }

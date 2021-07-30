@@ -37,6 +37,7 @@ public class Goblin : Enemy
 
     float attackTimer;
     float chaseTimer;
+    AudioManager audioManager;
 
     [SerializeField]
     float wanderSpeed = 2.25f;
@@ -68,6 +69,7 @@ public class Goblin : Enemy
         agent = GetComponent<NavMeshAgent>();
         chaseTimer = chasePathUpdateSpeed + 0.01f;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        audioManager = FindObjectOfType<AudioManager>();
         anim = GetComponent<Animator>();
         if (type == Type.Mage)
         {
@@ -254,6 +256,7 @@ public class Goblin : Enemy
         if (attackTimer >= attackSpeed)
         {
             anim.SetTrigger("StartCast");
+            audioManager.Play("GoblinCast");
             GameObject fireBall = Instantiate(mageFireBallPrefab, fireBallSpawnPoint.position, Quaternion.identity);
             GoblinFireBall fireBallComp = fireBall.GetComponent<GoblinFireBall>();
             fireBallComp.PlayerTransform = player.transform;

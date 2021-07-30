@@ -11,6 +11,7 @@ public class Arrow : MonoBehaviour
     [SerializeField]
     float cooldownUntilDestroy = 10;
     WaitForSeconds cooldownUntilDestroyWFS;
+    AudioManager audioManager;
 
     TrailRenderer trail;
 
@@ -24,6 +25,7 @@ public class Arrow : MonoBehaviour
         rb.velocity = (transform.forward * speed) + transform.up * 2f;
         cooldownUntilDestroyWFS = new WaitForSeconds(cooldownUntilDestroy);
         StartCoroutine(nameof(DestroyCooldown));
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -36,12 +38,14 @@ public class Arrow : MonoBehaviour
 
         if (other.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
         {
+        	audioManager.Play("ArrowHit");
             Freeze();
             transform.SetParent(other.transform, true);
             enemy.ModifyHealth(-damage);
         }
         if (other.gameObject.TryGetComponent<Ogre>(out Ogre ogre))
         {
+        	audioManager.Play("ArrowHit");
             Freeze();
             transform.SetParent(other.transform, true);
             ogre.ModifyHealth(-damage);

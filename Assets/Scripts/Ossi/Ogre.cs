@@ -8,6 +8,7 @@ public class Ogre : MonoBehaviour
     private float health = 1000;
     public GameObject canvas;
     public bool intro;
+    AudioManager audioManager;
 
     public bool facingLeft = true;
 
@@ -17,6 +18,7 @@ public class Ogre : MonoBehaviour
         healthBar.SetHealth(health);
         canvas.SetActive(false);
         intro = false;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public void LookAtPlayer()
@@ -60,6 +62,12 @@ public class Ogre : MonoBehaviour
     {
         canvas.SetActive(true);
         Debug.Log("hp should show");
+    }
+
+    public void StepSound() {
+    	if(intro) {
+    		audioManager.Play("Drop");
+    	}
     }
 
 }

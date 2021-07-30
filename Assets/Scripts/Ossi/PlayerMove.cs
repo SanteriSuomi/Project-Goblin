@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     Vector2 moveVector;
     PlayerBow bow;
     PlayerMelee melee;
+    AudioManager audioManager;
 
     public float moveVelocity;
     float rotateSpeed = 20f;
@@ -34,13 +35,13 @@ public class PlayerMove : MonoBehaviour
 
     float angle;
     float mx;
-    // float mx2;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         bow = GetComponent<PlayerBow>();
         melee = GetComponent<PlayerMelee>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
@@ -49,7 +50,6 @@ public class PlayerMove : MonoBehaviour
         anim.SetFloat("velocityY", rb.velocity.y);
         Jump();
         Turn();
-        //Dash();
     }
 
     private void FixedUpdate()
@@ -59,9 +59,10 @@ public class PlayerMove : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButton("Jump") && IsGrounded() && !bow.IsCharging && !jumping && !melee.IsMelee)
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !bow.IsCharging && !jumping && !melee.IsMelee)
         {
             anim.SetTrigger("Jump");
+            audioManager.Play("Jump");
             jumping = true;
             rb.velocity = Vector3.up * jumpVelocity;
         }
@@ -74,7 +75,7 @@ public class PlayerMove : MonoBehaviour
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
         RaycastHit rayHit;
-        if (Physics.Raycast(transform.position, -transform.up, out rayHit, 2f))
+        if (Physics.Raycast(transform.position, -transform.up, out rayHit, 1.5f))
         {
             anim.SetTrigger("StopJump");
             jumping = false;
@@ -101,7 +102,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (!bow.IsCharging && !melee.IsMelee)
         {
-            // mx2 = 0;
             mx = Input.GetAxisRaw("Horizontal") * movementSpeed;
             Vector2 movement = new Vector2(mx, rb.velocity.y);
             rb.velocity = movement;
@@ -109,9 +109,6 @@ public class PlayerMove : MonoBehaviour
         else if (bow.IsCharging)
         {
             mx = 0;
-            //mx2 = Input.GetAxisRaw("Horizontal") * (movementSpeed / 3);
-            //Vector2 movement = new Vector2(mx2, rb.velocity.y);
-            //rb.velocity = movement;
         }
 
         if (Mathf.Abs(mx) > 0.05f)
@@ -122,17 +119,6 @@ public class PlayerMove : MonoBehaviour
         {
             anim.SetBool("Running", false);
         }
-        /*
-        if (Mathf.Abs(mx2) > 0.05f)
-        {
-            anim.SetBool("Walking", true);
-            anim.SetLayerWeight(1, 1);
-        }
-        else if (Mathf.Abs(mx2) == 0f)
-        {
-            anim.SetBool("Walking", false);
-            anim.SetLayerWeight(1, 0);
-        }*/
     }
 
     public bool IsGrounded()
@@ -186,4 +172,13 @@ public class PlayerMove : MonoBehaviour
         Aim.transform.localScale = theScale;
         transform.localScale = theScale;
     }
+
+    public void LeftStepSound() {
+        audioManager.Play("StepLeft");
+    }
+
+    public void RightStepSound() {
+        audioManager.Play("StepRight");
+    }
+
 }

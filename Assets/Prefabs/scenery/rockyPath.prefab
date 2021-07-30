@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4117486400276831451}
   - component: {fileID: 1048102336344331134}
   - component: {fileID: 2985724703481489332}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: rockyPath
   m_TagString: Untagged
   m_Icon: {fileID: 0}

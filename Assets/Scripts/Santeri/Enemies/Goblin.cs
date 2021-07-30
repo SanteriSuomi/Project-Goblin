@@ -57,6 +57,11 @@ public class Goblin : Enemy
     float enviroCollisionCooldown = 1.5f;
     float enviroCollisionTimer = 0;
 
+    [SerializeField]
+    GameObject edgeTestLeft;
+    [SerializeField]
+    GameObject edgeTestRight;
+
     PlayerHealth player;
     Collider col;
 
@@ -101,11 +106,13 @@ public class Goblin : Enemy
         enviroCollisionTimer += Time.deltaTime;
         bool rayLeft = Physics.Raycast(transform.position + (Vector3.down * 0.5f), Vector3.left, out RaycastHit hitLeft, 1, enviroMask);
         bool rayRight = Physics.Raycast(transform.position + (Vector3.down * 0.5f), Vector3.right, out RaycastHit hitRight, 1, enviroMask);
-        bool rayBottomLeft = Physics.Raycast(transform.position + (Vector3.down * 0.5f), new Vector3(-0.5f, -0.5f, 0), out RaycastHit hitBottomLeft, 1, enviroMask);
-        bool rayBottomRight = Physics.Raycast(transform.position + (Vector3.down * 0.5f), new Vector3(0.5f, 0.5f, 0), out RaycastHit hitBottomRight, 1, enviroMask);
+        bool rayBottomLeft = Physics.Raycast(edgeTestLeft.transform.position, Vector3.down, out RaycastHit hitBottomLeft, 1, enviroMask);
+        bool rayBottomRight = Physics.Raycast(edgeTestRight.transform.position, Vector3.down, out RaycastHit hitBottomRight, 1, enviroMask);
         if (state == State.Wander && enviroCollisionTimer >= enviroCollisionCooldown)
         {
-            if ((rayLeft || rayRight) && hitLeft.transform != null && hitRight.transform != null && !hitLeft.transform.CompareTag("Player") && !hitRight.transform.CompareTag("Player"))
+            if ((rayLeft || rayRight)
+                && hitLeft.transform != null && hitRight.transform != null
+                && !hitLeft.transform.CompareTag("Player") && !hitRight.transform.CompareTag("Player"))
             {
                 Vector3 hitPos = rayLeft ? hitLeft.transform.position : hitRight.transform.position;
                 Vector3 dist = (hitPos - transform.position).normalized;
@@ -119,7 +126,7 @@ public class Goblin : Enemy
                 }
                 enviroCollisionTimer = 0;
             }
-            else if (!rayBottomLeft || !rayBottomRight)
+            if (!rayBottomLeft || !rayBottomRight)
             {
                 if (rayBottomLeft)
                 {

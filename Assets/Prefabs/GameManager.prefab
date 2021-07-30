@@ -46,6 +46,7 @@ MonoBehaviour:
   rooms:
   - {fileID: 7678770238060952117, guid: b22761c7632b7a646b670cc9e3c0a579, type: 3}
   - {fileID: 4244589766045792163, guid: f90424ac0decc5547ad032698b84b7a5, type: 3}
+  - {fileID: 5042316585261122842, guid: 09d943054228c4e499bfcec8bd6404a3, type: 3}
   bossRoom: {fileID: 8685119746987762234, guid: 3d5bd6d638962dc4ebaa49bb93d9d737, type: 3}
   xPositionForNewRoom: 42.5
   amountOfRoomsUntilBoss: 3

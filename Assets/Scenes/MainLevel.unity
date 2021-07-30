@@ -2100,42 +2100,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
-    - target: {fileID: 2313321416938507485, guid: f169733a563a82d4ab60eb68edd4111e, type: 3}
-      propertyPath: sounds.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313321416938507485, guid: f169733a563a82d4ab60eb68edd4111e, type: 3}
-      propertyPath: sounds.Array.data[8].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: e3fb7d2d38d55604788bca233aba4cff, type: 3}
-    - target: {fileID: 2313321416938507485, guid: f169733a563a82d4ab60eb68edd4111e, type: 3}
-      propertyPath: sounds.Array.data[8].name
-      value: GoblinCast
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313321416938507485, guid: f169733a563a82d4ab60eb68edd4111e, type: 3}
-      propertyPath: sounds.Array.data[9].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 65d27ca94187ed84b8208b2a1291e8dc, type: 3}
-    - target: {fileID: 2313321416938507485, guid: f169733a563a82d4ab60eb68edd4111e, type: 3}
-      propertyPath: sounds.Array.data[9].name
-      value: ArrowHit
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313321416938507485, guid: f169733a563a82d4ab60eb68edd4111e, type: 3}
-      propertyPath: sounds.Array.data[8].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313321416938507485, guid: f169733a563a82d4ab60eb68edd4111e, type: 3}
-      propertyPath: sounds.Array.data[9].pitch
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313321416938507485, guid: f169733a563a82d4ab60eb68edd4111e, type: 3}
-      propertyPath: sounds.Array.data[8].volume
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313321416938507485, guid: f169733a563a82d4ab60eb68edd4111e, type: 3}
-      propertyPath: sounds.Array.data[9].volume
-      value: 0.2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f169733a563a82d4ab60eb68edd4111e, type: 3}
 --- !u!1001 &5545834840095608817

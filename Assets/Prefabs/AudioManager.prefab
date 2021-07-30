@@ -76,11 +76,21 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: BossRoar
     clip: {fileID: 8300000, guid: 6845a4c1c3fd3474ab23368de468af88, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 0.9
     source: {fileID: 0}
   - name: BossRoar2
     clip: {fileID: 8300000, guid: a28428f8d9b78c14ebab58618b6cb610, type: 3}
-    volume: 0.7
+    volume: 0.6
     pitch: 1
+    source: {fileID: 0}
+  - name: GoblinCast
+    clip: {fileID: 8300000, guid: e3fb7d2d38d55604788bca233aba4cff, type: 3}
+    volume: 0.3
+    pitch: 1
+    source: {fileID: 0}
+  - name: ArrowHit
+    clip: {fileID: 8300000, guid: 65d27ca94187ed84b8208b2a1291e8dc, type: 3}
+    volume: 0.2
+    pitch: 0.7
     source: {fileID: 0}

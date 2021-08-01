@@ -50,20 +50,24 @@ public class PlayerMelee : MonoBehaviour
             dagger.SetActive(true);
             anim.SetTrigger("Melee");
             var hits = Physics.OverlapSphere(meleeDetectionPoint.position, meleeAttackRadius, meleeLayerMask, QueryTriggerInteraction.Ignore);
-            var set = new HashSet<Enemy>();
+            var set = new HashSet<Object>();
             foreach (var hit in hits)
             {
-                if (hit.transform != null && hit.transform.TryGetComponent<Enemy>(out Enemy enemy) && !set.Contains(enemy))
+                if (hit.transform == null)
+                {
+                    continue;
+                }
+                if (hit.transform.TryGetComponent<Enemy>(out Enemy enemy) && !set.Contains(enemy))
                 {
                     set.Add(enemy);
                     enemy.ModifyHealth(-damage);
                 }
+                if (hit.transform.TryGetComponent<Ogre>(out Ogre ogre) && !set.Contains(ogre))
+                {
+                    set.Add(ogre);
+                    ogre.ModifyHealth(-damage);
+                }
             }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(meleeDetectionPoint.position, meleeAttackRadius);
     }
 }

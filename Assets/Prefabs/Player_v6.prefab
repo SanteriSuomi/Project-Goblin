@@ -11148,7 +11148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeButton: 324
   meleeDetectionPoint: {fileID: 1056577156135294389}
-  damage: 17.5
+  damage: 25
   meleeAttackCooldown: 1.25
   meleeAttackRadius: 1
   dagger: {fileID: 1589864137694951014}

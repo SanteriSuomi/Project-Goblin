@@ -3537,36 +3537,6 @@ Transform:
   m_Father: {fileID: 3026687625028510810}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1038422178310957904
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2813885269921595485}
-  m_Layer: 9
-  m_Name: EdgeTestLeft
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2813885269921595485
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1038422178310957904}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3040576223620927565}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1068882780250042186
 GameObject:
   m_ObjectHideFlags: 0
@@ -8678,8 +8648,6 @@ Transform:
   - {fileID: 6803520767615864603}
   - {fileID: 6377138481304855684}
   - {fileID: 2924779116871456524}
-  - {fileID: 1797742814202117041}
-  - {fileID: 2813885269921595485}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8757,7 +8725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76ae1aa92c5fa740b43e5ed3296f163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 70
   healthBar: {fileID: 6377138481281936313}
   healthDropChance: 0.25
   healthDrop: {fileID: 4280477154092672073, guid: f873381142d2e0c4fb572b27c319ed09, type: 3}
@@ -8778,8 +8746,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   enviroCollisionCooldown: 0
-  edgeTestLeft: {fileID: 1038422178310957904}
-  edgeTestRight: {fileID: 3275704052048957370}
+  edgeTestLeft: {fileID: 0}
+  edgeTestRight: {fileID: 0}
   linecastMask:
     serializedVersion: 2
     m_Bits: 392
@@ -12056,36 +12024,6 @@ Transform:
   - {fileID: 7044407301528674970}
   m_Father: {fileID: 5218295929720646865}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3275704052048957370
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1797742814202117041}
-  m_Layer: 9
-  m_Name: EdgeTestRight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1797742814202117041
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3275704052048957370}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3040576223620927565}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3284586373066109118
 GameObject:

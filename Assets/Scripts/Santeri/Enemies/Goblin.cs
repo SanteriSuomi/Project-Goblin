@@ -106,8 +106,8 @@ public class Goblin : Enemy
         enviroCollisionTimer += Time.deltaTime;
         bool rayLeft = Physics.Raycast(transform.position + (Vector3.down * 0.5f), Vector3.left, out RaycastHit hitLeft, 1, enviroMask);
         bool rayRight = Physics.Raycast(transform.position + (Vector3.down * 0.5f), Vector3.right, out RaycastHit hitRight, 1, enviroMask);
-        bool rayBottomLeft = Physics.Raycast(edgeTestLeft.transform.position, Vector3.down, out RaycastHit hitBottomLeft, 1, enviroMask);
-        bool rayBottomRight = Physics.Raycast(edgeTestRight.transform.position, Vector3.down, out RaycastHit hitBottomRight, 1, enviroMask);
+        bool rayBottomLeft = Physics.Raycast(edgeTestLeft.transform.position, Vector3.down, out RaycastHit hitBottomLeft, 0.5f, enviroMask);
+        bool rayBottomRight = Physics.Raycast(edgeTestRight.transform.position, Vector3.down, out RaycastHit hitBottomRight, 0.5f, enviroMask);
         if (state == State.Wander && enviroCollisionTimer >= enviroCollisionCooldown)
         {
             if ((rayLeft || rayRight)
@@ -126,7 +126,7 @@ public class Goblin : Enemy
                 }
                 enviroCollisionTimer = 0;
             }
-            if (!rayBottomLeft || !rayBottomRight)
+            else if (!rayBottomLeft || !rayBottomRight)
             {
                 if (rayBottomLeft)
                 {

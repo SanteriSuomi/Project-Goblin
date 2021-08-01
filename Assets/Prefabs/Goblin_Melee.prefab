@@ -4652,7 +4652,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1169384277770937644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.75}
+  m_LocalPosition: {x: 0, y: 0, z: -0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1305478028374702492}
@@ -6935,7 +6935,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7
+  m_Radius: 7.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1555787121479163517
 CapsuleCollider:
@@ -6982,21 +6982,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76ae1aa92c5fa740b43e5ed3296f163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 70
   healthBar: {fileID: 9204945382178770572}
   healthDropChance: 0.25
   healthDrop: {fileID: 4280477154092672073, guid: f873381142d2e0c4fb572b27c319ed09, type: 3}
   type: 0
   mageFireBallPrefab: {fileID: 0}
   fireBallSpawnPoint: {fileID: 0}
-  wanderRange: 8
+  wanderRange: 7.5
   angleToPlayerForChase: 20
   distanceToPlayerForChase: 6.25
   distanceToPlayerForAttack: 1.25
-  damagePerHit: 15
+  damagePerHit: 10
   attackSpeed: 1.38
-  wanderSpeed: 1
-  chaseSpeed: 2.2
+  wanderSpeed: 1.05
+  chaseSpeed: 2.25
   chasePathUpdateSpeed: 0.3
   offsetLength: 1.1
   enviroMask:
@@ -11189,7 +11189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2967747006591682989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.75}
+  m_LocalPosition: {x: 0, y: 0, z: 0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1305478028374702492}

@@ -49,4 +49,4 @@ MonoBehaviour:
   - {fileID: 5042316585261122842, guid: 09d943054228c4e499bfcec8bd6404a3, type: 3}
   bossRoom: {fileID: 8685119746987762234, guid: 3d5bd6d638962dc4ebaa49bb93d9d737, type: 3}
   xPositionForNewRoom: 42.5
-  amountOfRoomsUntilBoss: 3
+  amountOfRoomsUntilBoss: 5
